@@ -1,50 +1,82 @@
 
+import { useMemo, useState } from 'react';
+import ProjectModal from './ProjectModal';
+
+import chatup1 from '../assets/chatup-1.png';
+import chatup2 from '../assets/chatup-2.png';
+
+import roast1 from '../assets/roast-1.png';
+import roast2 from '../assets/roast-2.png';
+import roast3 from '../assets/roast-3.png';
+
 export default function Work() {
-  // Portfolio project cards (JSON data)
-  const projects = [
-    {
-      bgClass: 'bg-1',
-      shortTitle: 'Real-time Chat Application',
-      category: 'Full Stack • Realtime',
-      tagline: 'Instant messaging with a smooth, responsive UI.',
-      description:
-        'A real-time chat app built to handle fast message delivery and clean conversation views. I focused on reliable updates, efficient state handling, and a friendly user experience. The system supports active conversations, fast UI rendering, and thoughtful UX details for everyday messaging.',
-      techStack: ['React', 'Node.js', 'WebSockets', 'REST APIs', 'SQL/NoSQL'],
-      keyFeatures: [
-        'Live message streaming',
-        'Conversation-focused UI',
-        'User-friendly typing & status',
-        'Scalable backend endpoints'
-      ],
-      title: 'Real-time Chat Application'
-    },
-    {
-      bgClass: 'bg-2',
-      shortTitle: 'AI Roasting App',
-      category: 'Artificial Intelligence • Web App',
-      tagline: 'Generate fun roasts with an AI-powered experience.',
-      description:
-        'An AI roasting app that turns user prompts into entertaining outputs. I built the flow end-to-end: collecting input, generating responses with machine learning, and presenting results clearly. The goal was to combine creativity with practical engineering—fast interactions, clean UI, and reliable deployment.',
-      techStack: ['React', 'Python', 'NLP/LLM', 'API Layer', 'Cloud Deployment'],
-      keyFeatures: [
-        'Prompt-to-roast generation',
-        'Interactive, lightweight UI',
-        'Safety-aware output handling',
-        'Cloud-ready deployment'
-      ],
-      title: 'AI Roasting App'
-    }
-  ];
+  const [activeProjectIndex, setActiveProjectIndex] = useState(null);
+
+  const projects = useMemo(
+    () => [
+      {
+        bgClass: 'bg-1',
+        shortTitle: 'ChatUp',
+        category: 'Full Stack • Realtime',
+        tagline: 'Real-Time Web Chat Application',
+        description:
+          'A modern real-time chatting platform that enables users to communicate instantly through a responsive web interface. The application focuses on seamless messaging, intuitive user experience, and real-time communication.',
+        techStack: ['React', 'Node.js', 'Express.js', 'Socket.io', 'MongoDB'],
+        features: [
+          'Real-time messaging',
+          'Responsive interface',
+          'Fast communication',
+          'Modern chat experience'
+        ],
+        title: 'ChatUp',
+        images: [chatup1, chatup2],
+        githubUrl: '#',
+        liveDemoUrl: '#'
+      },
+      {
+        bgClass: 'bg-2',
+        shortTitle: 'Roasting AI',
+        category: 'Artificial Intelligence • Web App',
+        tagline: 'AI-Powered Roast Generator',
+        description:
+          'An AI-based web application that generates humorous and context-aware roasts using large language models. The application demonstrates AI integration, prompt engineering, and interactive user experiences.',
+        techStack: ['React', 'Node.js', 'Gemini API'],
+        features: [
+          'AI-generated responses',
+          'Prompt engineering',
+          'Instant roast generation',
+          'Interactive UI'
+        ],
+        title: 'Roasting AI',
+        images: [roast1, roast2, roast3],
+        githubUrl: '#',
+        liveDemoUrl: '#'
+      }
+    ],
+    []
+  );
+
+  const activeProject = activeProjectIndex === null ? null : projects[activeProjectIndex];
 
   return (
     <section id="work" className="container">
       <h2 className="section-title uppercase gsap-reveal" style={{ marginBottom: '4rem' }}>
         <span className="text-dark-gray">2.</span> My<br />Works
       </h2>
-      
+
       <div className="work-grid">
         {projects.map((proj, index) => (
-          <div key={index} className="project-card hoverable gsap-work-card">
+          <div
+            key={proj.title}
+            className="project-card hoverable gsap-work-card"
+            role="button"
+            tabIndex={0}
+            onClick={() => setActiveProjectIndex(index)}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter' || e.key === ' ') setActiveProjectIndex(index);
+            }}
+            aria-label={`Open project: ${proj.title}`}
+          >
             <div className={`project-bg ${proj.bgClass}`} />
             <div className="project-overlay" />
             <div className="project-info">
@@ -54,6 +86,12 @@ export default function Work() {
           </div>
         ))}
       </div>
+
+      <ProjectModal
+        open={activeProjectIndex !== null}
+        onClose={() => setActiveProjectIndex(null)}
+        project={activeProject}
+      />
     </section>
   );
 }
