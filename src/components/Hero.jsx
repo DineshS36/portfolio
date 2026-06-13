@@ -55,14 +55,9 @@ export default function Hero() {
         >
           Explore
         </a>
-        <a 
-          href="/Dinesh-Resume.pdf" // Make sure your resume is in the public folder
-          download="Dinesh-Resume.pdf"
-          className="explore-btn font-mono hoverable uppercase" // Reusing the same class for consistent styling
-        >
-          Download Resume
-        </a>
-      </div>
+        </div>
+        
+      
       
       <div className="scroll-indicator">
         <div className="scroll-line">
