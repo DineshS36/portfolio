@@ -47,13 +47,20 @@ export default function Hero() {
       </h1>
       <h1 className="hero-elem hero-title-2 uppercase">DEVELOPER</h1>
       
-      <div className="hero-elem">
+      <div className="hero-elem" style={{ display: 'flex', gap: '2rem', justifyContent: 'center' }}>
         <a 
           href="#work" 
           ref={exploreBtnRef} 
           className="explore-btn font-mono hoverable uppercase"
         >
           Explore
+        </a>
+        <a 
+          href="/Dinesh-Resume.pdf" // Make sure your resume is in the public folder
+          download="Dinesh-Resume.pdf"
+          className="explore-btn font-mono hoverable uppercase" // Reusing the same class for consistent styling
+        >
+          Download Resume
         </a>
       </div>
       
