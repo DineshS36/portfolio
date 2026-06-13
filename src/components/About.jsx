@@ -6,7 +6,7 @@ export default function About() {
       <div className="about-grid">
         <div className="gsap-reveal">
           <h2 className="section-title uppercase">
-            <span className="text-dark-gray">01.</span> Abstract<br />Thinking.
+            <span className="text-dark-gray">1.</span> Abstract<br />Thinking
           </h2>
           <div className="divider"></div>
           <p className="text-gray about-text">

@@ -39,7 +39,7 @@ export default function Work() {
   return (
     <section id="work" className="container">
       <h2 className="section-title uppercase gsap-reveal" style={{ marginBottom: '4rem' }}>
-        <span className="text-dark-gray">02.</span> Selected<br />Works.
+        <span className="text-dark-gray">2.</span> My<br />Works
       </h2>
       
       <div className="work-grid">

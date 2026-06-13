@@ -36,7 +36,7 @@ export default function Timeline() {
   return (
     <section id="experience" className="container">
       <h2 className="section-title uppercase gsap-reveal">
-        <span className="text-dark-gray">03.</span> System<br />History.
+        <span className="text-dark-gray">4.</span>My<br />Timeline
       </h2>
       <div className="timeline">
         {experiences.map((exp, index) => (

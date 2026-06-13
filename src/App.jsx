@@ -16,6 +16,7 @@ import About from './components/About';
 import Marquee from './components/Marquee';
 import Work from './components/Work';
 import Timeline from './components/Timeline';
+import Skills from './components/Skills';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 
@@ -103,6 +104,7 @@ export default function App() {
         <About />
         <Marquee />
         <Work />
+        <Skills />
         <Timeline />
         <Contact />
         <Footer />
