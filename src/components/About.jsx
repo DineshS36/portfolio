@@ -10,16 +10,16 @@ export default function About() {
           </h2>
           <div className="divider"></div>
           <p className="text-gray about-text">
-            I architect intelligent systems at the intersection of deep learning and scalable software engineering. Utilizing state-of-the-art neural networks and modern frameworks to construct robust, high-performance AI solutions.
+            I’m Dinesh, a Full Stack Developer and 4th-year AIML student. I build practical products that blend Artificial Intelligence with clean, scalable software—turning ideas into real-time experiences. I also work with Cloud Technologies to deploy and iterate reliably. My focus is to keep learning continuously, whether it’s improving ML models, refining front-end and back-end flows, or exploring new tools and best practices for production-ready systems.
           </p>
           <div className="font-mono text-gray skill-list text-sm">
-            <p><span style={{ color: '#fff' }}>&gt;</span> PyTorch / TensorFlow</p>
-            <p><span style={{ color: '#fff' }}>&gt;</span> Computer Vision & NLP</p>
-            <p><span style={{ color: '#fff' }}>&gt;</span> Data Engineering</p>
-            <p><span style={{ color: '#fff' }}>&gt;</span> Cloud Architecture (AWS/GCP)</p>
+            <p><span style={{ color: '#fff' }}></span> Artificial Intelligence</p>
+            <p><span style={{ color: '#fff' }}></span> Full-stack Development</p>
+            <p><span style={{ color: '#fff' }}></span> Cloud Technologies (AWS / GCP)</p>
+            <p><span style={{ color: '#fff' }}></span> Continuous learning</p>
           </div>
         </div>
-        
+
         <div className="abstract-box hoverable gsap-reveal">
           <div className="shape shape-1"></div>
           <div className="shape shape-2"></div>

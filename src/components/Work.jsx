@@ -1,26 +1,38 @@
-import React from 'react';
 
 export default function Work() {
+  // Portfolio project cards (JSON data)
   const projects = [
     {
       bgClass: 'bg-1',
-      category: 'Computer Vision',
-      title: 'DEEPVISION'
+      shortTitle: 'Real-time Chat Application',
+      category: 'Full Stack • Realtime',
+      tagline: 'Instant messaging with a smooth, responsive UI.',
+      description:
+        'A real-time chat app built to handle fast message delivery and clean conversation views. I focused on reliable updates, efficient state handling, and a friendly user experience. The system supports active conversations, fast UI rendering, and thoughtful UX details for everyday messaging.',
+      techStack: ['React', 'Node.js', 'WebSockets', 'REST APIs', 'SQL/NoSQL'],
+      keyFeatures: [
+        'Live message streaming',
+        'Conversation-focused UI',
+        'User-friendly typing & status',
+        'Scalable backend endpoints'
+      ],
+      title: 'Real-time Chat Application'
     },
     {
       bgClass: 'bg-2',
-      category: 'Generative AI',
-      title: 'NEURAL FORGE'
-    },
-    {
-      bgClass: 'bg-3',
-      category: 'NLP Models',
-      title: 'SENTIMENT X'
-    },
-    {
-      bgClass: 'bg-4',
-      category: 'Predictive Modeling',
-      title: 'QUANTUM PRED'
+      shortTitle: 'AI Roasting App',
+      category: 'Artificial Intelligence • Web App',
+      tagline: 'Generate fun roasts with an AI-powered experience.',
+      description:
+        'An AI roasting app that turns user prompts into entertaining outputs. I built the flow end-to-end: collecting input, generating responses with machine learning, and presenting results clearly. The goal was to combine creativity with practical engineering—fast interactions, clean UI, and reliable deployment.',
+      techStack: ['React', 'Python', 'NLP/LLM', 'API Layer', 'Cloud Deployment'],
+      keyFeatures: [
+        'Prompt-to-roast generation',
+        'Interactive, lightweight UI',
+        'Safety-aware output handling',
+        'Cloud-ready deployment'
+      ],
+      title: 'AI Roasting App'
     }
   ];
 
