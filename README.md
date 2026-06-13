@@ -56,5 +56,5 @@ npm run build
 
 ## Contact
 - Email: itsdinesh036@gmail.com  
-- GitHub: [Dinesh](https://github.com/DineshS36)
+- GitHub: [Already in github](https://github.com/DineshS36)
 - LinkedIn: https://www.linkedin.com/in/dinesh-s-173698390

@@ -1,21 +1,35 @@
-import React from 'react';
 
 export default function Timeline() {
   const experiences = [
     {
-      date: '2024 - Present',
-      title: 'Machine Learning Researcher',
-      desc: 'Researching and deploying state-of-the-art transformer models. Optimizing inference latency and fine-tuning large language models for domain-specific applications.'
+      date: 'Year 1',
+      title: 'Started Programming',
+      desc: 'Began learning programming fundamentals and problem-solving through consistent practice and small projects.'
     },
     {
-      date: '2022 - 2024',
-      title: 'Data Scientist Intern',
-      desc: 'Developed scalable data pipelines for predictive analytics. Implemented machine learning algorithms that improved forecasting accuracy by 40%.'
+      date: 'Year 2',
+      title: 'Started Web Development',
+      desc: 'Started building web applications and learning how to structure front-end and back-end features for real user experiences.'
     },
     {
-      date: '2020 - 2022',
-      title: 'AI / ML Student',
-      desc: 'Focusing on advanced mathematics, statistics, and deep learning algorithms. Building foundational knowledge in neural networks and artificial intelligence.'
+      date: 'Year 2–3',
+      title: 'Learned React',
+      desc: 'Focused on React fundamentals and component-based UI development, building interactive pages and improving code organization.'
+    },
+    {
+      date: 'Year 3',
+      title: 'Built Chat Application',
+      desc: 'Developed a real-time chat application with an emphasis on smooth UI and dependable message flow.'
+    },
+    {
+      date: 'Year 4',
+      title: 'Built AI Roasting Application',
+      desc: 'Built an AI roasting app that turns user input into generated outputs, refining the end-to-end experience.'
+    },
+    {
+      date: 'Year 4',
+      title: 'Started AIML Specialization',
+      desc: 'Began deeper coursework and practical work in Artificial Intelligence and Machine Learning to strengthen applied knowledge.'
     }
   ];
 
@@ -28,9 +42,11 @@ export default function Timeline() {
         {experiences.map((exp, index) => (
           <div key={index} className="timeline-item gsap-reveal hoverable">
             <div className="timeline-dot" />
-            <span className="timeline-date uppercase">{exp.date}</span>
-            <h3 className="timeline-title uppercase text-glow">{exp.title}</h3>
-            <p className="timeline-desc">{exp.desc}</p>
+            <div className="timeline-text">
+              <div className="timeline-date uppercase">{exp.date}</div>
+              <h3 className="timeline-title uppercase text-glow">{exp.title}</h3>
+              <p className="timeline-desc">{exp.desc}</p>
+            </div>
           </div>
         ))}
       </div>
