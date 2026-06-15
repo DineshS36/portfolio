@@ -9,7 +9,7 @@ export default function Contact() {
     displayText: btnText,
     onMouseEnter: btnEnter,
     onMouseLeave: btnLeave
-  } = useTextScramble('System.Log("Contact_Me")');
+  } = useTextScramble('console.log("contact_me")');
 
   useEffect(() => {
     const btn = contactBtnRef.current;
@@ -52,7 +52,7 @@ export default function Contact() {
       <p className="text-gray font-mono">Ready to construct something beyond the ordinary?</p>
 
       <a
-        href="mailto:hello@example.com"
+        href="mailto:itsdinesh036@gmail.com"
         ref={contactBtnRef}
         className="contact-btn hoverable"
         onMouseEnter={btnEnter}
