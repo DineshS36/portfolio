@@ -17,6 +17,14 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+@media (pointer: fine) {
+  *,
+  *::before,
+  *::after {
+    cursor: none !important;
+  }
+}
+
 ::selection {
   background: #ffffff;
   color: #000000;
@@ -112,7 +120,7 @@ section {
   border: 2px solid #fff;
   border-radius: 50%;
   pointer-events: none;
-  z-index: 9999;
+  z-index: 30000;
   transform: translate(-50%, -50%);
   transition: width 0.3s, height 0.3s, background-color 0.3s, box-shadow 0.3s;
   mix-blend-mode: difference;
@@ -931,6 +939,13 @@ footer {
   justify-content: center;
   padding: 2rem;
   isolation: isolate;
+}
+
+@media (pointer: fine) {
+  .project-modal-overlay,
+  .project-modal-overlay * {
+    cursor: none !important;
+  }
 }
 
 .project-modal-panel {
