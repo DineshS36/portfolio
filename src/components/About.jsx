@@ -14,8 +14,8 @@ export default function About() {
             I’m Dinesh, a Full Stack Developer and 4th-year AIML student. I build practical products that blend Artificial Intelligence with clean, scalable software—turning ideas into real-time experiences. I also work with Cloud Technologies to deploy and iterate reliably. My focus is to keep learning continuously, whether it’s improving ML models, refining front-end and back-end flows, or exploring new tools and best practices for production-ready systems.
           </p>
           <div className="font-mono text-gray skill-list text-sm">
-            <p><span style={{ color: '#fff' }}></span> Artificial Intelligence</p>
             <p><span style={{ color: '#fff' }}></span> Full-stack Development</p>
+            <p><span style={{ color: '#fff' }}></span> Automations</p>
             <p><span style={{ color: '#fff' }}></span> Cloud Technologies (AWS / GCP)</p>
             <p><span style={{ color: '#fff' }}></span> Continuous learning</p>
           </div>

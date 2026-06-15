@@ -30,7 +30,7 @@ export default function Work() {
         ],
         title: 'ChatUp',
         images: [chatup1, chatup2],
-        githubUrl: '#',
+        githubUrl: 'https://github.com/DineshS36/chatup',
         liveDemoUrl: '#'
       },
       {
@@ -49,7 +49,7 @@ export default function Work() {
         ],
         title: 'AI Roast Generator',
         images: [roast1, roast2, roast3],
-        githubUrl: '#',
+        githubUrl: 'https://github.com/DineshS36/Roasting_AI',
         liveDemoUrl: '#'
       }
     ],
