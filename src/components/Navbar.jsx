@@ -1,3 +1,4 @@
+import { useEffect, useRef, useState } from 'react';
 import useTextScramble from '../hooks/useTextScramble';
 
 function ScrambleLink({ href, children, className }) {
@@ -15,7 +16,35 @@ function ScrambleLink({ href, children, className }) {
 }
 
 export default function Navbar() {
+  const [isHidden, setIsHidden] = useState(false);
+  const ticking = useRef(false);
   const { displayText: logoText, onMouseEnter: logoEnter, onMouseLeave: logoLeave } = useTextScramble('DINESH');
+
+  useEffect(() => {
+    const updateNavVisibility = () => {
+      setIsHidden(window.scrollY > 120);
+    };
+
+    const handleScroll = () => {
+      if (ticking.current) return;
+
+      window.requestAnimationFrame(() => {
+        updateNavVisibility();
+        ticking.current = false;
+      });
+
+      ticking.current = true;
+    };
+
+    updateNavVisibility();
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    window.addEventListener('resize', updateNavVisibility);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('resize', updateNavVisibility);
+    };
+  }, []);
 
   const onResumeClick = (e) => {
     e.preventDefault();
@@ -37,7 +66,7 @@ export default function Navbar() {
   };
 
   return (
-    <nav>
+    <nav className={isHidden ? 'nav-hidden' : 'nav-visible'}>
       <div className="container nav-inner">
         <a
           href="#"

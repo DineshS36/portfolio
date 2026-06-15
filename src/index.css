@@ -142,6 +142,22 @@ nav {
   padding: 2rem 0;
   z-index: 50;
   mix-blend-mode: difference;
+  transition: opacity 0.45s ease, transform 0.45s ease, filter 0.45s ease;
+  will-change: opacity, transform, filter;
+}
+
+.nav-visible {
+  opacity: 1;
+  transform: translateY(0);
+  filter: blur(0);
+  pointer-events: auto;
+}
+
+.nav-hidden {
+  opacity: 0;
+  transform: translateY(-28px) scale(0.98);
+  filter: blur(8px);
+  pointer-events: none;
 }
 
 .nav-inner {
