@@ -11,13 +11,17 @@ export default function ProjectModal({
   const panelRef = useRef(null);
   const galleryRef = useRef(null);
   const [activeIndex, setActiveIndex] = useState(0);
+  const [demoText, setDemoText] = useState('Live Demo');
 
   const images = project?.images ?? [];
 
   useEffect(() => {
     if (!open) return;
     // Defer to avoid synchronous state updates during effect execution
-    requestAnimationFrame(() => setActiveIndex(0));
+    requestAnimationFrame(() => {
+      setActiveIndex(0);
+      setDemoText('Live Demo');
+    });
   }, [open]);
 
   useEffect(() => {
@@ -86,6 +90,16 @@ export default function ProjectModal({
 
   const githubUrl = project?.githubUrl;
   const liveDemoUrl = project?.liveDemoUrl;
+
+  const handleLiveDemoClick = (e) => {
+    if (liveDemoUrl === '#' || !liveDemoUrl) {
+      e.preventDefault();
+      setDemoText('Coming Soon');
+      setTimeout(() => {
+        setDemoText('Live Demo');
+      }, 2000);
+    }
+  };
 
   if (!open || !project) return null;
 
@@ -214,11 +228,12 @@ export default function ProjectModal({
               {liveDemoUrl ? (
                 <a
                   className="project-modal-action-btn hoverable font-mono uppercase"
-                  href={liveDemoUrl}
-                  target="_blank"
+                  href={liveDemoUrl === '#' ? undefined : liveDemoUrl}
+                  target={liveDemoUrl === '#' ? undefined : '_blank'}
                   rel="noreferrer"
+                  onClick={handleLiveDemoClick}
                 >
-                  Live Demo
+                  {demoText}
                 </a>
               ) : null}
             </div>
