@@ -925,21 +925,25 @@ footer {
   inset: 0;
   background: rgba(0, 0, 0, 0.7);
   backdrop-filter: blur(10px);
-  z-index: 9999;
+  z-index: 20000;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 2rem;
+  isolation: isolate;
 }
 
 .project-modal-panel {
   width: 100%;
   max-width: 980px;
+  max-height: calc(100vh - 4rem);
   border-radius: 14px;
   border: 1px solid #222;
   background: rgba(5, 5, 5, 0.72);
   box-shadow: 0 0 40px rgba(255, 255, 255, 0.06);
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
 }
 
 .project-modal-header {
@@ -995,6 +999,8 @@ footer {
   grid-template-columns: 1.2fr 1fr;
   gap: 0;
   padding: 1.5rem 2rem 2rem;
+  overflow-y: auto;
+  overscroll-behavior: contain;
 }
 
 .project-modal-gallery {

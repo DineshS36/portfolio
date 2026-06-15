@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
+import { createPortal } from 'react-dom';
 import gsap from 'gsap';
 
 export default function ProjectModal({
@@ -88,7 +89,7 @@ export default function ProjectModal({
 
   if (!open || !project) return null;
 
-  return (
+  return createPortal(
     <div
       className="project-modal-overlay"
       ref={overlayRef}
@@ -224,6 +225,7 @@ export default function ProjectModal({
           </div>
         </div>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 }
