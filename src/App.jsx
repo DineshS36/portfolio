@@ -37,6 +37,32 @@ export default function App() {
       { y: 0, opacity: 1, scale: 1, duration: 1.2, stagger: 0.2, ease: 'power4.out', delay: 0.2 }
     );
 
+    const heroExitElements = gsap.utils.toArray('.explore-btn, .scroll-indicator');
+    if (heroExitElements.length) {
+      gsap.to(heroExitElements, {
+        opacity: 0,
+        scale: 0.75,
+        y: -20,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: 'header',
+          start: 'top top',
+          end: 'bottom 70%',
+          scrub: true,
+          onLeave: () => {
+            heroExitElements.forEach((elem) => {
+              elem.style.pointerEvents = 'none';
+            });
+          },
+          onEnterBack: () => {
+            heroExitElements.forEach((elem) => {
+              elem.style.pointerEvents = '';
+            });
+          }
+        }
+      });
+    }
+
     // 2. Staggered Scroll Reveal sections
     const reveals = gsap.utils.toArray('.gsap-reveal');
     reveals.forEach((elem) => {
