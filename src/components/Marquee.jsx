@@ -1,7 +1,18 @@
 import React from 'react';
 
 export default function Marquee() {
-  const skills = ['PyTorch', 'TensorFlow', 'LLMs', 'Computer Vision', 'Data Science', 'Python', 'MLOps'];
+  const skills = [
+    'Full-Stack Development',
+    'API Integrations',
+    'React.js',
+    'Node.js',
+    'Gemini & OpenAI API',
+    'Cloudflare Workers',
+    'MongoDB',
+    'Express',
+    'Python',
+    'Docker',
+  ];
 
   return (
     <div className="marquee-container gsap-reveal">

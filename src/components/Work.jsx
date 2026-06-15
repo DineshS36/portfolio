@@ -35,7 +35,7 @@ export default function Work() {
       },
       {
         bgClass: 'bg-2',
-        shortTitle: 'Roasting AI',
+        shortTitle: 'AI Roast Generator',
         category: 'Artificial Intelligence • Web App',
         tagline: 'AI-Powered Roast Generator',
         description:
@@ -47,7 +47,7 @@ export default function Work() {
           'Instant roast generation',
           'Interactive UI'
         ],
-        title: 'Roasting AI',
+        title: 'AI Roast Generator',
         images: [roast1, roast2, roast3],
         githubUrl: '#',
         liveDemoUrl: '#'
