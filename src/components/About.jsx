@@ -1,4 +1,5 @@
-import react from 'react';
+import React from 'react';
+import NeuralNetworkCanvas from './NeuralNetworkCanvas';
 
 export default function About() {
   return (
@@ -21,9 +22,7 @@ export default function About() {
         </div>
 
         <div className="abstract-box hoverable gsap-reveal">
-          <div className="shape shape-1"></div>
-          <div className="shape shape-2"></div>
-          <div className="shape shape-3"></div>
+          <NeuralNetworkCanvas />
         </div>
       </div>
     </section>
