@@ -47,14 +47,13 @@ npm run build
 ---
 
 ## Screenshots
-> Add screenshots here (recommended format below):
-- ![Screenshot 1](./public/screenshots/screenshot-1.png)
-- ![Screenshot 2](./public/screenshots/screenshot-2.png)
-- ![Screenshot 3](./public/screenshots/screenshot-3.png)
+- ![Screenshot 1](public/screenshots/Screenshot 2026-06-16 205729.png)
+- ![Screenshot 2](public/screenshots/Screenshot 2026-06-16 205800.png)
+- ![Screenshot 3](public/screenshots/Screenshot 2026-06-16 205800.png)
 
 ---
 
 ## Contact
 - Email: itsdinesh036@gmail.com  
-- GitHub: [Already in github](https://github.com/DineshS36)
+- GitHub: https://github.com/DineshS36
 - LinkedIn: https://www.linkedin.com/in/dinesh-s-173698390
