@@ -47,9 +47,9 @@ npm run build
 ---
 
 ## Screenshots
-- ![Screenshot 1](public/screenshots/Screenshot 2026-06-16 205729.png)
-- ![Screenshot 2](public/screenshots/Screenshot 2026-06-16 205800.png)
-- ![Screenshot 3](public/screenshots/Screenshot 2026-06-16 205800.png)
+![Screenshot 1](public/screenshots/Screenshot%202026-06-16%20205729.png)
+![Screenshot 2](public/screenshots/Screenshot%202026-06-16%20205812.png)
+![Screenshot 3](public/screenshots/Screenshot%202026-06-16%20205853.png)
 
 ---
 
