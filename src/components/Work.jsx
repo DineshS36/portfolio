@@ -9,11 +9,43 @@ import roast1 from '../assets/roast-1.png';
 import roast2 from '../assets/roast-2.png';
 import roast3 from '../assets/roast-3.png';
 
+import resumeMain from '../assets/resume.png';
+import resume1 from '../assets/resume1.png';
+import resume2 from '../assets/resume2.png';
+import resume3 from '../assets/resume3.png';
+
 export default function Work() {
   const [activeProjectIndex, setActiveProjectIndex] = useState(null);
 
   const projects = useMemo(
     () => [
+      {
+        bgClass: 'bg-3',
+        shortTitle: 'AI Resume Builder',
+        category: 'SAAS • FULL-STACK AI • DECOUPLED',
+        tagline: 'AI-Powered Resume Builder',
+        description:
+          'A production-ready SaaS platform that transforms PDFs into ATS-optimized resumes. Built with a decoupled architecture utilizing a Next.js static edge frontend and an Express/PostgreSQL backend, secured by Google OAuth 2.0 and custom JWTs.',
+        techStack: [
+          'Next.js 14',
+          'Express',
+          'PostgreSQL',
+          'Prisma',
+          'Google OAuth',
+          'Gemini API',
+          'Cloudflare Pages'
+        ],
+        features: [
+          'PDF parsing & ATS optimization',
+          'Decoupled Next.js edge frontend',
+          'Secure Google OAuth 2.0 & JWTs',
+          'Gemini AI resume enhancement'
+        ],
+        title: 'AI Resume Builder',
+        images: [resumeMain, resume1, resume2, resume3],
+        githubUrl: 'https://github.com/DineshS36/resume-analyser',
+        liveDemoUrl: '#'
+      },
       {
         bgClass: 'bg-1',
         shortTitle: 'ChatUp',

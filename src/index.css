@@ -134,6 +134,18 @@ section {
   border: none;
 }
 
+body:has(.project-modal-gallery:hover) #cursor {
+  mix-blend-mode: normal !important;
+  border-color: #fff !important;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5), inset 0 0 5px rgba(0, 0, 0, 0.5) !important;
+}
+
+body:has(.project-modal-gallery:hover) #cursor.hovered {
+  mix-blend-mode: normal !important;
+  background-color: #fff !important;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5) !important;
+}
+
 /* Navigation */
 nav {
   position: fixed;
