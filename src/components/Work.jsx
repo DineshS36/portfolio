@@ -44,7 +44,8 @@ export default function Work() {
         title: 'AI Resume Builder',
         images: [resumeMain, resume1, resume2, resume3],
         githubUrl: 'https://github.com/DineshS36/resume-analyser',
-        liveDemoUrl: '#'
+        liveDemoUrl: '#',
+        exploreUrl: 'https://resume-analyser.pages.dev'
       },
       {
         bgClass: 'bg-1',
@@ -63,7 +64,8 @@ export default function Work() {
         title: 'ChatUp',
         images: [chatup1, chatup2],
         githubUrl: 'https://github.com/DineshS36/chatup',
-        liveDemoUrl: '#'
+        liveDemoUrl: '#',
+        exploreUrl: 'https://chatup-phi.vercel.app'
       },
       {
         bgClass: 'bg-2',
@@ -82,7 +84,8 @@ export default function Work() {
         title: 'AI Roast Generator',
         images: [roast1, roast2, roast3],
         githubUrl: 'https://github.com/DineshS36/Roasting_AI',
-        liveDemoUrl: '#'
+        liveDemoUrl: '#',
+        exploreUrl: 'https://roasting-ai.pages.dev'
       }
     ],
     []

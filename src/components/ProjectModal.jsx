@@ -90,6 +90,7 @@ export default function ProjectModal({
 
   const githubUrl = project?.githubUrl;
   const liveDemoUrl = project?.liveDemoUrl;
+  const exploreUrl = project?.exploreUrl;
 
   const handleLiveDemoClick = (e) => {
     if (liveDemoUrl === '#' || !liveDemoUrl) {
@@ -234,6 +235,17 @@ export default function ProjectModal({
                   onClick={handleLiveDemoClick}
                 >
                   {demoText}
+                </a>
+              ) : null}
+
+              {exploreUrl ? (
+                <a
+                  className="project-modal-action-btn hoverable font-mono uppercase"
+                  href={exploreUrl === '#' ? undefined : exploreUrl}
+                  target={exploreUrl === '#' ? undefined : '_blank'}
+                  rel="noreferrer"
+                >
+                  View
                 </a>
               ) : null}
             </div>
