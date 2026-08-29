@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, lazy, Suspense } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
@@ -8,7 +8,6 @@ gsap.registerPlugin(ScrollTrigger);
 // Components
 import Preloader from './components/Preloader';
 import ScrollProgress from './components/ScrollProgress';
-import ThreeBackground from './components/ThreeBackground';
 import CustomCursor from './components/CustomCursor';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
@@ -19,6 +18,10 @@ import Timeline from './components/Timeline';
 import Skills from './components/Skills';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
+
+// Keep the first page payload light; the GPU-heavy background loads while the
+// existing preloader is visible instead of blocking the initial UI bundle.
+const ThreeBackground = lazy(() => import('./components/ThreeBackground'));
 
 export default function App() {
   const [loaded, setLoaded] = useState(false);
@@ -116,7 +119,9 @@ export default function App() {
       <CustomCursor />
 
       {/* Interactive 3D Background */}
-      <ThreeBackground />
+      <Suspense fallback={null}>
+        <ThreeBackground />
+      </Suspense>
 
       {/* Main website page content */}
       <div

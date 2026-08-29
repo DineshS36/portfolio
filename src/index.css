@@ -105,9 +105,80 @@ section {
   left: 0;
   width: 100vw;
   height: 100vh;
-  background: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.5), #050505);
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    transparent 64%,
+    rgba(5, 5, 5, 0.32) 84%,
+    #050505 100%
+  );
   z-index: -1;
   pointer-events: none;
+}
+
+/* A static, compositor-friendly sheen gives the hero its premium glow without
+   adding any work to the raymarch shader. It is deliberately off in Orbit Mode
+   because that mode already enables real bloom. */
+.bg-overlay::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse 48% 43% at 50% 42%,
+    rgba(255, 174, 73, 0.14) 0%,
+    rgba(255, 130, 28, 0.055) 36%,
+    transparent 72%
+  );
+  mix-blend-mode: screen;
+  opacity: 0.9;
+  transition: opacity 0.35s ease;
+}
+
+.bg-overlay.orbit-active::before {
+  opacity: 0;
+}
+
+/* 3D Orbit Mode Badge */
+.orbit-mode-badge {
+  position: fixed;
+  bottom: 2.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10000;
+  background: rgba(10, 10, 15, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 9999px;
+  padding: 0.65rem 1.6rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2rem;
+  pointer-events: none;
+  box-shadow: 0 10px 35px rgba(0, 0, 0, 0.9), 0 0 25px rgba(255, 180, 84, 0.2);
+  animation: badgePop 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes badgePop {
+  0% { opacity: 0; transform: translate(-50%, 15px) scale(0.95); }
+  100% { opacity: 1; transform: translate(-50%, 0) scale(1); }
+}
+
+.orbit-mode-badge .badge-title {
+  font-size: 0.8rem;
+  letter-spacing: 0.18em;
+  font-weight: 700;
+  font-family: ui-monospace, 'SF Mono', monospace;
+  color: #ffb454;
+  text-shadow: 0 0 12px rgba(255, 180, 84, 0.5);
+}
+
+.orbit-mode-badge .badge-hint {
+  font-size: 0.65rem;
+  letter-spacing: 0.08em;
+  font-family: ui-monospace, 'SF Mono', monospace;
+  color: rgba(234, 250, 255, 0.7);
 }
 
 /* Custom Cursor */
@@ -238,6 +309,8 @@ header {
   line-height: 1;
   margin-bottom: 1rem;
   letter-spacing: -0.05em;
+  color: #eeeeee;
+  text-shadow: 0 0 7px rgba(255, 255, 255, 0.55), 0 0 14px rgba(255, 255, 255, 0.28);
 }
 
 .hero-title-2 {
