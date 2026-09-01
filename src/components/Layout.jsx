@@ -1,6 +1,9 @@
 import React, { useEffect, Suspense, lazy } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
 import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
 import Navbar from './Navbar';
 import CustomCursor from './CustomCursor';
 import StarfieldBackground from './StarfieldBackground';
@@ -33,15 +36,70 @@ export default function Layout({ isPreloaderDone }) {
     window.scrollTo(0, 0);
   }, [location.pathname, isPreloaderDone, isHeroPage]);
 
-  // Page entry animation when route changes
+  // Page entry animation and ScrollTrigger re-initialization when route changes
   useEffect(() => {
     if (!isPreloaderDone) return;
     
+    // Animate page content in
     gsap.fromTo('.page-transition-wrapper',
       { opacity: 0, y: 20 },
       { opacity: 1, y: 0, duration: 0.6, ease: 'power3.out', clearProps: 'all' }
     );
-  }, [location.pathname, isPreloaderDone]);
+
+    // Wait for the next tick so the DOM is fully rendered for the new route
+    setTimeout(() => {
+      ScrollTrigger.refresh();
+
+      // Hero Elements (only run if on Hero page and elements exist)
+      if (isHeroPage) {
+        gsap.fromTo('.hero-elem',
+          { y: 50, opacity: 0, scale: 0.95 },
+          { y: 0, opacity: 1, scale: 1, duration: 1.2, stagger: 0.2, ease: 'power4.out', delay: 0.2 }
+        );
+      }
+
+      // Staggered Scroll Reveal sections (About, Work content, etc)
+      const reveals = gsap.utils.toArray('.gsap-reveal');
+      reveals.forEach((elem) => {
+        gsap.fromTo(elem,
+          { y: 100, opacity: 0 },
+          {
+            y: 0,
+            opacity: 1,
+            duration: 1.5,
+            ease: 'power3.out',
+            scrollTrigger: {
+              trigger: elem,
+              start: 'top 80%',
+              toggleActions: 'play none none reverse'
+            }
+          }
+        );
+      });
+
+      // Staggered Work Card Reveals specifically for the Work page
+      if (document.querySelector('#work')) {
+        gsap.fromTo('.gsap-work-card',
+          { y: 100, opacity: 0 },
+          {
+            y: 0,
+            opacity: 1,
+            duration: 1,
+            stagger: 0.2,
+            ease: 'power3.out',
+            scrollTrigger: {
+              trigger: '#work',
+              start: 'top 60%'
+            }
+          }
+        );
+      }
+    }, 100);
+
+    return () => {
+      ScrollTrigger.getAll().forEach(t => t.kill());
+    };
+  }, [location.pathname, isPreloaderDone, isHeroPage]);
 
   return (
     <>

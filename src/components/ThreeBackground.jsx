@@ -7,15 +7,20 @@ import { ShaderPass } from 'three/examples/jsm/postprocessing/ShaderPass.js';
 import { UnrealBloomPass } from 'three/examples/jsm/postprocessing/UnrealBloomPass.js';
 import { RAY_VERT, RAY_FRAG, COMPOSITE_VERT, COMPOSITE_FRAG } from './shaders.js';
 
-export default function ThreeBackground() {
+export default function ThreeBackground({ isHeroPage = true }) {
   const canvasRef = useRef(null);
   const [isInteractive, setIsInteractive] = useState(false);
   const isInteractiveRef = useRef(false);
+  const isHeroPageRef = useRef(isHeroPage);
 
-  // Sync ref with state for use inside animation loop
+  // Sync refs with state/props for use inside animation loop
   useEffect(() => {
     isInteractiveRef.current = isInteractive;
   }, [isInteractive]);
+
+  useEffect(() => {
+    isHeroPageRef.current = isHeroPage;
+  }, [isHeroPage]);
 
   useEffect(() => {
     if (!canvasRef.current) return;
@@ -320,8 +325,13 @@ export default function ThreeBackground() {
       uniforms.uCamTarget.value.set(0, 0, 0);
       compositePass.uniforms.uTime.value = elapsedTime;
 
-      // Keep the hero alive, but do not spend a 60fps ray-trace budget behind
-      // ordinary page content. Orbit Mode remains fully responsive.
+      // Keep the hero alive, but do not spend a 60fps ray-trace budget behind ordinary page content.
+      // If we are not on the hero page, skip rendering entirely to free up 100% of GPU for the UI.
+      if (!isHeroPageRef.current) {
+        animationFrameId = window.requestAnimationFrame(tick);
+        return;
+      }
+
       const nowMs = elapsedTime * 1000;
       const isHeroVisible = window.scrollY < window.innerHeight * 1.15;
       const targetFps = isInteractiveRef.current
