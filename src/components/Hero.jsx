@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import gsap from 'gsap';
+import { Link } from 'react-router-dom';
 
 export default function Hero() {
   const exploreBtnRef = useRef(null);
@@ -48,13 +49,13 @@ export default function Hero() {
       <h1 className="hero-elem hero-title-2 uppercase">DEVELOPER</h1>
       
       <div className="hero-elem" style={{ display: 'flex', gap: '2rem', justifyContent: 'center' }}>
-        <a 
-          href="#work" 
+        <Link 
+          to="/work" 
           ref={exploreBtnRef} 
           className="explore-btn font-mono hoverable uppercase"
         >
           Explore
-        </a>
+        </Link>
         </div>
         
       

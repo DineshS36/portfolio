@@ -1,38 +1,44 @@
-import { useEffect, useRef, useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
+import { Link } from 'react-router-dom';
 import useTextScramble from '../hooks/useTextScramble';
 
-function ScrambleLink({ href, children, className }) {
+function ScrambleLink({ to, children, className }) {
   const { displayText, onMouseEnter, onMouseLeave } = useTextScramble(children);
   return (
-    <a 
-      href={href} 
+    <Link 
+      to={to} 
       className={className}
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
     >
       {displayText}
-    </a>
+    </Link>
   );
 }
 
-export default function Navbar() {
+export default function Navbar({ isHeroPage }) {
   const [isHidden, setIsHidden] = useState(false);
   const ticking = useRef(false);
   const { displayText: logoText, onMouseEnter: logoEnter, onMouseLeave: logoLeave } = useTextScramble('DINESH');
 
   useEffect(() => {
+    // If we're on the hero page, we might want it visible at top, hidden on scroll.
+    // If not on hero page, keep it always visible.
+    if (!isHeroPage) {
+      setIsHidden(false);
+      return;
+    }
+
     const updateNavVisibility = () => {
       setIsHidden(window.scrollY > 120);
     };
 
     const handleScroll = () => {
       if (ticking.current) return;
-
       window.requestAnimationFrame(() => {
         updateNavVisibility();
         ticking.current = false;
       });
-
       ticking.current = true;
     };
 
@@ -44,13 +50,11 @@ export default function Navbar() {
       window.removeEventListener('scroll', handleScroll);
       window.removeEventListener('resize', updateNavVisibility);
     };
-  }, []);
+  }, [isHeroPage]);
 
   const onResumeClick = (e) => {
     e.preventDefault();
     const href = '/Dinesh_Resume.pdf';
-
-    // Try download first
     try {
       const a = document.createElement('a');
       a.href = href;
@@ -60,7 +64,6 @@ export default function Navbar() {
       a.click();
       a.remove();
     } catch {
-      // Fallback: open in new tab
       window.open(href, '_blank', 'noopener,noreferrer');
     }
   };
@@ -68,20 +71,21 @@ export default function Navbar() {
   return (
     <nav className={isHidden ? 'nav-hidden' : 'nav-visible'}>
       <div className="container nav-inner">
-        <a
-          href="#"
+        <Link
+          to="/"
           className="logo hoverable"
           onMouseEnter={logoEnter}
           onMouseLeave={logoLeave}
         >
           {logoText}
-        </a>
+        </Link>
 
         <div style={{ display: 'flex', alignItems: 'center', gap: '2rem' }}>
           <div className="nav-links font-mono uppercase">
-            <ScrambleLink href="#about" className="nav-link hoverable">About</ScrambleLink>
-            <ScrambleLink href="#work" className="nav-link hoverable">Work</ScrambleLink>
-            <ScrambleLink href="#contact" className="nav-link hoverable">Contact</ScrambleLink>
+            <ScrambleLink to="/about" className="nav-link hoverable">About</ScrambleLink>
+            <ScrambleLink to="/work" className="nav-link hoverable">Work</ScrambleLink>
+            <ScrambleLink to="/skills" className="nav-link hoverable">Skills</ScrambleLink>
+            <ScrambleLink to="/contact" className="nav-link hoverable">Contact</ScrambleLink>
           </div>
 
           <a
