@@ -1295,3 +1295,54 @@ footer {
 .scroll-arrow { display: inline-block; animation: bounce 2s infinite; }
 @keyframes pulse { 0%, 100% { opacity: 0.3; } 50% { opacity: 0.8; } }
 @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(5px); } }
+
+/* Floating Dock Mode for Inner Pages */
+nav.dock-mode {
+  position: fixed;
+  top: 1.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: auto;
+  min-width: fit-content;
+  background: rgba(10, 10, 15, 0.6);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 100px;
+  padding: 0.25rem 0.5rem;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+nav.dock-mode .nav-inner {
+  padding: 0 1.5rem;
+  gap: 3rem;
+  height: 3.5rem;
+}
+
+@media (max-width: 768px) {
+  nav.dock-mode {
+    width: 90%;
+    top: 1rem;
+    padding: 0.25rem;
+  }
+  nav.dock-mode .nav-inner {
+    padding: 0 1rem;
+    gap: 1rem;
+    height: 3rem;
+  }
+  nav.dock-mode .nav-links {
+    display: none; /* Hide links on mobile dock, rely on logo & resume */
+  }
+}
+
+.hero-logo {
+  transition: opacity 0.5s ease-in-out;
+}
+.hero-logo.fade-in {
+  opacity: 1;
+}
+.hero-logo.fade-out {
+  opacity: 0;
+}

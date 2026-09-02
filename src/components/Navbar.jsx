@@ -69,19 +69,36 @@ export default function Navbar({ isHeroPage }) {
   };
 
   return (
-    <nav className={isHidden ? 'nav-hidden' : 'nav-visible'}>
-      <div className="container nav-inner">
+    <>
+      {/* 1. Top-Left Logo (Only visible on Hero page) */}
+      <div 
+        className={`hero-logo ${!isHeroPage ? 'fade-out' : 'fade-in'}`}
+        style={{
+          position: 'fixed',
+          top: '2rem',
+          left: '2rem',
+          zIndex: 1000,
+          pointerEvents: isHeroPage ? 'auto' : 'none'
+        }}
+      >
         <Link
           to="/"
-          className="logo hoverable"
+          className="logo hoverable text-glow"
           onMouseEnter={logoEnter}
           onMouseLeave={logoLeave}
+          style={{ textDecoration: 'none', color: '#fff', fontSize: '1.5rem', fontWeight: 900, letterSpacing: '0.1em' }}
         >
           {logoText}
         </Link>
+      </div>
 
-        <div style={{ display: 'flex', alignItems: 'center', gap: '2rem' }}>
+      {/* 2. Glass Dock Navigation (Visible everywhere) */}
+      <nav className={`dock-mode ${isHidden && isHeroPage ? 'nav-hidden' : 'nav-visible'}`}>
+        <div className="container nav-inner">
           <div className="nav-links font-mono uppercase">
+            {!isHeroPage && (
+              <ScrambleLink to="/" className="nav-link hoverable">Home</ScrambleLink>
+            )}
             <ScrambleLink to="/about" className="nav-link hoverable">About</ScrambleLink>
             <ScrambleLink to="/work" className="nav-link hoverable">Work</ScrambleLink>
             <ScrambleLink to="/skills" className="nav-link hoverable">Skills</ScrambleLink>
@@ -103,7 +120,7 @@ export default function Navbar({ isHeroPage }) {
             Resume
           </a>
         </div>
-      </div>
-    </nav>
+      </nav>
+    </>
   );
 }
