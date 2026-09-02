@@ -116,41 +116,7 @@ export default function ThreeStarfield() {
     const starSystem = new THREE.Points(geometry, starMaterial);
     scene.add(starSystem);
 
-    // 2. Create 3D Shooting Stars (Meteors)
-    const meteors = [];
-    const meteorGeometry = new THREE.CylinderGeometry(0.5, 0.1, 100, 4);
-    meteorGeometry.rotateX(Math.PI / 2); // align along Z axis
-    
-    const meteorMaterial = new THREE.MeshBasicMaterial({
-      color: 0xffffff,
-      transparent: true,
-      opacity: 0.8,
-      blending: THREE.AdditiveBlending
-    });
-
-    const spawnMeteor = () => {
-      const meteor = new THREE.Mesh(meteorGeometry, meteorMaterial);
-      
-      // Start far away
-      meteor.position.x = (Math.random() - 0.5) * 2000;
-      meteor.position.y = (Math.random() - 0.5) * 1000 + 500; // Prefer top half
-      meteor.position.z = -1000;
-      
-      // Angle it diagonally towards the camera
-      meteor.rotation.y = (Math.random() - 0.5) * 0.5;
-      meteor.rotation.x = (Math.random() * 0.2) + 0.1;
-
-      // Speed
-      meteor.userData = {
-        speed: Math.random() * 20 + 30,
-        active: true
-      };
-
-      scene.add(meteor);
-      meteors.push(meteor);
-    };
-
-    // 3. Animation Loop
+    // 2. Animation Loop
     const clock = new THREE.Clock();
     let animationFrameId;
 
@@ -159,30 +125,6 @@ export default function ThreeStarfield() {
       
       // Update GPU stars time
       uniforms.uTime.value = elapsedTime;
-
-      // Random chance to spawn meteor
-      if (Math.random() < 0.02 && meteors.length < 5) {
-        spawnMeteor();
-      }
-
-      // Update meteors
-      for (let i = meteors.length - 1; i >= 0; i--) {
-        const m = meteors[i];
-        if (m.userData.active) {
-          m.translateZ(m.userData.speed);
-          
-          // Fade out as it passes camera
-          if (m.position.z > 800) {
-            m.material.opacity -= 0.02;
-          }
-
-          // Remove if past camera or faded out
-          if (m.position.z > 1200 || m.material.opacity <= 0) {
-            scene.remove(m);
-            meteors.splice(i, 1);
-          }
-        }
-      }
 
       // Gentle camera sway for life
       camera.position.x = Math.sin(elapsedTime * 0.2) * 50;
@@ -195,7 +137,7 @@ export default function ThreeStarfield() {
 
     tick();
 
-    // 4. Resize Handler
+    // 3. Resize Handler
     const handleResize = () => {
       camera.aspect = window.innerWidth / window.innerHeight;
       camera.updateProjectionMatrix();
@@ -211,8 +153,6 @@ export default function ThreeStarfield() {
       renderer.dispose();
       geometry.dispose();
       starMaterial.dispose();
-      meteorGeometry.dispose();
-      meteorMaterial.dispose();
     };
   }, []);
 
