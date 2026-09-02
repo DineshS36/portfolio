@@ -6,7 +6,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 gsap.registerPlugin(ScrollTrigger);
 import Navbar from './Navbar';
 import CustomCursor from './CustomCursor';
-import StarfieldBackground from './StarfieldBackground';
+import ThreeStarfield from './ThreeStarfield';
 import usePageTransitions from '../hooks/usePageTransitions';
 
 const ThreeBackground = lazy(() => import('./ThreeBackground'));
@@ -23,16 +23,16 @@ export default function Layout({ isPreloaderDone }) {
 
     const webglCanvas = document.getElementById('webgl-canvas');
     const bgOverlay = document.querySelector('.bg-overlay');
-    const starfield = document.getElementById('starfield-canvas');
+    const threeStarfield = document.getElementById('three-starfield-canvas');
 
     if (isHeroPage) {
       if (webglCanvas) gsap.to(webglCanvas, { opacity: 1, duration: 0.6, ease: 'power2.out' });
       if (bgOverlay) gsap.to(bgOverlay, { opacity: 1, duration: 0.6, ease: 'power2.out' });
-      if (starfield) gsap.to(starfield, { opacity: 0, duration: 0.4, ease: 'power2.in' });
+      if (threeStarfield) gsap.to(threeStarfield, { opacity: 0, duration: 0.4, ease: 'power2.in' });
     } else {
       if (webglCanvas) gsap.to(webglCanvas, { opacity: 0, duration: 0.5, ease: 'power2.in' });
       if (bgOverlay) gsap.to(bgOverlay, { opacity: 0, duration: 0.5, ease: 'power2.in' });
-      if (starfield) gsap.to(starfield, { opacity: 1, duration: 0.6, ease: 'power2.out' });
+      if (threeStarfield) gsap.to(threeStarfield, { opacity: 1, duration: 0.6, ease: 'power2.out' });
     }
     
     // Scroll to top on route change
@@ -107,7 +107,7 @@ export default function Layout({ isPreloaderDone }) {
   return (
     <>
       <CustomCursor />
-      <StarfieldBackground />
+      <ThreeStarfield />
       
       <Suspense fallback={null}>
         <ThreeBackground isHeroPage={isHeroPage} />
