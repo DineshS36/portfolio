@@ -289,31 +289,50 @@ nav {
   align-items: center;
 }
 
-/* 3D Convex Mirror Text Distortion */
+/* Interactive Direct Letter Focus Magnifier */
 .convex-word {
   display: inline-flex;
   align-items: center;
-  perspective: 450px;
+  perspective: 500px;
   transform-style: preserve-3d;
 }
 
 .convex-char {
   display: inline-block;
   transform-style: preserve-3d;
-  transition: transform 0.28s cubic-bezier(0.2, 1.25, 0.4, 1),
-              text-shadow 0.25s ease,
-              opacity 0.25s ease;
+  padding: 0.2rem 0.05em;
+  transition: transform 0.22s cubic-bezier(0.2, 1.15, 0.4, 1),
+              color 0.18s ease,
+              text-shadow 0.22s ease,
+              opacity 0.18s ease;
   transform-origin: center center;
   will-change: transform;
+  cursor: pointer;
 }
 
-/* When hovered, characters bend outward like a real convex mirror:
-   middle is big & pushes forward, corners are small and bend behind */
-.nav-link:hover .convex-char,
-.logo:hover .convex-char {
-  transform: translateY(var(--char-y)) translateZ(var(--char-z)) scale(var(--char-scale)) rotateY(var(--char-rot-y));
-  text-shadow: 0 0 calc(4px + var(--char-curve) * 14px) rgba(255, 255, 255, calc(0.35 + var(--char-curve) * 0.65));
-  opacity: calc(0.7 + var(--char-curve) * 0.3);
+/* 1. The exact letter being hovered/focused gets BIG */
+.convex-char:hover {
+  transform: translateY(-4px) scale(1.42) translateZ(20px);
+  color: #ffffff;
+  text-shadow: 0 0 14px rgba(255, 255, 255, 0.95), 0 0 26px rgba(255, 255, 255, 0.5);
+  z-index: 10;
+  position: relative;
+}
+
+/* 2. Immediate next neighbor scales slightly */
+.convex-char:hover + .convex-char {
+  transform: translateY(-2px) scale(1.18) translateZ(10px);
+  text-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
+  z-index: 5;
+  position: relative;
+}
+
+/* 3. Immediate previous neighbor scales slightly */
+.convex-char:has(+ .convex-char:hover) {
+  transform: translateY(-2px) scale(1.18) translateZ(10px);
+  text-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
+  z-index: 5;
+  position: relative;
 }
 
 .nav-link svg {
@@ -1391,13 +1410,13 @@ nav.dock-mode {
   transform: translateX(-50%);
   width: auto;
   min-width: fit-content;
-  background: rgba(10, 10, 15, 0.6);
+  background: rgba(8, 8, 8, 0.75);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 100px;
   padding: 0.25rem 0.5rem;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
   z-index: 1000;
   transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
