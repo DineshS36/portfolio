@@ -2,16 +2,58 @@ import { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import useTextScramble from '../hooks/useTextScramble';
 
+function ConvexText({ text }) {
+  if (!text) return null;
+  const chars = Array.from(String(text));
+  const total = chars.length;
+  const mid = (total - 1) / 2;
+
+  return (
+    <span className="convex-word">
+      {chars.map((char, i) => {
+        const d = mid > 0 ? (i - mid) / mid : 0;
+        const absD = Math.abs(d);
+        const curve = 1 - Math.pow(absD, 1.5);
+
+        // Middle is BIG (1.45x), corners are SMALL (0.75x)
+        const scale = 0.75 + curve * 0.70;
+        // Middle bulges forward (+22px), corners bend behind (-10px)
+        const z = -10 + curve * 32;
+        // Two corners bend backward away from viewer in 3D
+        const rotY = -d * 34;
+        // Spherical arc curvature dip at the edges
+        const y = (1 - curve) * 2.5;
+
+        return (
+          <span
+            key={i}
+            className="convex-char"
+            style={{
+              '--char-scale': scale.toFixed(2),
+              '--char-z': `${z.toFixed(1)}px`,
+              '--char-rot-y': `${rotY.toFixed(1)}deg`,
+              '--char-y': `${y.toFixed(1)}px`,
+              '--char-curve': curve.toFixed(2)
+            }}
+          >
+            {char === ' ' ? '\u00A0' : char}
+          </span>
+        );
+      })}
+    </span>
+  );
+}
+
 function ScrambleLink({ to, children, className }) {
   const { displayText, onMouseEnter, onMouseLeave } = useTextScramble(children);
   return (
-    <Link 
-      to={to} 
+    <Link
+      to={to}
       className={className}
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
     >
-      {displayText}
+      <ConvexText text={displayText} />
     </Link>
   );
 }
@@ -71,7 +113,7 @@ export default function Navbar({ isHeroPage }) {
   return (
     <>
       {/* 1. Top-Left Logo (Only visible on Hero page) */}
-      <div 
+      <div
         className={`hero-logo ${!isHeroPage ? 'fade-out' : 'fade-in'}`}
         style={{
           position: 'fixed',
@@ -88,8 +130,44 @@ export default function Navbar({ isHeroPage }) {
           onMouseLeave={logoLeave}
           style={{ textDecoration: 'none', color: '#fff', fontSize: '1.5rem', fontWeight: 900, letterSpacing: '0.1em' }}
         >
-          {logoText}
+          <ConvexText text={logoText} />
         </Link>
+      </div>
+
+      {/* 1.5 Top-Right Resume (Only visible on Hero page) */}
+      <div
+        className={`hero-logo ${!isHeroPage ? 'fade-out' : 'fade-in'}`}
+        style={{
+          position: 'fixed',
+          top: '2rem',
+          right: '2rem',
+          zIndex: 1000,
+          pointerEvents: isHeroPage ? 'auto' : 'none'
+        }}
+      >
+        <a
+          href="/Dinesh_Resume.pdf"
+          onClick={onResumeClick}
+          className="nav-link hoverable font-mono uppercase text-glow"
+          aria-label="Download Resume"
+          style={{
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: '0.75rem',
+            textDecoration: 'none',
+            color: '#fff',
+            fontSize: '1.35rem',
+            fontWeight: 800,
+            letterSpacing: '0.08em'
+          }}
+        >
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M12 3v10" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" />
+            <path d="M8 11l4 4 4-4" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
+            <path d="M4 20h16" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" />
+          </svg>
+          <ConvexText text="Resume" />
+        </a>
       </div>
 
       {/* 2. Glass Dock Navigation (Visible everywhere) */}
@@ -105,20 +183,22 @@ export default function Navbar({ isHeroPage }) {
             <ScrambleLink to="/contact" className="nav-link hoverable">Contact</ScrambleLink>
           </div>
 
-          <a
-            href="/Dinesh_Resume.pdf"
-            onClick={onResumeClick}
-            className="nav-link hoverable font-mono uppercase"
-            aria-label="Download Resume"
-            style={{ display: 'inline-flex', alignItems: 'center', gap: '0.75rem' }}
-          >
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-              <path d="M12 3v10" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-              <path d="M8 11l4 4 4-4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-              <path d="M4 20h16" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-            </svg>
-            Resume
-          </a>
+          {!isHeroPage && (
+            <a
+              href="/Dinesh_Resume.pdf"
+              onClick={onResumeClick}
+              className="nav-link hoverable font-mono uppercase"
+              aria-label="Download Resume"
+              style={{ display: 'inline-flex', alignItems: 'center', gap: '0.75rem' }}
+            >
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path d="M12 3v10" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+                <path d="M8 11l4 4 4-4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                <path d="M4 20h16" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+              </svg>
+              <ConvexText text="Resume" />
+            </a>
+          )}
         </div>
       </nav>
     </>

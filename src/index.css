@@ -18,6 +18,7 @@ body {
 }
 
 @media (pointer: fine) {
+
   *,
   *::before,
   *::after {
@@ -105,13 +106,11 @@ section {
   left: 0;
   width: 100vw;
   height: 100vh;
-  background: linear-gradient(
-    to bottom,
-    transparent 0%,
-    transparent 64%,
-    rgba(5, 5, 5, 0.32) 84%,
-    #050505 100%
-  );
+  background: linear-gradient(to bottom,
+      transparent 0%,
+      transparent 64%,
+      rgba(5, 5, 5, 0.32) 84%,
+      #050505 100%);
   z-index: -1;
   pointer-events: none;
 }
@@ -123,12 +122,10 @@ section {
   content: '';
   position: absolute;
   inset: 0;
-  background: radial-gradient(
-    ellipse 48% 43% at 50% 42%,
-    rgba(255, 174, 73, 0.14) 0%,
-    rgba(255, 130, 28, 0.055) 36%,
-    transparent 72%
-  );
+  background: radial-gradient(ellipse 48% 43% at 50% 42%,
+      rgba(255, 174, 73, 0.14) 0%,
+      rgba(255, 130, 28, 0.055) 36%,
+      transparent 72%);
   mix-blend-mode: screen;
   opacity: 0.9;
   transition: opacity 0.35s ease;
@@ -161,8 +158,15 @@ section {
 }
 
 @keyframes badgePop {
-  0% { opacity: 0; transform: translate(-50%, 15px) scale(0.95); }
-  100% { opacity: 1; transform: translate(-50%, 0) scale(1); }
+  0% {
+    opacity: 0;
+    transform: translate(-50%, 15px) scale(0.95);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translate(-50%, 0) scale(1);
+  }
 }
 
 .orbit-mode-badge .badge-title {
@@ -203,6 +207,16 @@ section {
   background-color: #fff;
   box-shadow: 0 0 15px rgba(255, 255, 255, 0.6);
   border: none;
+}
+
+/* Over navbar and hero branding, keep cursor subtle so convex text is crystal clear */
+body:has(nav:hover) #cursor,
+body:has(.hero-logo:hover) #cursor {
+  width: 22px !important;
+  height: 22px !important;
+  background-color: transparent !important;
+  border: 1.5px solid rgba(255, 255, 255, 0.7) !important;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.3) !important;
 }
 
 body:has(.project-modal-gallery:hover) #cursor {
@@ -255,10 +269,13 @@ nav {
   text-decoration: none;
   color: #fff;
   letter-spacing: -1px;
+  display: inline-flex;
+  align-items: center;
 }
 
 .nav-links {
   display: flex;
+  align-items: center;
   gap: 2rem;
   font-size: 0.875rem;
   letter-spacing: 2px;
@@ -268,22 +285,43 @@ nav {
   color: #fff;
   text-decoration: none;
   position: relative;
+  display: inline-flex;
+  align-items: center;
 }
 
-.nav-link::after {
-  content: '';
-  position: absolute;
-  width: 0;
-  height: 2px;
-  bottom: -4px;
-  left: 0;
-  background-color: #fff;
-  box-shadow: 0 0 10px #fff;
-  transition: width 0.3s ease;
+/* 3D Convex Mirror Text Distortion */
+.convex-word {
+  display: inline-flex;
+  align-items: center;
+  perspective: 450px;
+  transform-style: preserve-3d;
 }
 
-.nav-link:hover::after {
-  width: 100%;
+.convex-char {
+  display: inline-block;
+  transform-style: preserve-3d;
+  transition: transform 0.28s cubic-bezier(0.2, 1.25, 0.4, 1),
+              text-shadow 0.25s ease,
+              opacity 0.25s ease;
+  transform-origin: center center;
+  will-change: transform;
+}
+
+/* When hovered, characters bend outward like a real convex mirror:
+   middle is big & pushes forward, corners are small and bend behind */
+.nav-link:hover .convex-char,
+.logo:hover .convex-char {
+  transform: translateY(var(--char-y)) translateZ(var(--char-z)) scale(var(--char-scale)) rotateY(var(--char-rot-y));
+  text-shadow: 0 0 calc(4px + var(--char-curve) * 14px) rgba(255, 255, 255, calc(0.35 + var(--char-curve) * 0.65));
+  opacity: calc(0.7 + var(--char-curve) * 0.3);
+}
+
+.nav-link svg {
+  transition: transform 0.25s ease;
+}
+
+.nav-link:hover svg {
+  transform: translateY(2px);
 }
 
 /* Hero Section */
@@ -988,6 +1026,7 @@ footer {
     grid-template-columns: 1fr 1fr;
   }
 }
+
 @media (max-width: 768px) {
   .skills-grid {
     grid-template-columns: 1fr;
@@ -1009,6 +1048,7 @@ footer {
 }
 
 @media (pointer: fine) {
+
   .project-modal-overlay,
   .project-modal-overlay * {
     cursor: none !important;
@@ -1251,20 +1291,25 @@ footer {
   .project-modal-body {
     grid-template-columns: 1fr;
   }
+
   .project-modal-gallery {
     padding-right: 0;
     border-right: none;
   }
+
   .project-modal-content {
     padding-left: 0;
     margin-top: 1.25rem;
   }
+
   .project-modal-image {
     height: 300px;
   }
+
   .project-modal-thumbs {
     justify-content: space-between;
   }
+
   .project-modal-thumb {
     flex: 1 1 auto;
     min-width: 72px;
@@ -1275,26 +1320,68 @@ footer {
   .project-modal-overlay {
     padding: 1rem;
   }
+
   .project-modal-panel {
     border-radius: 12px;
   }
+
   .project-modal-header {
     padding: 1.5rem 1.25rem 1rem;
   }
+
   .project-modal-body {
     padding: 1rem 1.25rem 1.5rem;
   }
+
   .project-modal-image {
     height: 240px;
   }
 }
 
-.scroll-hint { text-align: center; padding: 2rem; opacity: 0.5; animation: pulse 2s infinite; }
-.scroll-hint-top { margin-top: 2rem; }
-.scroll-hint-bottom { margin-bottom: 2rem; padding-bottom: 4rem; }
-.scroll-arrow { display: inline-block; animation: bounce 2s infinite; }
-@keyframes pulse { 0%, 100% { opacity: 0.3; } 50% { opacity: 0.8; } }
-@keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(5px); } }
+.scroll-hint {
+  text-align: center;
+  padding: 2rem;
+  opacity: 0.5;
+  animation: pulse 2s infinite;
+}
+
+.scroll-hint-top {
+  margin-top: 2rem;
+}
+
+.scroll-hint-bottom {
+  margin-bottom: 2rem;
+  padding-bottom: 4rem;
+}
+
+.scroll-arrow {
+  display: inline-block;
+  animation: bounce 2s infinite;
+}
+
+@keyframes pulse {
+
+  0%,
+  100% {
+    opacity: 0.3;
+  }
+
+  50% {
+    opacity: 0.8;
+  }
+}
+
+@keyframes bounce {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(5px);
+  }
+}
 
 /* Floating Dock Mode for Inner Pages */
 nav.dock-mode {
@@ -1327,22 +1414,27 @@ nav.dock-mode .nav-inner {
     top: 1rem;
     padding: 0.25rem;
   }
+
   nav.dock-mode .nav-inner {
     padding: 0 1rem;
     gap: 1rem;
     height: 3rem;
   }
+
   nav.dock-mode .nav-links {
-    display: none; /* Hide links on mobile dock, rely on logo & resume */
+    display: none;
+    /* Hide links on mobile dock, rely on logo & resume */
   }
 }
 
 .hero-logo {
   transition: opacity 0.5s ease-in-out;
 }
+
 .hero-logo.fade-in {
   opacity: 1;
 }
+
 .hero-logo.fade-out {
   opacity: 0;
 }
