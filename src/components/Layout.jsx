@@ -7,12 +7,15 @@ gsap.registerPlugin(ScrollTrigger);
 import Navbar from './Navbar';
 import CustomCursor from './CustomCursor';
 import StarfieldBackground from './StarfieldBackground';
+import usePageTransitions from '../hooks/usePageTransitions';
 
 const ThreeBackground = lazy(() => import('./ThreeBackground'));
 
 export default function Layout({ isPreloaderDone }) {
   const location = useLocation();
   const isHeroPage = location.pathname === '/';
+  
+  const { hasNext, nextRoute, hasPrev, prevRoute } = usePageTransitions({ isActive: isPreloaderDone });
 
   // Manage visibility of backgrounds based on route
   useEffect(() => {
@@ -113,7 +116,19 @@ export default function Layout({ isPreloaderDone }) {
       <Navbar isHeroPage={isHeroPage} />
       
       <main className="page-transition-wrapper" style={{ opacity: isPreloaderDone ? 1 : 0, transition: 'opacity 0.8s ease' }}>
+        {hasPrev && (
+          <div className="scroll-hint scroll-hint-top font-mono text-gray">
+            <span className="scroll-arrow">↑</span> Scroll up for previous section
+          </div>
+        )}
+        
         <Outlet />
+        
+        {hasNext && (
+          <div className="scroll-hint scroll-hint-bottom font-mono text-gray">
+            Scroll down for next section <span className="scroll-arrow">↓</span>
+          </div>
+        )}
       </main>
     </>
   );

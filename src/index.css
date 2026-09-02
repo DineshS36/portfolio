@@ -1288,3 +1288,10 @@ footer {
     height: 240px;
   }
 }
+
+.scroll-hint { text-align: center; padding: 2rem; opacity: 0.5; animation: pulse 2s infinite; }
+.scroll-hint-top { margin-top: 2rem; }
+.scroll-hint-bottom { margin-bottom: 2rem; padding-bottom: 4rem; }
+.scroll-arrow { display: inline-block; animation: bounce 2s infinite; }
+@keyframes pulse { 0%, 100% { opacity: 0.3; } 50% { opacity: 0.8; } }
+@keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(5px); } }
