@@ -46,8 +46,13 @@ const STAR_FRAG = `
   }
 `;
 
-export default function ThreeStarfield() {
+export default function ThreeStarfield({ isHeroPage = false }) {
   const canvasRef = useRef(null);
+  const isHeroPageRef = useRef(isHeroPage);
+
+  useEffect(() => {
+    isHeroPageRef.current = isHeroPage;
+  }, [isHeroPage]);
 
   useEffect(() => {
     if (!canvasRef.current) return;
@@ -117,11 +122,17 @@ export default function ThreeStarfield() {
     scene.add(starSystem);
 
     // 2. Animation Loop
-    const clock = new THREE.Clock();
+    const initTime = performance.now();
     let animationFrameId;
 
     const tick = () => {
-      const elapsedTime = clock.getElapsedTime();
+      // If on Hero page, starfield is invisible (opacity: 0) — skip rendering completely (0% GPU)
+      if (isHeroPageRef.current) {
+        animationFrameId = requestAnimationFrame(tick);
+        return;
+      }
+
+      const elapsedTime = (performance.now() - initTime) * 0.001;
       
       // Update GPU stars time
       uniforms.uTime.value = elapsedTime;
@@ -146,13 +157,28 @@ export default function ThreeStarfield() {
 
     window.addEventListener('resize', handleResize);
 
+    // WebGL Context Loss Handlers
+    const handleContextLost = (e) => {
+      e.preventDefault();
+      cancelAnimationFrame(animationFrameId);
+    };
+    const handleContextRestored = () => {
+      handleResize();
+      tick();
+    };
+
+    canvas.addEventListener('webglcontextlost', handleContextLost, false);
+    canvas.addEventListener('webglcontextrestored', handleContextRestored, false);
+
     // Cleanup
     return () => {
       window.removeEventListener('resize', handleResize);
+      canvas.removeEventListener('webglcontextlost', handleContextLost);
+      canvas.removeEventListener('webglcontextrestored', handleContextRestored);
       cancelAnimationFrame(animationFrameId);
-      renderer.dispose();
       geometry.dispose();
       starMaterial.dispose();
+      renderer.dispose();
     };
   }, []);
 

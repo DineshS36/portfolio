@@ -107,7 +107,7 @@ export default function Layout({ isPreloaderDone }) {
   return (
     <>
       <CustomCursor />
-      <ThreeStarfield />
+      <ThreeStarfield isHeroPage={isHeroPage} />
       
       <Suspense fallback={null}>
         <ThreeBackground isHeroPage={isHeroPage} />

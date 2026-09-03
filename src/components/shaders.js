@@ -279,7 +279,7 @@ void main(){
     float r = length(pos);
     lastR = r;
     if(r < 1.03*RS){ trans = 0.0; break; } // Event Horizon
-    if(r > 45.0 && dot(pos,vel) > 0.0){ break; } // Escaped ray
+    if(r > 40.0 && dot(pos,vel) > 0.0){ break; } // Escaped ray beyond accretion disk
     minR = min(minR, r);
 
     float dt = max(0.012, r*mix(0.02, 0.06, smoothstep(6.0, 20.0, r)));

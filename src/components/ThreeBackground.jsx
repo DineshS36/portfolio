@@ -287,17 +287,31 @@ export default function ThreeBackground({ isHeroPage = true }) {
     handleResize();
     window.addEventListener('resize', handleResize);
 
-    const clock = new THREE.Clock();
+    const initTime = performance.now();
 
     // Render Animation Loop
     const tick = () => {
-      const elapsedTime = clock.getElapsedTime();
+      // If we are not on the hero page, skip rendering entirely to free up 100% of GPU
+      if (!isHeroPageRef.current) {
+        animationFrameId = window.requestAnimationFrame(tick);
+        return;
+      }
+
+      // If user has scrolled past the hero, pause raymarching completely (0% GPU usage)
+      const isHeroVisible = window.scrollY < window.innerHeight * 1.05;
+      if (!isHeroVisible && !isInteractiveRef.current) {
+        animationFrameId = window.requestAnimationFrame(tick);
+        return;
+      }
+
+      const now = performance.now();
+      const elapsedTime = (now - initTime) * 0.001;
 
       if (isInteractiveRef.current) {
         // Free Orbit Mode: OrbitControls has full 3D authority
         controls.update();
       } else {
-        // The non-interactive site always returns to the reference composition.
+        // The non-interactive site smoothly glides with subtle mouse parallax
         smoothMouseX += (mouseX - smoothMouseX) * 0.05;
         smoothMouseY += (mouseY - smoothMouseY) * 0.05;
 
@@ -325,29 +339,30 @@ export default function ThreeBackground({ isHeroPage = true }) {
       uniforms.uCamTarget.value.set(0, 0, 0);
       compositePass.uniforms.uTime.value = elapsedTime;
 
-      // Keep the hero alive, but do not spend a 60fps ray-trace budget behind ordinary page content.
-      // If we are not on the hero page, skip rendering entirely to free up 100% of GPU for the UI.
-      if (!isHeroPageRef.current) {
-        animationFrameId = window.requestAnimationFrame(tick);
-        return;
-      }
-
-      const nowMs = elapsedTime * 1000;
-      const isHeroVisible = window.scrollY < window.innerHeight * 1.15;
-      const targetFps = isInteractiveRef.current
-        ? 60
-        : (isHeroVisible ? (isLowPowerDevice ? 18 : 30) : 8);
-      const minFrameMs = 1000 / targetFps;
-
-      if (nowMs - lastRenderMs >= minFrameMs) {
+      // Render smoothly synced with display VSync
+      const minFrameMs = isInteractiveRef.current ? 16 : (isLowPowerDevice ? 28 : 16);
+      if (now - lastRenderMs >= minFrameMs) {
         bloomPass.enabled = halfFloatOK && isInteractiveRef.current;
         composer.render();
-        lastRenderMs = nowMs;
+        lastRenderMs = now;
       }
       animationFrameId = window.requestAnimationFrame(tick);
     };
 
     tick();
+
+    // WebGL Context Loss Handlers
+    const handleContextLost = (e) => {
+      e.preventDefault();
+      cancelAnimationFrame(animationFrameId);
+    };
+    const handleContextRestored = () => {
+      handleResize();
+      tick();
+    };
+
+    canvas.addEventListener('webglcontextlost', handleContextLost, false);
+    canvas.addEventListener('webglcontextrestored', handleContextRestored, false);
 
     // Cleanup on unmount
     return () => {
@@ -359,6 +374,8 @@ export default function ThreeBackground({ isHeroPage = true }) {
       canvas.removeEventListener('pointerdown', handlePointerDown);
       window.removeEventListener('pointerup', handlePointerUp);
       window.removeEventListener('resize', handleResize);
+      canvas.removeEventListener('webglcontextlost', handleContextLost);
+      canvas.removeEventListener('webglcontextrestored', handleContextRestored);
       window.cancelAnimationFrame(animationFrameId);
       if (controls) controls.dispose();
       if (composer) composer.dispose();
