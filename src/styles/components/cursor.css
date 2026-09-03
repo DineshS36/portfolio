@@ -1,0 +1,55 @@
+/* Custom Cursor */
+#cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 20px;
+  height: 20px;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 30000;
+  transform: translate(-50%, -50%);
+  transition: width 0.3s, height 0.3s, background-color 0.3s, box-shadow 0.3s;
+  mix-blend-mode: difference;
+}
+
+#cursor.hovered {
+  width: 50px;
+  height: 50px;
+  background-color: #fff;
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.6);
+  border: none;
+}
+
+/* Over navbar and hero branding, keep cursor subtle so convex text is crystal clear */
+body:has(nav:hover) #cursor,
+body:has(.hero-logo:hover) #cursor {
+  width: 22px !important;
+  height: 22px !important;
+  background-color: transparent !important;
+  border: 1.5px solid rgba(255, 255, 255, 0.7) !important;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.3) !important;
+}
+
+body:has(.project-modal-gallery:hover) #cursor {
+  mix-blend-mode: normal !important;
+  border-color: #fff !important;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5), inset 0 0 5px rgba(0, 0, 0, 0.5) !important;
+}
+
+body:has(.project-modal-gallery:hover) #cursor.hovered {
+  mix-blend-mode: normal !important;
+  background-color: #fff !important;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5) !important;
+}
+
+@media (max-width: 768px) {
+  body {
+    cursor: auto;
+  }
+
+  #cursor {
+    display: none;
+  }
+}

@@ -1,0 +1,170 @@
+/* Navigation */
+nav {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  padding: 2rem 0;
+  z-index: 50;
+  mix-blend-mode: difference;
+  transition: opacity 0.45s ease, transform 0.45s ease, filter 0.45s ease;
+  will-change: opacity, transform, filter;
+}
+
+.nav-visible {
+  opacity: 1;
+  transform: translateY(0);
+  filter: blur(0);
+  pointer-events: auto;
+}
+
+.nav-hidden {
+  opacity: 0;
+  transform: translateY(-28px) scale(0.98);
+  filter: blur(8px);
+  pointer-events: none;
+}
+
+.nav-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: 900;
+  text-decoration: none;
+  color: #fff;
+  letter-spacing: -1px;
+  display: inline-flex;
+  align-items: center;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  font-size: 0.875rem;
+  letter-spacing: 2px;
+}
+
+.nav-link {
+  color: #fff;
+  text-decoration: none;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+/* Interactive Direct Letter Focus Magnifier */
+.convex-word {
+  display: inline-flex;
+  align-items: center;
+  perspective: 500px;
+  transform-style: preserve-3d;
+}
+
+.convex-char {
+  display: inline-block;
+  transform-style: preserve-3d;
+  padding: 0.2rem 0.05em;
+  transition: transform 0.22s cubic-bezier(0.2, 1.15, 0.4, 1),
+              color 0.18s ease,
+              text-shadow 0.22s ease,
+              opacity 0.18s ease;
+  transform-origin: center center;
+  will-change: transform;
+  cursor: pointer;
+}
+
+/* 1. The exact letter being hovered/focused gets BIG */
+.convex-char:hover {
+  transform: translateY(-4px) scale(1.42) translateZ(20px);
+  color: #ffffff;
+  text-shadow: 0 0 14px rgba(255, 255, 255, 0.95), 0 0 26px rgba(255, 255, 255, 0.5);
+  z-index: 10;
+  position: relative;
+}
+
+/* 2. Immediate next neighbor scales slightly */
+.convex-char:hover + .convex-char {
+  transform: translateY(-2px) scale(1.18) translateZ(10px);
+  text-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
+  z-index: 5;
+  position: relative;
+}
+
+/* 3. Immediate previous neighbor scales slightly */
+.convex-char:has(+ .convex-char:hover) {
+  transform: translateY(-2px) scale(1.18) translateZ(10px);
+  text-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
+  z-index: 5;
+  position: relative;
+}
+
+.nav-link svg {
+  transition: transform 0.25s ease;
+}
+
+.nav-link:hover svg {
+  transform: translateY(2px);
+}
+
+/* Floating Dock Mode for Inner Pages */
+nav.dock-mode {
+  position: fixed;
+  top: 1.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: auto;
+  min-width: fit-content;
+  background: rgba(8, 8, 8, 0.75);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 100px;
+  padding: 0.25rem 0.5rem;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
+  z-index: 1000;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+nav.dock-mode .nav-inner {
+  padding: 0 1.5rem;
+  gap: 3rem;
+  height: 3.5rem;
+}
+
+@media (max-width: 768px) {
+  .nav-links {
+    display: none;
+  }
+
+  nav.dock-mode {
+    width: 90%;
+    top: 1rem;
+    padding: 0.25rem;
+  }
+
+  nav.dock-mode .nav-inner {
+    padding: 0 1rem;
+    gap: 1rem;
+    height: 3rem;
+  }
+
+  nav.dock-mode .nav-links {
+    display: none;
+  }
+}
+
+.hero-logo {
+  transition: opacity 0.5s ease-in-out;
+}
+
+.hero-logo.fade-in {
+  opacity: 1;
+}
+
+.hero-logo.fade-out {
+  opacity: 0;
+}

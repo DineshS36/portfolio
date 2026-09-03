@@ -1,0 +1,118 @@
+/* Work Section */
+.work-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+}
+
+.project-card {
+  position: relative;
+  aspect-ratio: 4/3;
+  background: #111;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid #222;
+  transition: all 0.5s;
+  cursor: pointer;
+}
+
+.project-card:nth-child(even) {
+  transform: translateY(4rem);
+}
+
+.project-card:hover {
+  border-color: #fff;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+}
+
+.project-bg {
+  position: absolute;
+  inset: 0;
+  transition: transform 1s;
+}
+
+.bg-1 {
+  background: conic-gradient(from 90deg, #333, #050505, #111);
+}
+
+.bg-2 {
+  background: radial-gradient(circle, #444, #050505);
+}
+
+.bg-3 {
+  background: linear-gradient(45deg, #222, #050505);
+}
+
+.bg-4 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #000;
+}
+
+.bg-4::after {
+  content: '';
+  width: 100px;
+  height: 100px;
+  border: 2px solid #333;
+  border-radius: 50%;
+  transition: 0.5s;
+}
+
+.project-card:hover .bg-4::after {
+  border-color: #fff;
+  box-shadow: 0 0 30px #fff;
+}
+
+.project-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  transition: opacity 0.5s;
+  z-index: 10;
+}
+
+.project-card:hover .project-overlay {
+  opacity: 0;
+}
+
+.project-card:hover .project-bg {
+  transform: scale(1.1);
+}
+
+.project-info {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 2rem;
+  z-index: 20;
+  transform: translateY(20px);
+  transition: transform 0.5s;
+}
+
+.project-card:hover .project-info {
+  transform: translateY(0);
+}
+
+.project-category {
+  margin-bottom: 0.5rem;
+  font-size: 0.75rem;
+  letter-spacing: 2px;
+}
+
+.project-title {
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+@media (max-width: 768px) {
+  .work-grid {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+
+  .project-card:nth-child(even) {
+    transform: translateY(0);
+  }
+}

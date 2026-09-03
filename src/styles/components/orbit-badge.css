@@ -1,0 +1,37 @@
+/* 3D Orbit Mode Badge */
+.orbit-mode-badge {
+  position: fixed;
+  bottom: 2.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10000;
+  background: rgba(10, 10, 15, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 9999px;
+  padding: 0.65rem 1.6rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2rem;
+  pointer-events: none;
+  box-shadow: 0 10px 35px rgba(0, 0, 0, 0.9), 0 0 25px rgba(255, 180, 84, 0.2);
+  animation: badgePop 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.orbit-mode-badge .badge-title {
+  font-size: 0.8rem;
+  letter-spacing: 0.18em;
+  font-weight: 700;
+  font-family: ui-monospace, 'SF Mono', monospace;
+  color: #ffb454;
+  text-shadow: 0 0 12px rgba(255, 180, 84, 0.5);
+}
+
+.orbit-mode-badge .badge-hint {
+  font-size: 0.65rem;
+  letter-spacing: 0.08em;
+  font-family: ui-monospace, 'SF Mono', monospace;
+  color: rgba(234, 250, 255, 0.7);
+}

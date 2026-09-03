@@ -1,0 +1,53 @@
+/* Contact Section */
+.contact-section {
+  text-align: center;
+  padding-top: 12rem;
+}
+
+.contact-title {
+  font-size: 6rem;
+  margin-bottom: 2rem;
+  line-height: 1;
+}
+
+.contact-btn {
+  display: inline-block;
+  margin-top: 3rem;
+  padding: 1.5rem 3rem;
+  border: 1px solid #555;
+  color: #fff;
+  text-decoration: none;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s;
+  font-size: 0.875rem;
+  letter-spacing: 2px;
+}
+
+.contact-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 100%;
+  background: #fff;
+  transition: width 0.4s ease-out;
+  z-index: -1;
+}
+
+.contact-btn:hover {
+  color: #000;
+  border-color: #fff;
+  font-weight: bold;
+}
+
+.contact-btn:hover::before {
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+  .contact-title {
+    font-size: 3.5rem;
+  }
+}

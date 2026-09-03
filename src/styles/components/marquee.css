@@ -1,0 +1,45 @@
+/* Infinite Marquee */
+.marquee-container {
+  width: 100%;
+  overflow: hidden;
+  padding: 4rem 0;
+  background: rgba(0, 0, 0, 0.5);
+  border-top: 1px solid #222;
+  border-bottom: 1px solid #222;
+  position: relative;
+  z-index: 10;
+  transform: rotate(-2deg) scale(1.05);
+}
+
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee 20s linear infinite;
+}
+
+.marquee-item {
+  font-size: 5rem;
+  font-weight: 900;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.2);
+  margin: 0 2rem;
+  white-space: nowrap;
+  transition: 0.3s;
+  cursor: default;
+  text-transform: uppercase;
+}
+
+.marquee-item:hover {
+  color: #fff;
+  -webkit-text-stroke: 0;
+  text-shadow: 0 0 20px #fff;
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}

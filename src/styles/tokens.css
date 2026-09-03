@@ -1,0 +1,76 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Cinzel:wght@400;600;800&display=swap');
+
+/* Reset & Base Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #050505;
+  color: #e5e5e5;
+  font-family: 'Inter', sans-serif;
+  overflow-x: hidden;
+  cursor: none;
+  /* Custom cursor override */
+  -webkit-font-smoothing: antialiased;
+}
+
+@media (pointer: fine) {
+  *,
+  *::before,
+  *::after {
+    cursor: none !important;
+  }
+}
+
+::selection {
+  background: #ffffff;
+  color: #000000;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #050505;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #333;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #fff;
+  box-shadow: 0 0 10px #fff;
+}
+
+/* Typography Utilities */
+.font-mono {
+  font-family: 'Space Mono', monospace;
+}
+
+.text-gray {
+  color: #888888;
+}
+
+.text-dark-gray {
+  color: #444444;
+}
+
+.uppercase {
+  text-transform: uppercase;
+}
+
+/* Glowing Effects */
+.text-glow {
+  text-shadow: 0 0 6px rgba(255, 255, 255, 0.4);
+}
+
+.text-glow-intense {
+  text-shadow: 0 0 8px rgba(255, 255, 255, 0.7), 0 0 16px rgba(255, 255, 255, 0.4);
+}
