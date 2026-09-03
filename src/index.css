@@ -831,7 +831,7 @@ footer {
   background: #fff;
   box-shadow: 0 0 10px #fff;
   width: 0%;
-  transition: width 0.1s;
+  transition: width 0.05s linear;
 }
 
 @keyframes pulse {
