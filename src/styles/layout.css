@@ -57,19 +57,6 @@ section {
   opacity: 0;
 }
 
-/* Scroll Progress */
-#scroll-progress {
-  position: fixed;
-  top: 0;
-  left: 0;
-  height: 3px;
-  background: #fff;
-  box-shadow: 0 0 6px rgba(255, 255, 255, 0.5);
-  z-index: 9998;
-  width: 0%;
-  transition: width 0.1s;
-}
-
 /* Scroll Hints */
 .scroll-hint {
   text-align: center;

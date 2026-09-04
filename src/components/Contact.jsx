@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import useTextScramble from '../hooks/useTextScramble';
+import Footer from './Footer';
 
 export default function Contact() {
   const contactBtnRef = useRef(null);
@@ -47,19 +48,23 @@ export default function Contact() {
   }, []);
 
   return (
-    <section id="contact" className="container contact-section gsap-reveal">
-      <h2 className="contact-title uppercase text-glow-intense">Initiate<br />Sequence.</h2>
-      <p className="text-gray font-mono">Ready to construct something beyond the ordinary?</p>
+    <>
+      <section id="contact" className="container contact-section gsap-reveal">
+        <h2 className="contact-title uppercase text-glow-intense">Initiate<br />Sequence.</h2>
+        <p className="text-gray font-mono">Ready to construct something beyond the ordinary?</p>
 
-      <a
-        href="mailto:itsdinesh036@gmail.com"
-        ref={contactBtnRef}
-        className="contact-btn hoverable"
-        onMouseEnter={btnEnter}
-        onMouseLeave={btnLeave}
-      >
-        <span style={{ position: 'relative', zIndex: 2 }}>{btnText}</span>
-      </a>
-    </section>
+        <a
+          href="mailto:itsdinesh036@gmail.com"
+          ref={contactBtnRef}
+          className="contact-btn hoverable"
+          onMouseEnter={btnEnter}
+          onMouseLeave={btnLeave}
+        >
+          <span style={{ position: 'relative', zIndex: 2 }}>{btnText}</span>
+        </a>
+      </section>
+
+      <Footer />
+    </>
   );
 }
