@@ -1,15 +1,17 @@
-import { useState } from 'react';
+import { useState, lazy } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
-// Components
+// Core shell components
 import Preloader from './components/Preloader';
 import Layout from './components/Layout';
 import Hero from './components/Hero';
-import About from './components/About';
-import Work from './components/Work';
-import Skills from './components/Skills';
-import Timeline from './components/Timeline';
-import Contact from './components/Contact';
+
+// Route-level code splitting for high performance
+const About = lazy(() => import('./components/About'));
+const Work = lazy(() => import('./components/Work'));
+const Skills = lazy(() => import('./components/Skills'));
+const Timeline = lazy(() => import('./components/Timeline'));
+const Contact = lazy(() => import('./components/Contact'));
 
 export default function App() {
   const [isPreloaderDone, setIsPreloaderDone] = useState(

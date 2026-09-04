@@ -2,17 +2,17 @@
 import { useMemo, useState } from 'react';
 import ProjectModal from './ProjectModal';
 
-import chatup1 from '../assets/chatup-1.png';
-import chatup2 from '../assets/chatup-2.png';
+import chatup1 from '../assets/chatup-1.webp';
+import chatup2 from '../assets/chatup-2.webp';
 
-import roast1 from '../assets/roast-1.png';
-import roast2 from '../assets/roast-2.png';
-import roast3 from '../assets/roast-3.png';
+import roast1 from '../assets/roast-1.webp';
+import roast2 from '../assets/roast-2.webp';
+import roast3 from '../assets/roast-3.webp';
 
-import resumeMain from '../assets/resume.png';
-import resume1 from '../assets/resume1.png';
-import resume2 from '../assets/resume2.png';
-import resume3 from '../assets/resume3.png';
+import resumeMain from '../assets/resume.webp';
+import resume1 from '../assets/resume1.webp';
+import resume2 from '../assets/resume2.webp';
+import resume3 from '../assets/resume3.webp';
 
 export default function Work() {
   const [activeProjectIndex, setActiveProjectIndex] = useState(null);

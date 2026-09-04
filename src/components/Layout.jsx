@@ -6,10 +6,10 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 gsap.registerPlugin(ScrollTrigger);
 import Navbar from './Navbar';
 import CustomCursor from './CustomCursor';
-import ThreeStarfield from './ThreeStarfield';
 import usePageTransitions from '../hooks/usePageTransitions';
 import { useLenis } from '../hooks/useLenis';
 
+const ThreeStarfield = lazy(() => import('./ThreeStarfield'));
 const ThreeBackground = lazy(() => import('./ThreeBackground'));
 
 export default function Layout({ isPreloaderDone }) {
@@ -109,9 +109,8 @@ export default function Layout({ isPreloaderDone }) {
   return (
     <>
       <CustomCursor />
-      <ThreeStarfield isHeroPage={isHeroPage} />
-      
       <Suspense fallback={null}>
+        <ThreeStarfield isHeroPage={isHeroPage} />
         <ThreeBackground isHeroPage={isHeroPage} />
       </Suspense>
 
@@ -124,7 +123,9 @@ export default function Layout({ isPreloaderDone }) {
           </div>
         )}
         
-        <Outlet />
+        <Suspense fallback={null}>
+          <Outlet />
+        </Suspense>
         
         {hasNext && (
           <div className="scroll-hint scroll-hint-bottom font-mono text-gray">

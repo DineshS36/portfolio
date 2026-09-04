@@ -9,7 +9,7 @@
   border-radius: 50%;
   pointer-events: none;
   z-index: 30000;
-  transform: translate(-50%, -50%);
+  will-change: transform;
   transition: width 0.3s, height 0.3s, background-color 0.3s, box-shadow 0.3s;
   mix-blend-mode: difference;
 }
