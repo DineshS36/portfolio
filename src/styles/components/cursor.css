@@ -44,12 +44,12 @@ body:has(.project-modal-gallery:hover) #cursor.hovered {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5) !important;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 768px), (pointer: coarse), (hover: none) {
   body {
-    cursor: auto;
+    cursor: auto !important;
   }
 
   #cursor {
-    display: none;
+    display: none !important;
   }
 }

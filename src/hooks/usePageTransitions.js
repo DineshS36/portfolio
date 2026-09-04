@@ -2,25 +2,36 @@ import { useEffect, useRef } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 
 const ROUTES = ['/', '/about', '/work', '/skills', '/timeline', '/contact'];
-const COOLDOWN_MS = 1500;
+const COOLDOWN_MS = 1200;
+const WHEEL_INTENT_THRESHOLD = 260; // Deliberate sustained scroll against boundary
+const TOUCH_INTENT_THRESHOLD = 90;  // Deliberate swipe against boundary
 
 export default function usePageTransitions({ isActive }) {
   const navigate = useNavigate();
   const location = useLocation();
   const isNavigating = useRef(false);
   const touchStartY = useRef(null);
+  const wheelDeltaAccumulator = useRef(0);
+  const wheelResetTimer = useRef(null);
 
   useEffect(() => {
     if (!isActive) return;
 
+    const isModalOrMenuOpen = () => {
+      return (
+        document.querySelector('.project-modal-overlay') !== null ||
+        document.querySelector('.mobile-nav-drawer.open') !== null ||
+        document.body.style.overflow === 'hidden'
+      );
+    };
+
     const navigateTo = (direction) => {
-      if (isNavigating.current) return;
+      if (isNavigating.current || isModalOrMenuOpen()) return;
 
       const currentIndex = ROUTES.indexOf(location.pathname);
       if (currentIndex === -1) return;
 
       let nextIndex = -1;
-      
       if (direction === 'next' && currentIndex < ROUTES.length - 1) {
         nextIndex = currentIndex + 1;
       } else if (direction === 'prev' && currentIndex > 0) {
@@ -29,9 +40,9 @@ export default function usePageTransitions({ isActive }) {
 
       if (nextIndex !== -1) {
         isNavigating.current = true;
+        wheelDeltaAccumulator.current = 0;
         navigate(ROUTES[nextIndex]);
-        
-        // Cooldown to prevent rapid multi-page skipping
+
         setTimeout(() => {
           isNavigating.current = false;
         }, COOLDOWN_MS);
@@ -39,43 +50,81 @@ export default function usePageTransitions({ isActive }) {
     };
 
     const handleWheel = (e) => {
-      if (isNavigating.current) return;
+      if (isNavigating.current || isModalOrMenuOpen()) return;
 
-      const isScrollUp = e.deltaY < 0;
-      const isScrollDown = e.deltaY > 0;
+      const isHero = location.pathname === '/';
+      const scrollY = window.scrollY || document.documentElement.scrollTop;
+      const atTop = scrollY <= 5;
+      const atBottom =
+        window.innerHeight + Math.round(scrollY) >= document.documentElement.scrollHeight - 5;
 
-      // Check if we are at the top of the page
-      if (isScrollUp && window.scrollY <= 5) {
-        navigateTo('prev');
+      // On the Hero page, single intentional scroll down moves to about
+      if (isHero && e.deltaY > 60) {
+        navigateTo('next');
+        return;
       }
 
-      // Check if we are at the bottom of the page
-      const atBottom = window.innerHeight + Math.round(window.scrollY) >= document.documentElement.scrollHeight - 5;
-      if (isScrollDown && atBottom) {
+      // If user is inside content (not at edges), reset accumulator immediately
+      if (!atTop && !atBottom) {
+        wheelDeltaAccumulator.current = 0;
+        return;
+      }
+
+      // If at top and scrolling down, or at bottom and scrolling up, reset
+      if (atTop && e.deltaY > 0) {
+        wheelDeltaAccumulator.current = 0;
+        return;
+      }
+      if (atBottom && e.deltaY < 0) {
+        wheelDeltaAccumulator.current = 0;
+        return;
+      }
+
+      // Debounced reset of accumulated delta if user stops scrolling
+      clearTimeout(wheelResetTimer.current);
+      wheelResetTimer.current = setTimeout(() => {
+        wheelDeltaAccumulator.current = 0;
+      }, 350);
+
+      // Accumulate boundary pull
+      wheelDeltaAccumulator.current += e.deltaY;
+
+      if (atTop && wheelDeltaAccumulator.current <= -WHEEL_INTENT_THRESHOLD) {
+        navigateTo('prev');
+      } else if (atBottom && wheelDeltaAccumulator.current >= WHEEL_INTENT_THRESHOLD) {
         navigateTo('next');
       }
     };
 
     const handleTouchStart = (e) => {
+      if (isModalOrMenuOpen()) return;
       touchStartY.current = e.touches[0].clientY;
     };
 
     const handleTouchMove = (e) => {
-      if (isNavigating.current || touchStartY.current === null) return;
+      if (isNavigating.current || touchStartY.current === null || isModalOrMenuOpen()) return;
 
       const touchEndY = e.touches[0].clientY;
-      const deltaY = touchStartY.current - touchEndY;
+      const deltaY = touchStartY.current - touchEndY; // Positive = swiping up (scrolling down)
 
-      const isScrollUp = deltaY < -20; // significant swipe down (scroll up)
-      const isScrollDown = deltaY > 20; // significant swipe up (scroll down)
+      const isHero = location.pathname === '/';
+      const scrollY = window.scrollY || document.documentElement.scrollTop;
+      const atTop = scrollY <= 5;
+      const atBottom =
+        window.innerHeight + Math.round(scrollY) >= document.documentElement.scrollHeight - 5;
 
-      if (isScrollUp && window.scrollY <= 5) {
-        navigateTo('prev');
-        touchStartY.current = null; // reset to prevent multiple triggers
+      // Hero swipe down
+      if (isHero && deltaY > 50) {
+        navigateTo('next');
+        touchStartY.current = null;
+        return;
       }
 
-      const atBottom = window.innerHeight + Math.round(window.scrollY) >= document.documentElement.scrollHeight - 5;
-      if (isScrollDown && atBottom) {
+      // Require deliberate, strong pull while resting at boundary
+      if (atTop && deltaY < -TOUCH_INTENT_THRESHOLD) {
+        navigateTo('prev');
+        touchStartY.current = null;
+      } else if (atBottom && deltaY > TOUCH_INTENT_THRESHOLD) {
         navigateTo('next');
         touchStartY.current = null;
       }
@@ -85,14 +134,13 @@ export default function usePageTransitions({ isActive }) {
       touchStartY.current = null;
     };
 
-    // Use passive: false to theoretically prevent default if we wanted to hijack, 
-    // but passive: true is better for performance since we aren't calling e.preventDefault().
     window.addEventListener('wheel', handleWheel, { passive: true });
     window.addEventListener('touchstart', handleTouchStart, { passive: true });
     window.addEventListener('touchmove', handleTouchMove, { passive: true });
     window.addEventListener('touchend', handleTouchEnd, { passive: true });
 
     return () => {
+      clearTimeout(wheelResetTimer.current);
       window.removeEventListener('wheel', handleWheel);
       window.removeEventListener('touchstart', handleTouchStart);
       window.removeEventListener('touchmove', handleTouchMove);
@@ -100,7 +148,6 @@ export default function usePageTransitions({ isActive }) {
     };
   }, [isActive, location.pathname, navigate]);
 
-  // Expose the route index if we want to display progress or UI hints
   const currentIndex = ROUTES.indexOf(location.pathname);
   return {
     currentIndex,

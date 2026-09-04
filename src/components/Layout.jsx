@@ -1,5 +1,5 @@
 import { useEffect, Suspense, lazy } from 'react';
-import { Outlet, useLocation } from 'react-router-dom';
+import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
@@ -14,10 +14,11 @@ const ThreeBackground = lazy(() => import('./ThreeBackground'));
 
 export default function Layout({ isPreloaderDone }) {
   useLenis();
+  const navigate = useNavigate();
   const location = useLocation();
   const isHeroPage = location.pathname === '/';
   
-  const { hasNext, hasPrev } = usePageTransitions({ isActive: isPreloaderDone });
+  const { hasNext, nextRoute, hasPrev, prevRoute } = usePageTransitions({ isActive: isPreloaderDone });
 
   // Manage visibility of backgrounds based on route
   useEffect(() => {
@@ -117,20 +118,30 @@ export default function Layout({ isPreloaderDone }) {
       <Navbar isHeroPage={isHeroPage} />
       
       <main className="page-transition-wrapper" style={{ opacity: isPreloaderDone ? 1 : 0, transition: 'opacity 0.8s ease' }}>
-        {hasPrev && (
-          <div className="scroll-hint scroll-hint-top font-mono text-gray">
-            <span className="scroll-arrow">↑</span> Scroll up for previous section
-          </div>
+        {hasPrev && prevRoute && (
+          <button
+            type="button"
+            onClick={() => navigate(prevRoute)}
+            className="scroll-hint scroll-hint-top font-mono text-gray hoverable"
+            style={{ background: 'none', border: 'none', width: '100%', cursor: 'pointer' }}
+          >
+            <span className="scroll-arrow">↑</span> Scroll up or click for previous section ({prevRoute === '/' ? 'home' : prevRoute.slice(1)})
+          </button>
         )}
         
         <Suspense fallback={null}>
           <Outlet />
         </Suspense>
         
-        {hasNext && (
-          <div className="scroll-hint scroll-hint-bottom font-mono text-gray">
-            Scroll down for next section <span className="scroll-arrow">↓</span>
-          </div>
+        {hasNext && nextRoute && (
+          <button
+            type="button"
+            onClick={() => navigate(nextRoute)}
+            className="scroll-hint scroll-hint-bottom font-mono text-gray hoverable"
+            style={{ background: 'none', border: 'none', width: '100%', cursor: 'pointer' }}
+          >
+            Scroll down or click for next section ({nextRoute.slice(1)}) <span className="scroll-arrow">↓</span>
+          </button>
         )}
       </main>
     </>

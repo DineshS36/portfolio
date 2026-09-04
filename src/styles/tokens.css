@@ -12,12 +12,11 @@ body {
   color: #e5e5e5;
   font-family: 'Inter', sans-serif;
   overflow-x: hidden;
-  cursor: none;
-  /* Custom cursor override */
   -webkit-font-smoothing: antialiased;
 }
 
 @media (pointer: fine) {
+  body,
   *,
   *::before,
   *::after {
