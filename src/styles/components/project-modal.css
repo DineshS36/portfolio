@@ -1,14 +1,18 @@
-/* Project Modal (premium cyberpunk theme, isolated styles) */
+/* ==========================================================================
+   Project Modal & Editorial Case Study Layout
+   High-Fidelity Cyberpunk / Dark Aesthetic
+   ========================================================================== */
+
 .project-modal-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.7);
-  backdrop-filter: blur(10px);
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(14px);
   z-index: 20000;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 2rem;
+  padding: 1.5rem;
   isolation: isolate;
 }
 
@@ -21,77 +25,151 @@
 
 .project-modal-panel {
   width: 100%;
-  max-width: 980px;
-  max-height: calc(100vh - 4rem);
-  border-radius: 14px;
-  border: 1px solid #222;
-  background: rgba(5, 5, 5, 0.72);
-  box-shadow: 0 0 40px rgba(255, 255, 255, 0.06);
+  max-width: 1080px;
+  height: min(88vh, 860px);
+  max-height: calc(100vh - 2.5rem);
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(8, 8, 10, 0.94);
+  box-shadow: 0 25px 70px rgba(0, 0, 0, 0.9), 0 0 50px rgba(255, 255, 255, 0.04);
   overflow: hidden;
   display: flex;
   flex-direction: column;
+  overscroll-behavior: contain;
 }
 
+/* Modal Header */
 .project-modal-header {
+  flex: 0 0 auto;
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  padding: 2rem 2rem 1.25rem;
-  gap: 1rem;
+  padding: 1.75rem 2rem 1.25rem;
+  gap: 1.5rem;
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .project-modal-tag {
   font-size: 0.75rem;
   color: #888;
-  margin-bottom: 0.5rem;
+  letter-spacing: 0.12em;
+  margin-bottom: 0.4rem;
 }
 
 .project-modal-title {
-  font-size: 2.15rem;
+  font-size: 2.1rem;
   line-height: 1.1;
   margin: 0;
+  letter-spacing: 0.02em;
 }
 
 .project-modal-subtitle {
-  margin-top: 0.75rem;
-  font-size: 1rem;
-  line-height: 1.6;
-  max-width: 45ch;
+  margin-top: 0.5rem;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  max-width: 55ch;
 }
 
 .project-modal-close {
-  border: 1px solid rgba(255, 255, 255, 0.25);
-  background: rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.04);
   color: #fff;
   border-radius: 12px;
-  width: 42px;
-  height: 42px;
+  width: 40px;
+  height: 40px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  transition: all 0.3s;
+  transition: all 0.25s ease;
   flex: 0 0 auto;
 }
 
 .project-modal-close:hover {
   border-color: #fff;
-  box-shadow: 0 0 20px rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.12);
+  box-shadow: 0 0 16px rgba(255, 255, 255, 0.15);
   transform: translateY(-2px);
 }
 
+/* Editorial Case Study Navigation Tab Bar */
+.project-modal-tab-bar {
+  flex: 0 0 auto;
+  display: flex;
+  gap: 0.5rem;
+  padding: 0.4rem 2rem;
+  background: rgba(0, 0, 0, 0.45);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  overflow-x: auto;
+}
+
+.project-modal-tab-btn {
+  background: transparent;
+  border: none;
+  color: #888;
+  padding: 0.7rem 1.15rem;
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  border-radius: 8px;
+  white-space: nowrap;
+}
+
+.project-modal-tab-btn .tab-number {
+  color: #555;
+  font-size: 0.72rem;
+  font-weight: 700;
+  transition: color 0.25s ease;
+}
+
+.project-modal-tab-btn:hover {
+  color: #ddd;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.project-modal-tab-btn:hover .tab-number {
+  color: #aaa;
+}
+
+.project-modal-tab-btn.active {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.project-modal-tab-btn.active .tab-number {
+  color: #fff;
+}
+
+.project-modal-tab-btn.active .tab-label {
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.35);
+}
+
+/* ==========================================================================
+   TAB 1: Overview & Gallery
+   ========================================================================== */
+
 .project-modal-body {
+  flex: 1 1 auto;
+  min-height: 0;
   display: grid;
-  grid-template-columns: 1.2fr 1fr;
+  grid-template-columns: 1.15fr 1fr;
   gap: 0;
-  padding: 1.5rem 2rem 2rem;
+  padding: 1.75rem 2rem 2rem;
   overflow-y: auto;
   overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
 }
 
 .project-modal-gallery {
-  padding-right: 1.5rem;
+  padding-right: 1.75rem;
   border-right: 1px solid rgba(255, 255, 255, 0.08);
+  position: sticky;
+  top: 0;
+  align-self: start;
 }
 
 .project-modal-gallery-main {
@@ -104,36 +182,45 @@
   object-fit: cover;
   border-radius: 12px;
   border: 1px solid rgba(255, 255, 255, 0.12);
-  background: rgba(0, 0, 0, 0.25);
+  background: rgba(0, 0, 0, 0.35);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
 }
 
 .project-modal-nav-btn {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  width: 44px;
-  height: 44px;
-  border-radius: 999px;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
   border: 1px solid rgba(255, 255, 255, 0.25);
-  background: rgba(0, 0, 0, 0.45);
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(8px);
   color: #fff;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  transition: all 0.3s;
+  font-size: 1.25rem;
+  transition: all 0.25s ease;
+}
+
+.project-modal-nav-btn:hover:not([disabled]) {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: #fff;
+  transform: translateY(-50%) scale(1.08);
 }
 
 .project-modal-nav-btn[disabled] {
-  opacity: 0.35;
+  opacity: 0.25;
   cursor: not-allowed;
 }
 
 .project-modal-nav-btn:first-of-type {
-  left: 14px;
+  left: 12px;
 }
 
 .project-modal-nav-btn:last-of-type {
-  right: 14px;
+  right: 12px;
 }
 
 .project-modal-thumbs {
@@ -144,13 +231,13 @@
 
 .project-modal-thumb {
   width: 86px;
-  height: 60px;
+  height: 58px;
   padding: 0;
-  border-radius: 10px;
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  background: rgba(0, 0, 0, 0.25);
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: rgba(0, 0, 0, 0.3);
   overflow: hidden;
-  transition: all 0.3s;
+  transition: all 0.25s ease;
 }
 
 .project-modal-thumb img {
@@ -162,28 +249,64 @@
 
 .project-modal-thumb.active {
   border-color: #fff;
-  box-shadow: 0 0 18px rgba(255, 255, 255, 0.12);
+  box-shadow: 0 0 16px rgba(255, 255, 255, 0.2);
   transform: translateY(-2px);
 }
 
 .project-modal-content {
-  padding-left: 1.5rem;
+  padding-left: 1.75rem;
+}
+
+/* Engineering Challenge Callout */
+.case-study-callout-card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-left: 3px solid #fff;
+  border-radius: 8px;
+  padding: 1rem 1.25rem;
+  margin-bottom: 1.5rem;
+}
+
+.callout-header {
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  color: #aaa;
+  margin-bottom: 0.4rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.callout-glow-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 0 8px #fff;
+}
+
+.callout-text {
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: #ddd;
+  margin: 0;
 }
 
 .project-modal-description {
   margin: 0 0 1.5rem 0;
-  font-size: 1rem;
+  font-size: 0.95rem;
   line-height: 1.7;
 }
 
 .project-modal-section {
-  margin-bottom: 1.75rem;
+  margin-bottom: 1.5rem;
 }
 
 .project-modal-section-title {
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   color: #fff;
-  margin-bottom: 0.75rem;
+  margin-bottom: 0.65rem;
+  letter-spacing: 0.06em;
 }
 
 .project-modal-list {
@@ -192,66 +315,517 @@
   margin: 0;
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
+  gap: 0.65rem;
 }
 
 .project-modal-list li {
-  color: #888;
-  padding-left: 0.85rem;
+  color: #aaa;
+  padding-left: 1rem;
   position: relative;
   line-height: 1.5;
+  font-size: 0.9rem;
 }
 
 .project-modal-list li::before {
-  content: '•';
+  content: '✦';
   position: absolute;
   left: 0;
-  top: 0;
-  color: rgba(255, 255, 255, 0.55);
+  top: 1px;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 0.75rem;
 }
 
 .project-modal-pills {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.65rem;
+  gap: 0.55rem;
 }
 
 .project-modal-pill {
-  color: #888888;
-  border: 1px solid #222;
-  background: rgba(5, 5, 5, 0.4);
+  color: #bbb;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.04);
   border-radius: 999px;
-  padding: 0.5rem 0.8rem;
-  font-size: 0.85rem;
+  padding: 0.4rem 0.85rem;
+  font-size: 0.8rem;
+  transition: all 0.2s ease;
 }
 
-.project-modal-action-btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0.95rem 1.2rem;
-  border: 1px solid rgba(255, 255, 255, 0.22);
-  border-radius: 12px;
+.project-modal-pill:hover {
+  border-color: rgba(255, 255, 255, 0.3);
   color: #fff;
-  text-decoration: none;
-  transition: all 0.3s;
-  margin-right: 1rem;
-}
-
-.project-modal-action-btn:hover {
-  border-color: #fff;
-  box-shadow: 0 0 22px rgba(255, 255, 255, 0.14);
-  transform: translateY(-3px);
 }
 
 .project-modal-actions {
   display: flex;
   flex-wrap: wrap;
   gap: 0.75rem;
+  margin-top: 1.75rem;
 }
 
-/* Responsive modal layout */
-@media (max-width: 900px) {
+.project-modal-action-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.85rem 1.25rem;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+  color: #fff;
+  background: rgba(255, 255, 255, 0.04);
+  text-decoration: none;
+  font-size: 0.82rem;
+  letter-spacing: 0.06em;
+  transition: all 0.25s ease;
+  cursor: pointer;
+}
+
+.project-modal-action-btn:hover {
+  border-color: #fff;
+  box-shadow: 0 0 18px rgba(255, 255, 255, 0.16);
+  transform: translateY(-2px);
+}
+
+.project-modal-action-btn.primary-btn {
+  background: #fff;
+  color: #000;
+  font-weight: 700;
+  border-color: #fff;
+}
+
+.project-modal-action-btn.primary-btn:hover {
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 0 22px rgba(255, 255, 255, 0.4);
+}
+
+.project-modal-action-btn.secondary-btn {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+/* ==========================================================================
+   TAB 2: System Architecture & Deep Dive
+   ========================================================================== */
+
+.project-modal-architecture-body {
+  flex: 1 1 auto;
+  min-height: 0;
+  padding: 2rem;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+
+.case-study-section-header {
+  margin-bottom: 1.25rem;
+}
+
+.section-badge {
+  font-size: 0.75rem;
+  color: #888;
+  letter-spacing: 0.1em;
+  margin-bottom: 0.35rem;
+  display: block;
+}
+
+.case-study-heading {
+  font-size: 1.45rem;
+  font-weight: 700;
+  color: #fff;
+  margin: 0 0 0.4rem;
+  letter-spacing: 0.02em;
+}
+
+.case-study-subheading {
+  font-size: 0.9rem;
+  line-height: 1.6;
+  margin: 0;
+  max-width: 70ch;
+}
+
+/* Visual Pipeline Diagram */
+.architecture-pipeline-grid {
+  display: flex;
+  align-items: stretch;
+  gap: 0.5rem;
+  overflow-x: auto;
+  padding-bottom: 0.5rem;
+}
+
+.architecture-node-wrapper {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  min-width: 200px;
+}
+
+.architecture-node-card {
+  flex: 1;
+  background: rgba(255, 255, 255, 0.025);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 1.25rem;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.architecture-node-card:hover {
+  border-color: rgba(255, 255, 255, 0.25);
+  background: rgba(255, 255, 255, 0.05);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+}
+
+.node-step {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  font-size: 0.75rem;
+  color: #555;
+  font-weight: bold;
+}
+
+.node-title {
+  font-size: 0.95rem;
+  margin: 0 0 0.5rem;
+  color: #fff;
+  letter-spacing: 0.04em;
+}
+
+.node-tech-badge {
+  display: inline-block;
+  font-size: 0.72rem;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 999px;
+  padding: 0.2rem 0.6rem;
+  color: #ddd;
+  margin-bottom: 0.75rem;
+}
+
+.node-desc {
+  font-size: 0.82rem;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.architecture-connector {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 0.6rem;
+  color: rgba(255, 255, 255, 0.3);
+  font-size: 1.25rem;
+  user-select: none;
+}
+
+/* Engineering Strategy Grid */
+.architecture-decisions-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.25rem;
+}
+
+.decision-card {
+  background: rgba(255, 255, 255, 0.025);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  padding: 1.5rem;
+  transition: all 0.3s ease;
+}
+
+.decision-card:hover {
+  border-color: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.decision-card-icon {
+  color: #fff;
+  font-size: 0.85rem;
+  margin-bottom: 0.65rem;
+}
+
+.decision-card-title {
+  font-size: 0.95rem;
+  color: #fff;
+  margin: 0 0 0.5rem;
+  letter-spacing: 0.04em;
+}
+
+.decision-card-desc {
+  font-size: 0.85rem;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* Performance Metrics Tiles */
+.metrics-tiles-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+}
+
+.metric-tile {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 1.35rem 1rem;
+  text-align: center;
+  transition: all 0.25s ease;
+}
+
+.metric-tile:hover {
+  border-color: rgba(255, 255, 255, 0.25);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.metric-value {
+  font-size: 1.85rem;
+  font-weight: 800;
+  color: #fff;
+  margin-bottom: 0.4rem;
+  letter-spacing: -0.02em;
+}
+
+.metric-label {
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+}
+
+/* ==========================================================================
+   TAB 3: Live Prototype & Sandbox Frame
+   ========================================================================== */
+
+.project-modal-prototype-body {
+  flex: 1 1 auto;
+  min-height: 0;
+  padding: 1.5rem 2rem 2rem;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+}
+
+.prototype-browser-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 1.25rem;
+  background: rgba(14, 14, 18, 0.95);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-bottom: none;
+  border-radius: 12px 12px 0 0;
+  gap: 1rem;
+}
+
+.browser-dots {
+  display: flex;
+  gap: 6px;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.dot-red { background: #ff5f56; }
+.dot-yellow { background: #ffbd2e; }
+.dot-green { background: #27c93f; }
+
+.browser-address-bar {
+  flex: 1;
+  max-width: 500px;
+  background: rgba(0, 0, 0, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+  padding: 0.35rem 0.85rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.78rem;
+  color: #aaa;
+  overflow: hidden;
+}
+
+.lock-icon {
+  color: #27c93f;
+  flex-shrink: 0;
+}
+
+.address-text {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.prototype-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.device-toggle-btn {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #888;
+  border-radius: 6px;
+  padding: 0.35rem 0.75rem;
+  font-size: 0.75rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.device-toggle-btn.active {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.35);
+}
+
+.launch-external-btn {
+  font-size: 0.75rem;
+  color: #fff;
+  text-decoration: none;
+  padding: 0.35rem 0.75rem;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: all 0.2s ease;
+}
+
+.launch-external-btn:hover {
+  background: rgba(255, 255, 255, 0.18);
+  border-color: #fff;
+}
+
+.prototype-viewport-container {
+  position: relative;
+  flex: 1 1 auto;
+  min-height: 440px;
+  height: 520px;
+  background: #000;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 0 0 12px 12px;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.prototype-viewport-container.device-desktop .prototype-iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+.prototype-viewport-container.device-mobile {
+  background: #08080a;
+}
+
+.prototype-viewport-container.device-mobile .prototype-iframe {
+  width: 390px;
+  height: 100%;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 20px;
+  box-shadow: 0 0 45px rgba(0, 0, 0, 0.95);
+  margin: auto;
+}
+
+.prototype-loading-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(10, 10, 12, 0.85);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  color: #888;
+  font-size: 0.85rem;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.prototype-spinner {
+  width: 28px;
+  height: 28px;
+  border: 2px solid rgba(255, 255, 255, 0.15);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+.prototype-empty-state {
+  text-align: center;
+  padding: 3rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+/* ==========================================================================
+   Modal Custom Scrollbars
+   ========================================================================== */
+
+.project-modal-body::-webkit-scrollbar,
+.project-modal-architecture-body::-webkit-scrollbar,
+.project-modal-prototype-body::-webkit-scrollbar,
+.architecture-pipeline-grid::-webkit-scrollbar,
+.project-modal-tab-bar::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.project-modal-body::-webkit-scrollbar-track,
+.project-modal-architecture-body::-webkit-scrollbar-track,
+.project-modal-prototype-body::-webkit-scrollbar-track,
+.architecture-pipeline-grid::-webkit-scrollbar-track,
+.project-modal-tab-bar::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: 4px;
+}
+
+.project-modal-body::-webkit-scrollbar-thumb,
+.project-modal-architecture-body::-webkit-scrollbar-thumb,
+.project-modal-prototype-body::-webkit-scrollbar-thumb,
+.architecture-pipeline-grid::-webkit-scrollbar-thumb,
+.project-modal-tab-bar::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+  transition: background 0.2s ease;
+}
+
+.project-modal-body::-webkit-scrollbar-thumb:hover,
+.project-modal-architecture-body::-webkit-scrollbar-thumb:hover,
+.project-modal-prototype-body::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.45);
+}
+
+.project-modal-body,
+.project-modal-architecture-body,
+.project-modal-prototype-body,
+.architecture-pipeline-grid,
+.project-modal-tab-bar {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.2) rgba(255, 255, 255, 0.02);
+}
+
+/* ==========================================================================
+   Responsive Adaptations
+   ========================================================================== */
+
+@media (max-width: 960px) {
+  .project-modal-panel {
+    max-width: 95vw;
+    height: 92vh;
+    max-height: 94vh;
+  }
+
   .project-modal-body {
     grid-template-columns: 1fr;
   }
@@ -259,45 +833,63 @@
   .project-modal-gallery {
     padding-right: 0;
     border-right: none;
+    position: static;
   }
 
   .project-modal-content {
     padding-left: 0;
-    margin-top: 1.25rem;
+    margin-top: 1.5rem;
   }
 
   .project-modal-image {
     height: 300px;
   }
 
-  .project-modal-thumbs {
-    justify-content: space-between;
+  .metrics-tiles-grid {
+    grid-template-columns: repeat(2, 1fr);
   }
 
-  .project-modal-thumb {
-    flex: 1 1 auto;
-    min-width: 72px;
+  .architecture-pipeline-grid {
+    flex-direction: column;
+  }
+
+  .architecture-connector {
+    transform: rotate(90deg);
+    padding: 0.4rem 0;
   }
 }
 
-@media (max-width: 520px) {
+@media (max-width: 580px) {
   .project-modal-overlay {
-    padding: 1rem;
+    padding: 0.75rem;
   }
 
   .project-modal-panel {
+    height: 96vh;
+    max-height: 100dvh;
     border-radius: 12px;
   }
 
   .project-modal-header {
-    padding: 1.5rem 1.25rem 1rem;
+    padding: 1.25rem 1.25rem 1rem;
   }
 
-  .project-modal-body {
+  .project-modal-tab-bar {
+    padding: 0.35rem 1rem;
+  }
+
+  .project-modal-body,
+  .project-modal-architecture-body,
+  .project-modal-prototype-body {
     padding: 1rem 1.25rem 1.5rem;
   }
 
   .project-modal-image {
-    height: 240px;
+    height: 220px;
+  }
+
+  .prototype-viewport-container {
+    min-height: 340px;
+    height: 380px;
   }
 }

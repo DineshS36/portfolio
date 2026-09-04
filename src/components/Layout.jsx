@@ -8,10 +8,12 @@ import Navbar from './Navbar';
 import CustomCursor from './CustomCursor';
 import ThreeStarfield from './ThreeStarfield';
 import usePageTransitions from '../hooks/usePageTransitions';
+import { useLenis } from '../hooks/useLenis';
 
 const ThreeBackground = lazy(() => import('./ThreeBackground'));
 
 export default function Layout({ isPreloaderDone }) {
+  useLenis();
   const location = useLocation();
   const isHeroPage = location.pathname === '/';
   

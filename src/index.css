@@ -20,6 +20,7 @@
 @import './styles/components/marquee.css';
 @import './styles/components/project-modal.css';
 @import './styles/components/footer.css';
+@import './styles/components/lenis.css';
 
 /* 5. Page Layouts & Specific Route Views */
 @import './styles/pages/hero.css';
