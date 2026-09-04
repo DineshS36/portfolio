@@ -1,15 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 export default function Preloader({ onLoaded }) {
-  const [progress, setProgress] = useState(0);
-  const [isVisible, setIsVisible] = useState(true);
-  const [isRendered, setIsRendered] = useState(true);
+  const isAlreadyDone = typeof window !== 'undefined' && sessionStorage.getItem('preloaderDone') === 'true';
+  const [progress, setProgress] = useState(isAlreadyDone ? 100 : 0);
+  const [isVisible, setIsVisible] = useState(!isAlreadyDone);
+  const [isRendered, setIsRendered] = useState(!isAlreadyDone);
 
   useEffect(() => {
     // If the preloader has already run this session, skip it entirely.
-    if (sessionStorage.getItem('preloaderDone') === 'true') {
-      setIsVisible(false);
-      setIsRendered(false);
+    if (isAlreadyDone) {
       if (onLoaded) onLoaded();
       return;
     }
@@ -35,6 +34,7 @@ export default function Preloader({ onLoaded }) {
         setTimeout(() => {
           setIsVisible(false);
           setTimeout(() => {
+            sessionStorage.setItem('preloaderDone', 'true');
             setIsRendered(false);
             document.body.style.overflow = 'auto';
             document.body.style.overflowX = 'hidden';
@@ -49,7 +49,7 @@ export default function Preloader({ onLoaded }) {
     return () => {
       cancelAnimationFrame(animationFrameId);
     };
-  }, [onLoaded]);
+  }, [onLoaded, isAlreadyDone]);
 
   if (!isRendered) return null;
 

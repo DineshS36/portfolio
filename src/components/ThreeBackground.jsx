@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer.js';
@@ -56,7 +56,7 @@ export default function ThreeBackground({ isHeroPage = true }) {
         gl.getExtension('EXT_color_buffer_float') ||
         gl.getExtension('EXT_color_buffer_half_float')
       );
-    } catch (e) {
+    } catch {
       halfFloatOK = false;
     }
 

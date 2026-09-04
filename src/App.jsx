@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 // Components
@@ -12,7 +12,9 @@ import Timeline from './components/Timeline';
 import Contact from './components/Contact';
 
 export default function App() {
-  const [isPreloaderDone, setIsPreloaderDone] = useState(false);
+  const [isPreloaderDone, setIsPreloaderDone] = useState(
+    () => typeof window !== 'undefined' && sessionStorage.getItem('preloaderDone') === 'true'
+  );
 
   return (
     <BrowserRouter>

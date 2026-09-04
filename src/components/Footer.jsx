@@ -1,4 +1,3 @@
-import React from 'react';
 import useTextScramble from '../hooks/useTextScramble';
 
 function ScrambleLink({ href, children, className, ...props }) {

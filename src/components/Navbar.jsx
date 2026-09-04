@@ -26,19 +26,17 @@ function NavLink({ to, children, className, onMouseEnter, onClick }) {
 
 export default function Navbar({ isHeroPage }) {
   const { isMuted, toggleMute, playHoverSound, playClickSound } = useAudio();
-  const [isHidden, setIsHidden] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
   const ticking = useRef(false);
 
   useEffect(() => {
-    // If we're on the hero page, we might want it visible at top, hidden on scroll.
-    // If not on hero page, keep it always visible.
+    // If not on hero page, keep it always visible without attaching scroll listener.
     if (!isHeroPage) {
-      setIsHidden(false);
       return;
     }
 
     const updateNavVisibility = () => {
-      setIsHidden(window.scrollY > 120);
+      setIsScrolled(window.scrollY > 120);
     };
 
     const handleScroll = () => {
@@ -138,7 +136,7 @@ export default function Navbar({ isHeroPage }) {
       </div>
 
       {/* 2. Glass Dock Navigation (Visible everywhere) */}
-      <nav className={`dock-mode ${isHidden && isHeroPage ? 'nav-hidden' : 'nav-visible'}`}>
+      <nav className={`dock-mode ${isHeroPage && isScrolled ? 'nav-hidden' : 'nav-visible'}`}>
         <div className="container nav-inner">
           <div className="nav-links font-mono uppercase">
             {!isHeroPage && (

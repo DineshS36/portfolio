@@ -1,4 +1,4 @@
-import React, { useEffect, Suspense, lazy } from 'react';
+import { useEffect, Suspense, lazy } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -17,7 +17,7 @@ export default function Layout({ isPreloaderDone }) {
   const location = useLocation();
   const isHeroPage = location.pathname === '/';
   
-  const { hasNext, nextRoute, hasPrev, prevRoute } = usePageTransitions({ isActive: isPreloaderDone });
+  const { hasNext, hasPrev } = usePageTransitions({ isActive: isPreloaderDone });
 
   // Manage visibility of backgrounds based on route
   useEffect(() => {

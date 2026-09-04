@@ -1,13 +1,12 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 
 export default function useTextScramble(originalText, speed = 30) {
   const [displayText, setDisplayText] = useState(originalText);
-  const [isHovered, setIsHovered] = useState(false);
   const intervalRef = useRef(null);
 
   const chars = '01XYZ_#$+-*[]{}/\\';
 
-  const trigger = () => {
+  const trigger = useCallback(() => {
     let iteration = 0;
     clearInterval(intervalRef.current);
 
@@ -31,21 +30,24 @@ export default function useTextScramble(originalText, speed = 30) {
 
       iteration += 1 / 2;
     }, speed);
-  };
+  }, [originalText, speed, chars]);
+
+  const onMouseEnter = useCallback(() => {
+    trigger();
+  }, [trigger]);
+
+  const onMouseLeave = useCallback(() => {
+    clearInterval(intervalRef.current);
+    setDisplayText(originalText);
+  }, [originalText]);
 
   useEffect(() => {
-    if (isHovered) {
-      trigger();
-    } else {
-      clearInterval(intervalRef.current);
-      setDisplayText(originalText);
-    }
     return () => clearInterval(intervalRef.current);
-  }, [isHovered, originalText]);
+  }, []);
 
   return {
     displayText,
-    onMouseEnter: () => setIsHovered(true),
-    onMouseLeave: () => setIsHovered(false),
+    onMouseEnter,
+    onMouseLeave,
   };
 }

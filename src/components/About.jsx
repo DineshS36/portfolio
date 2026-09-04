@@ -1,4 +1,3 @@
-import React from 'react';
 import NeuralNetworkCanvas from './NeuralNetworkCanvas';
 
 export default function About() {

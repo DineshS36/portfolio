@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 export default function CustomCursor() {
   const cursorRef = useRef(null);
@@ -17,16 +17,9 @@ export default function CustomCursor() {
       // Calculate current phase (0.0 to 1.0)
       const phase = ((now - newMoonDate) % lunarCycle) / lunarCycle; 
 
-      let shadow = '';
-      if (phase < 0.5) {
-        // Waxing Phase (0 to Full Moon) - Fills from left to right
-        const spread = phase * 40; // scales from 0px to 20px
-        shadow = `inset ${spread}px 0 0 #fff`;
-      } else {
-        // Waning Phase (Full Moon to New Moon) - Empties from left to right
-        const spread = (1 - phase) * 40; // scales from 20px to 0px
-        shadow = `inset -${spread}px 0 0 #fff`;
-      }
+      const shadow = phase < 0.5
+        ? `inset ${phase * 40}px 0 0 #fff`
+        : `inset -${(1 - phase) * 40}px 0 0 #fff`;
       
       cursor.style.setProperty('--moon-shadow', shadow);
     };
