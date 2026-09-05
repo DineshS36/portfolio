@@ -1,5 +1,5 @@
 /* Hero Section */
-header {
+header.hero-container {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -7,57 +7,211 @@ header {
   align-items: center;
   text-align: center;
   position: relative;
+  padding-top: 11rem;
+  box-sizing: border-box;
 }
 
 .hero-subtitle {
-  letter-spacing: 0.3em;
-  margin-bottom: 1rem;
-  font-size: 1rem;
+  letter-spacing: 0.35em;
+  margin-bottom: 0.75rem;
+  font-size: 0.95rem;
 }
 
 .hero-title-1 {
-  font-size: 9rem;
+  font-size: 8.5rem;
   font-weight: 900;
-  line-height: 1;
-  margin-bottom: 1rem;
-  letter-spacing: -0.05em;
+  line-height: 0.95;
+  margin-bottom: 0.5rem;
+  letter-spacing: -0.04em;
   color: #eeeeee;
   text-shadow: 0 0 7px rgba(255, 255, 255, 0.55), 0 0 14px rgba(255, 255, 255, 0.28);
 }
 
 .hero-title-2 {
-  font-size: 8rem;
+  font-size: 7.5rem;
   font-weight: 900;
-  line-height: 1;
-  letter-spacing: -0.05em;
+  line-height: 0.95;
+  letter-spacing: -0.04em;
   color: transparent;
   -webkit-text-stroke: 1px rgba(255, 255, 255, 0.3);
   background: linear-gradient(to right, #666, #fff, #666);
   -webkit-background-clip: text;
   background-clip: text;
-  margin-bottom: 3rem;
+  margin-bottom: 1.5rem;
 }
 
-.explore-btn {
-  display: inline-flex;
+/* Interactive 3D Holographic Globe CTA */
+.hero-globe-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 3.5rem 0 1.5rem;
+  perspective: 1000px;
+}
+
+.hero-globe-cta {
+  position: relative;
+  width: 150px;
+  height: 150px;
+  display: flex;
   align-items: center;
   justify-content: center;
-  width: 8rem;
-  height: 8rem;
+  cursor: pointer;
+  user-select: none;
   border-radius: 50%;
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  color: #fff;
-  text-decoration: none;
-  transition: all 0.5s;
-  font-size: 0.75rem;
-  letter-spacing: 2px;
+  transition: filter 0.3s ease;
 }
 
-.explore-btn:hover {
-  background: #fff;
-  color: #000;
-  box-shadow: 0 0 30px rgba(255, 255, 255, 0.6);
-  font-weight: bold;
+.hero-globe-cta:focus-visible {
+  outline: 2px solid rgba(255, 255, 255, 0.8);
+  outline-offset: 8px;
+}
+
+/* Radar Scan Rings */
+.globe-radar-ring {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  box-sizing: border-box;
+}
+
+.globe-radar-ring.outer {
+  inset: -14px;
+  border: 1px dashed rgba(255, 255, 255, 0.15);
+  animation: radarSpin 24s linear infinite;
+}
+
+.globe-radar-ring.inner {
+  inset: -6px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-top-color: rgba(255, 255, 255, 0.65);
+  border-bottom-color: rgba(255, 255, 255, 0.65);
+  animation: radarSpinReverse 14s linear infinite;
+}
+
+.hero-globe-cta:hover .globe-radar-ring.outer {
+  border-color: rgba(255, 255, 255, 0.35);
+  box-shadow: 0 0 24px rgba(255, 255, 255, 0.15);
+  animation-duration: 8s;
+}
+
+.hero-globe-cta:hover .globe-radar-ring.inner {
+  border-top-color: #fff;
+  border-bottom-color: #fff;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.25);
+  animation-duration: 5s;
+}
+
+@keyframes radarSpin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes radarSpinReverse {
+  from {
+    transform: rotate(360deg);
+  }
+  to {
+    transform: rotate(0deg);
+  }
+}
+
+/* Globe Canvas Layer */
+.globe-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  pointer-events: auto;
+  z-index: 1;
+}
+
+/* Frosted Center Core HUD Lens */
+.globe-core-lens {
+  position: relative;
+  z-index: 2;
+  width: 82px;
+  height: 82px;
+  border-radius: 50%;
+  background: rgba(5, 5, 5, 0.72);
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 0.25rem;
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: inset 0 0 16px rgba(255, 255, 255, 0.06), 0 8px 32px rgba(0, 0, 0, 0.8);
+  pointer-events: none;
+}
+
+.hero-globe-cta:hover .globe-core-lens {
+  background: rgba(255, 255, 255, 0.95);
+  border-color: #ffffff;
+  box-shadow: 0 0 35px rgba(255, 255, 255, 0.7), inset 0 0 12px rgba(0, 0, 0, 0.2);
+  transform: scale(1.06);
+}
+
+.globe-coord {
+  font-size: 0.52rem;
+  color: rgba(255, 255, 255, 0.45);
+  letter-spacing: 1.5px;
+  line-height: 1;
+  margin-bottom: 2px;
+  transition: color 0.3s;
+}
+
+.globe-action {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: #ffffff;
+  line-height: 1;
+  transition: color 0.3s;
+}
+
+.globe-sub {
+  font-size: 0.52rem;
+  color: rgba(255, 255, 255, 0.5);
+  letter-spacing: 1px;
+  line-height: 1;
+  margin-top: 3px;
+  transition: color 0.3s;
+}
+
+.globe-arrow-badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 3px;
+  color: rgba(255, 255, 255, 0.7);
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.hero-globe-cta:hover .globe-coord {
+  color: #555555;
+}
+
+.hero-globe-cta:hover .globe-action {
+  color: #000000;
+}
+
+.hero-globe-cta:hover .globe-sub {
+  color: #333333;
+}
+
+.hero-globe-cta:hover .globe-arrow-badge {
+  color: #000000;
+  transform: translate(2px, -2px);
 }
 
 /* Scroll Indicator */
