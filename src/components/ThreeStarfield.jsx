@@ -186,6 +186,7 @@ export default function ThreeStarfield({ isHeroPage = false }) {
     <canvas 
       id="three-starfield-canvas"
       ref={canvasRef}
+      className={isHeroPage ? 'starfield-hidden' : 'starfield-visible'}
       style={{
         position: 'fixed',
         top: 0,
@@ -194,7 +195,8 @@ export default function ThreeStarfield({ isHeroPage = false }) {
         height: '100%',
         zIndex: -2,
         pointerEvents: 'none',
-        opacity: 0 // Default opacity 0, managed by Layout GSAP
+        opacity: isHeroPage ? 0 : 1,
+        visibility: isHeroPage ? 'hidden' : 'visible',
       }}
     />
   );

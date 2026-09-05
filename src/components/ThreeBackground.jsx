@@ -384,7 +384,20 @@ export default function ThreeBackground({ isHeroPage = true }) {
   }, []);
 
   return (
-    <>
+    <div
+      className={`three-hero-bg-wrapper ${isHeroPage ? 'hero-visible' : 'hero-hidden'}${isInteractive ? ' orbit-active' : ''}`}
+      style={{
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        width: '100vw',
+        height: '100vh',
+        zIndex: isInteractive ? 9999 : -1,
+        pointerEvents: isHeroPage ? (isInteractive ? 'auto' : 'none') : 'none',
+        opacity: isHeroPage ? 1 : 0,
+        visibility: isHeroPage ? 'visible' : 'hidden',
+      }}
+    >
       <canvas id="webgl-canvas" ref={canvasRef}></canvas>
       <div className={`bg-overlay${isInteractive ? ' orbit-active' : ''}`}></div>
 
@@ -394,6 +407,6 @@ export default function ThreeBackground({ isHeroPage = true }) {
           <span className="badge-hint">DRAG TO ROTATE · SCROLL TO ZOOM · DOUBLE-CLICK OR ESC TO EXIT</span>
         </div>
       )}
-    </>
+    </div>
   );
 }

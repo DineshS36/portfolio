@@ -1,4 +1,4 @@
-import { useEffect, Suspense, lazy } from 'react';
+import { useEffect, Suspense } from 'react';
 import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -9,8 +9,8 @@ import CustomCursor from './CustomCursor';
 import usePageTransitions from '../hooks/usePageTransitions';
 import { useLenis } from '../hooks/useLenis';
 
-const ThreeStarfield = lazy(() => import('./ThreeStarfield'));
-const ThreeBackground = lazy(() => import('./ThreeBackground'));
+import ThreeStarfield from './ThreeStarfield';
+import ThreeBackground from './ThreeBackground';
 
 export default function Layout({ isPreloaderDone }) {
   useLenis();
@@ -20,27 +20,10 @@ export default function Layout({ isPreloaderDone }) {
   
   const { hasNext, nextRoute, hasPrev, prevRoute } = usePageTransitions({ isActive: isPreloaderDone });
 
-  // Manage visibility of backgrounds based on route
+  // Scroll to top on route change
   useEffect(() => {
-    if (!isPreloaderDone) return;
-
-    const webglCanvas = document.getElementById('webgl-canvas');
-    const bgOverlay = document.querySelector('.bg-overlay');
-    const threeStarfield = document.getElementById('three-starfield-canvas');
-
-    if (isHeroPage) {
-      if (webglCanvas) gsap.to(webglCanvas, { opacity: 1, duration: 0.6, ease: 'power2.out' });
-      if (bgOverlay) gsap.to(bgOverlay, { opacity: 1, duration: 0.6, ease: 'power2.out' });
-      if (threeStarfield) gsap.to(threeStarfield, { opacity: 0, duration: 0.4, ease: 'power2.in' });
-    } else {
-      if (webglCanvas) gsap.to(webglCanvas, { opacity: 0, duration: 0.5, ease: 'power2.in' });
-      if (bgOverlay) gsap.to(bgOverlay, { opacity: 0, duration: 0.5, ease: 'power2.in' });
-      if (threeStarfield) gsap.to(threeStarfield, { opacity: 1, duration: 0.6, ease: 'power2.out' });
-    }
-    
-    // Scroll to top on route change
     window.scrollTo(0, 0);
-  }, [location.pathname, isPreloaderDone, isHeroPage]);
+  }, [location.pathname]);
 
   // Page entry animation and ScrollTrigger re-initialization when route changes
   useEffect(() => {
@@ -110,10 +93,8 @@ export default function Layout({ isPreloaderDone }) {
   return (
     <>
       <CustomCursor />
-      <Suspense fallback={null}>
-        <ThreeStarfield isHeroPage={isHeroPage} />
-        <ThreeBackground isHeroPage={isHeroPage} />
-      </Suspense>
+      <ThreeStarfield isHeroPage={isHeroPage} />
+      <ThreeBackground isHeroPage={isHeroPage} />
 
       <Navbar isHeroPage={isHeroPage} />
       
