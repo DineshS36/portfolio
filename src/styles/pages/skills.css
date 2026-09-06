@@ -101,44 +101,9 @@
   background: rgba(255, 255, 255, 0.05);
 }
 
-/* Telemetry Banner below skills */
-.skills-telemetry-banner {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 1.25rem;
-  padding: 1.6rem 2rem;
-  border-radius: 14px;
-  background: rgba(10, 10, 14, 0.75);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-}
-
-.telemetry-stat {
-  display: flex;
-  flex-direction: column;
-  gap: 0.35rem;
-}
-
-.stat-label {
-  font-size: 0.65rem;
-  letter-spacing: 0.08em;
-  color: #777777;
-}
-
-.stat-value {
-  font-size: 0.88rem;
-  font-weight: 700;
-  color: #ffffff;
-}
-
 /* Responsive Skills Grid */
 @media (max-width: 1024px) {
   .skills-grid {
-    grid-template-columns: 1fr 1fr;
-  }
-
-  .skills-telemetry-banner {
     grid-template-columns: 1fr 1fr;
   }
 }
@@ -147,9 +112,5 @@
   .skills-grid {
     grid-template-columns: 1fr;
   }
-
-  .skills-telemetry-banner {
-    grid-template-columns: 1fr;
-    gap: 1rem;
-  }
 }
+

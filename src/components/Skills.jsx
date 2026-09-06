@@ -81,25 +81,6 @@ export default function Skills() {
         ))}
       </div>
 
-      {/* Engineering Competencies Banner */}
-      <div className="skills-telemetry-banner font-mono">
-        <div className="telemetry-stat">
-          <span className="stat-label text-gray">CORE DISCIPLINE</span>
-          <span className="stat-value">Full Stack & AIML</span>
-        </div>
-        <div className="telemetry-stat">
-          <span className="stat-label text-gray">SPRINT PACE</span>
-          <span className="stat-value">3 to 5-Day Delivery</span>
-        </div>
-        <div className="telemetry-stat">
-          <span className="stat-label text-gray">EDGE INFRA</span>
-          <span className="stat-value">Cloudflare Pages & Workers</span>
-        </div>
-        <div className="telemetry-stat">
-          <span className="stat-label text-gray">STATUS</span>
-          <span className="stat-value text-glow">Actively Building</span>
-        </div>
-      </div>
     </section>
   );
 }

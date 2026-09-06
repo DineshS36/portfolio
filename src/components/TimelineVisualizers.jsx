@@ -202,7 +202,6 @@ export function ChatUpSocketStreamCanvas() {
     ];
 
     let frame = 0;
-    let logOffset = 0;
 
     const render = () => {
       frame++;
@@ -242,7 +241,6 @@ export function ChatUpSocketStreamCanvas() {
         const y = baseY + idx * lineHeight;
         const isCurrent = (Math.floor(frame / 65) % chatLogs.length) === idx;
 
-        const isUser = item.type === 'in' || item.type === 'out';
         ctx.fillStyle = isCurrent
           ? 'rgba(30, 30, 42, 0.85)'
           : 'rgba(12, 12, 16, 0.7)';

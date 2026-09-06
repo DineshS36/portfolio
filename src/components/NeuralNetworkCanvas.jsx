@@ -61,25 +61,6 @@ function fillPolygon(polygon, count, scale, cx, cy) {
   return pts;
 }
 
-// Sample along a polyline curve
-function sampleCurve(curve, count, scale, cx, cy, jitter) {
-  const pts = [];
-  for (let i = 0; i < count; i++) {
-    const t = i / count;
-    const segF = t * (curve.length - 1);
-    const idx = Math.floor(segF);
-    const alpha = segF - idx;
-    const c1 = curve[Math.min(idx, curve.length - 1)];
-    const c2 = curve[Math.min(idx + 1, curve.length - 1)];
-    const j = (Math.random() - 0.5) * jitter;
-    pts.push({
-      x: cx + (c1.x + (c2.x - c1.x) * alpha + j) * scale,
-      y: cy + (c1.y + (c2.y - c1.y) * alpha + j) * scale
-    });
-  }
-  return pts;
-}
-
 export default function NeuralNetworkCanvas() {
   const canvasRef = useRef(null);
   const [currentArchetypeIndex, setCurrentArchetypeIndex] = useState(0);
@@ -270,7 +251,6 @@ export default function NeuralNetworkCanvas() {
             const y = t * helixH;
             const angle = t * Math.PI * 2 * revolutions;
             const strand = i < strandCount / 2 ? 1 : -1;
-            const depthFade = 0.5 + 0.5 * Math.cos(angle + (strand === 1 ? 0 : Math.PI));
             const x = strand * helixW * Math.cos(angle);
             pts.push({
               x: cx + x + (Math.random() - 0.5) * 3,

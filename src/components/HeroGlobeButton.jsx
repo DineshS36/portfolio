@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import gsap from 'gsap';
 
@@ -6,7 +6,6 @@ export default function HeroGlobeButton() {
   const containerRef = useRef(null);
   const canvasRef = useRef(null);
   const coreRef = useRef(null);
-  const [isHovered, setIsHovered] = useState(false);
   const navigate = useNavigate();
 
   // 1. Quantum Holographic Wireframe Globe on HTML5 Canvas
@@ -104,10 +103,7 @@ export default function HeroGlobeButton() {
 
           // Rotate X
           const y2 = pt.y * cosX - z1 * sinX;
-          const z2 = z1 * cosX + pt.y * sinX;
 
-          // Perspective depth factor
-          const perspective = (z2 + radius * 1.5) / (radius * 2.5);
           const px = centerX + x1;
           const py = centerY + y2;
 
@@ -175,18 +171,10 @@ export default function HeroGlobeButton() {
     };
   }, []);
 
-  // 2. Magnetic Cursor Tracking + Levitation
+  // 2. Continuous Floating Levitation
   useEffect(() => {
     const el = containerRef.current;
     if (!el) return;
-
-    let bounds = el.getBoundingClientRect();
-    const updateBounds = () => {
-      bounds = el.getBoundingClientRect();
-    };
-
-    window.addEventListener('resize', updateBounds);
-    window.addEventListener('scroll', updateBounds, { passive: true });
 
     // Subtle continuous floating levitation
     const floatAnim = gsap.to(el, {
@@ -236,8 +224,6 @@ export default function HeroGlobeButton() {
     <div
       ref={containerRef}
       className="hero-globe-cta hoverable"
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
       onClick={handlePortalClick}
       role="button"
       tabIndex={0}

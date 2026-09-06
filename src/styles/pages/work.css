@@ -53,27 +53,6 @@
   background: linear-gradient(45deg, #222, #050505);
 }
 
-.bg-4 {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: #000;
-}
-
-.bg-4::after {
-  content: '';
-  width: 100px;
-  height: 100px;
-  border: 2px solid #333;
-  border-radius: 50%;
-  transition: 0.5s;
-}
-
-.project-card:hover .bg-4::after {
-  border-color: #fff;
-  box-shadow: 0 0 30px #fff;
-}
-
 .project-overlay {
   position: absolute;
   inset: 0;
