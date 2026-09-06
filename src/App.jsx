@@ -1,5 +1,5 @@
 import { useState, lazy } from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 
 // Core shell components
 import Preloader from './components/Preloader';
@@ -10,7 +10,6 @@ import Hero from './components/Hero';
 const About = lazy(() => import('./components/About'));
 const Work = lazy(() => import('./components/Work'));
 const Skills = lazy(() => import('./components/Skills'));
-const Timeline = lazy(() => import('./components/Timeline'));
 const Contact = lazy(() => import('./components/Contact'));
 
 export default function App() {
@@ -29,7 +28,7 @@ export default function App() {
           <Route path="about" element={<About />} />
           <Route path="work" element={<Work />} />
           <Route path="skills" element={<Skills />} />
-          <Route path="timeline" element={<Timeline />} />
+          <Route path="timeline" element={<Navigate to="/about" replace />} />
           <Route path="contact" element={<Contact />} />
         </Route>
       </Routes>

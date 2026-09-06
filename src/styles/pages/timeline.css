@@ -1,62 +1,449 @@
-/* Timeline / Experience */
-.timeline {
+/* ==========================================================================
+   Timeline / Experience Section
+   Editorial Dark void layout aligned with #about, #work & #skills
+   ========================================================================== */
+
+.timeline-section {
   position: relative;
-  max-width: 800px;
-  margin: 4rem auto 0;
-  padding-left: 2rem;
+  z-index: 10;
+  padding-top: 3.5rem;
+  padding-bottom: 7rem;
 }
 
-.timeline::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 2px;
-  height: 100%;
-  background: linear-gradient(to bottom, #fff, #333, transparent);
-  box-shadow: 0 0 10px #fff;
+/* --------------------------------------------------------------------------
+   Section Header Aligned with Portfolio Design System
+   -------------------------------------------------------------------------- */
+.timeline-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 2.25rem;
+  flex-wrap: wrap;
+  gap: 1.5rem;
 }
 
-.timeline-item {
+.timeline-header-meta {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-size: 0.78rem;
+}
+
+/* --------------------------------------------------------------------------
+   Stage Slider with Beside-Card Navigation Arrows
+   -------------------------------------------------------------------------- */
+.timeline-stage-wrapper {
   position: relative;
-  margin-bottom: 4rem;
-  padding-left: 3rem;
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  width: 100%;
 }
 
-.timeline-dot {
-  position: absolute;
-  left: -2.35rem;
-  top: 0;
-  width: 1rem;
-  height: 1rem;
-  background: #050505;
-  border: 2px solid #fff;
+.timeline-side-arrow {
+  flex: 0 0 46px;
+  width: 46px;
+  height: 46px;
   border-radius: 50%;
-  box-shadow: 0 0 15px #fff;
-  transition: 0.3s;
+  background: rgba(14, 14, 20, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  color: #ffffff;
+  font-size: 1.6rem;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 10;
 }
 
-.timeline-item:hover .timeline-dot {
-  background: #fff;
-  transform: scale(1.5);
+.timeline-side-arrow:hover:not(:disabled) {
+  background: #ffffff;
+  color: #050505;
+  border-color: #ffffff;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+  transform: scale(1.08);
 }
 
-.timeline-date {
-  font-family: 'Space Mono', monospace;
-  color: #888;
-  font-size: 0.875rem;
-  margin-bottom: 0.5rem;
+.timeline-side-arrow:disabled {
+  opacity: 0.18;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.timeline-meta-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.4rem 0.95rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  color: #ffffff;
+  letter-spacing: 0.08em;
+  font-weight: 600;
+}
+
+.meta-pulse-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #ffffff;
+  box-shadow: 0 0 8px #ffffff;
+  animation: radarPulse 2s ease-in-out infinite;
+}
+
+@keyframes radarPulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.6);
+    opacity: 0.4;
+  }
+}
+
+.timeline-jump-strip {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.25rem 0.35rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.timeline-jump-pill {
+  background: transparent;
+  border: 1px solid transparent;
+  color: #777777;
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 0.25rem 0.65rem;
+  border-radius: 999px;
+  cursor: pointer;
+  letter-spacing: 0.06em;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.timeline-jump-pill:hover {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.timeline-jump-pill.is-active {
+  background: #ffffff;
+  color: #050505;
+  border-color: #ffffff;
+  box-shadow: 0 0 14px rgba(255, 255, 255, 0.45);
+}
+
+/* --------------------------------------------------------------------------
+   Carousel Viewport & Sliding Track
+   -------------------------------------------------------------------------- */
+.timeline-carousel-shell {
+  width: 100%;
+  overflow: hidden;
+  border-radius: 16px;
+  position: relative;
+}
+
+.timeline-cards-track {
+  display: flex;
+  width: 100%;
+  will-change: transform;
+}
+
+.timeline-card-slide {
+  flex: 0 0 100%;
+  min-width: 100%;
+  box-sizing: border-box;
+}
+
+/* --------------------------------------------------------------------------
+   Stage Split-Pane Card
+   -------------------------------------------------------------------------- */
+.timeline-stage-card {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 2.2rem;
+  background: rgba(12, 12, 16, 0.88);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 16px;
+  padding: 2.4rem 2.6rem;
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.8),
+              inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  transition: border-color 0.4s ease, box-shadow 0.4s ease;
+}
+
+.timeline-card-slide.is-active .timeline-stage-card {
+  border-color: rgba(255, 255, 255, 0.28);
+  box-shadow: 0 28px 70px rgba(0, 0, 0, 0.9),
+              0 0 25px rgba(255, 255, 255, 0.04),
+              inset 0 1px 1px rgba(255, 255, 255, 0.2);
+}
+
+/* --------------------------------------------------------------------------
+   Left Pane: Narrative & Technical Telemetry
+   -------------------------------------------------------------------------- */
+.timeline-narrative-pane {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.stage-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.1rem;
+}
+
+.stage-topbar-left {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+}
+
+.stage-badge {
+  padding: 0.35rem 0.85rem;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 999px;
+  color: #fff;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+
+.stage-date {
+  font-size: 0.72rem;
+  color: #aaaaaa;
+  letter-spacing: 0.06em;
+}
+
+.stage-step-tag {
+  font-size: 0.72rem;
+  color: #666666;
+  letter-spacing: 0.08em;
+}
+
+.stage-title-wrap {
+  margin-bottom: 1rem;
+}
+
+.stage-title {
+  font-size: 1.65rem;
+  font-weight: 800;
+  line-height: 1.25;
+  color: #ffffff;
+  letter-spacing: -0.01em;
+  margin-bottom: 0.35rem;
+}
+
+.stage-headline {
+  font-size: 0.78rem;
+  letter-spacing: 0.06em;
+  color: #888888;
+}
+
+.stage-summary {
+  font-size: 0.92rem;
+  line-height: 1.65;
+  color: #b0b0b0;
+  margin-bottom: 1.4rem;
+}
+
+/* Telemetry Metrics Grid */
+.stage-metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.85rem;
+  margin-bottom: 1.4rem;
+}
+
+.stage-metric-box {
+  background: rgba(255, 255, 255, 0.025);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 10px;
+  padding: 0.75rem 0.9rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.metric-lbl {
+  font-size: 0.64rem;
+  color: #777777;
+  letter-spacing: 0.06em;
+}
+
+.metric-val {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: 0.02em;
+}
+
+/* Tech Stack Pills matching .skill-pill */
+.stage-tech-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.stage-pill {
+  padding: 0.35rem 0.85rem;
+  border-radius: 999px;
+  background: rgba(5, 5, 5, 0.45);
+  border: 1px solid #222222;
+  font-size: 0.74rem;
+  color: #888888;
+  transition: all 0.3s ease;
+}
+
+.stage-pill:hover {
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.35);
+}
+
+/* --------------------------------------------------------------------------
+   Right Pane: Live Animated Simulation Terminal
+   -------------------------------------------------------------------------- */
+.timeline-simulation-pane {
+  display: flex;
+  flex-direction: column;
+  background: rgba(5, 5, 8, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  overflow: hidden;
+  min-height: 290px;
+}
+
+.terminal-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.7rem 1.1rem;
+  background: rgba(14, 14, 20, 0.8);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.terminal-dots {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.t-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.terminal-dots .t-dot:nth-child(1) {
+  background: #ff5f56;
+  opacity: 0.75;
+}
+
+.terminal-dots .t-dot:nth-child(2) {
+  background: #ffbd2e;
+  opacity: 0.75;
+}
+
+.terminal-dots .t-dot:nth-child(3) {
+  background: #27c93f;
+  opacity: 0.75;
+}
+
+.terminal-title {
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  color: #888888;
+}
+
+.terminal-canvas-wrapper {
+  flex: 1;
+  width: 100%;
+  position: relative;
+  min-height: 240px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.quantum-visualizer-canvas {
+  width: 100%;
+  height: 100%;
   display: block;
 }
 
-.timeline-title {
-  font-size: 2rem;
-  font-weight: bold;
-  margin-bottom: 0.5rem;
-  transition: 0.3s;
+
+/* --------------------------------------------------------------------------
+   Responsive Adaptations
+   -------------------------------------------------------------------------- */
+@media (max-width: 960px) {
+  .timeline-stage-wrapper {
+    gap: 0.75rem;
+  }
+
+  .timeline-side-arrow {
+    flex: 0 0 38px;
+    width: 38px;
+    height: 38px;
+    font-size: 1.3rem;
+  }
+
+  .timeline-stage-card {
+    grid-template-columns: 1fr;
+    gap: 1.75rem;
+    padding: 1.8rem 1.6rem;
+  }
+
+  .stage-title {
+    font-size: 1.4rem;
+  }
+
+  .timeline-simulation-pane {
+    min-height: 250px;
+  }
 }
 
-.timeline-desc {
-  color: #aaa;
-  line-height: 1.6;
+@media (max-width: 640px) {
+  .timeline-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .timeline-stage-wrapper {
+    position: relative;
+  }
+
+  .timeline-side-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  .timeline-arrow-prev {
+    left: -12px;
+  }
+
+  .timeline-arrow-next {
+    right: -12px;
+  }
+
+  .stage-metrics-grid {
+    grid-template-columns: 1fr;
+    gap: 0.6rem;
+  }
 }

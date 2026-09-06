@@ -1,10 +1,10 @@
 import { useEffect, useRef } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 
-const ROUTES = ['/', '/about', '/work', '/skills', '/timeline', '/contact'];
-const COOLDOWN_MS = 1200;
-const WHEEL_INTENT_THRESHOLD = 260; // Deliberate sustained scroll against boundary
-const TOUCH_INTENT_THRESHOLD = 90;  // Deliberate swipe against boundary
+const ROUTES = ['/', '/about', '/work', '/skills', '/contact'];
+const COOLDOWN_MS = 900;
+const WHEEL_INTENT_THRESHOLD = 160; // Responsive, deliberate pull against boundary
+const TOUCH_INTENT_THRESHOLD = 60;  // Clean swipe against boundary
 
 export default function usePageTransitions({ isActive }) {
   const navigate = useNavigate();
@@ -54,45 +54,67 @@ export default function usePageTransitions({ isActive }) {
 
       const isHero = location.pathname === '/';
       const scrollY = window.scrollY || document.documentElement.scrollTop;
-      const atTop = scrollY <= 5;
-      const atBottom =
-        window.innerHeight + Math.round(scrollY) >= document.documentElement.scrollHeight - 5;
+      const scrollHeight = document.documentElement.scrollHeight;
+      const clientHeight = window.innerHeight;
+      const hasOverflow = scrollHeight > clientHeight + 15;
 
-      // On the Hero page, single intentional scroll down moves to about
-      if (isHero && e.deltaY > 60) {
+      const atTop = scrollY <= 8;
+      const atBottom = clientHeight + Math.round(scrollY) >= scrollHeight - 8;
+
+      // On Hero page, single intentional scroll down moves to about
+      if (isHero && e.deltaY > 50) {
         navigateTo('next');
         return;
       }
 
-      // If user is inside content (not at edges), reset accumulator immediately
-      if (!atTop && !atBottom) {
+      // If page has scrollable content and user is in the middle of it, allow native scroll
+      if (hasOverflow && !atTop && !atBottom) {
         wheelDeltaAccumulator.current = 0;
         return;
       }
 
-      // If at top and scrolling down, or at bottom and scrolling up, reset
-      if (atTop && e.deltaY > 0) {
-        wheelDeltaAccumulator.current = 0;
-        return;
+      // Scrolling Down
+      if (e.deltaY > 0) {
+        // If there's overflow and we are at top (moving into page content), let native scroll handle it
+        if (hasOverflow && atTop && !atBottom) {
+          wheelDeltaAccumulator.current = 0;
+          return;
+        }
+
+        // At bottom or page fits on screen without overflow: accumulate pull towards next section
+        if (atBottom || !hasOverflow) {
+          clearTimeout(wheelResetTimer.current);
+          wheelResetTimer.current = setTimeout(() => {
+            wheelDeltaAccumulator.current = 0;
+          }, 350);
+
+          wheelDeltaAccumulator.current += e.deltaY;
+          if (wheelDeltaAccumulator.current >= WHEEL_INTENT_THRESHOLD) {
+            navigateTo('next');
+          }
+        }
       }
-      if (atBottom && e.deltaY < 0) {
-        wheelDeltaAccumulator.current = 0;
-        return;
-      }
 
-      // Debounced reset of accumulated delta if user stops scrolling
-      clearTimeout(wheelResetTimer.current);
-      wheelResetTimer.current = setTimeout(() => {
-        wheelDeltaAccumulator.current = 0;
-      }, 350);
+      // Scrolling Up
+      if (e.deltaY < 0) {
+        // If there's overflow and we are at bottom (moving up into page content), let native scroll handle it
+        if (hasOverflow && atBottom && !atTop) {
+          wheelDeltaAccumulator.current = 0;
+          return;
+        }
 
-      // Accumulate boundary pull
-      wheelDeltaAccumulator.current += e.deltaY;
+        // At top or page fits on screen without overflow: accumulate pull towards previous section
+        if (atTop || !hasOverflow) {
+          clearTimeout(wheelResetTimer.current);
+          wheelResetTimer.current = setTimeout(() => {
+            wheelDeltaAccumulator.current = 0;
+          }, 350);
 
-      if (atTop && wheelDeltaAccumulator.current <= -WHEEL_INTENT_THRESHOLD) {
-        navigateTo('prev');
-      } else if (atBottom && wheelDeltaAccumulator.current >= WHEEL_INTENT_THRESHOLD) {
-        navigateTo('next');
+          wheelDeltaAccumulator.current += e.deltaY;
+          if (wheelDeltaAccumulator.current <= -WHEEL_INTENT_THRESHOLD) {
+            navigateTo('prev');
+          }
+        }
       }
     };
 
@@ -109,9 +131,12 @@ export default function usePageTransitions({ isActive }) {
 
       const isHero = location.pathname === '/';
       const scrollY = window.scrollY || document.documentElement.scrollTop;
-      const atTop = scrollY <= 5;
-      const atBottom =
-        window.innerHeight + Math.round(scrollY) >= document.documentElement.scrollHeight - 5;
+      const scrollHeight = document.documentElement.scrollHeight;
+      const clientHeight = window.innerHeight;
+      const hasOverflow = scrollHeight > clientHeight + 15;
+
+      const atTop = scrollY <= 8;
+      const atBottom = clientHeight + Math.round(scrollY) >= scrollHeight - 8;
 
       // Hero swipe down
       if (isHero && deltaY > 50) {
@@ -120,13 +145,18 @@ export default function usePageTransitions({ isActive }) {
         return;
       }
 
-      // Require deliberate, strong pull while resting at boundary
-      if (atTop && deltaY < -TOUCH_INTENT_THRESHOLD) {
-        navigateTo('prev');
-        touchStartY.current = null;
-      } else if (atBottom && deltaY > TOUCH_INTENT_THRESHOLD) {
+      // Swiping up (pulling down towards next section)
+      if (deltaY > TOUCH_INTENT_THRESHOLD && (atBottom || !hasOverflow)) {
         navigateTo('next');
         touchStartY.current = null;
+        return;
+      }
+
+      // Swiping down (pulling up towards previous section)
+      if (deltaY < -TOUCH_INTENT_THRESHOLD && (atTop || !hasOverflow)) {
+        navigateTo('prev');
+        touchStartY.current = null;
+        return;
       }
     };
 

@@ -1,4 +1,9 @@
 /* About Section */
+.about-intro-section {
+  padding-top: 7rem;
+  padding-bottom: 3.5rem;
+}
+
 .about-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -150,3 +155,5 @@
     display: none;
   }
 }
+
+

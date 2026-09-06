@@ -157,10 +157,13 @@ export default function Work() {
   const activeProject = activeProjectIndex === null ? null : projects[activeProjectIndex];
 
   return (
-    <section id="work" className="container">
-      <h2 className="section-title uppercase gsap-reveal" style={{ marginBottom: '4rem' }}>
-        <span className="text-dark-gray">2.</span> My<br />Works
-      </h2>
+    <section id="work" className="container work-page-section">
+      <div className="gsap-reveal work-header">
+        <h2 className="section-title uppercase">
+          <span className="text-dark-gray">2.</span> My<br />Works
+        </h2>
+        <div className="divider" />
+      </div>
 
       <div className="work-grid">
         {projects.map((proj, index) => (

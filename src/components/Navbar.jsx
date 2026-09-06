@@ -112,8 +112,7 @@ export default function Navbar({ isHeroPage }) {
     { path: '/about', label: 'About', number: '02' },
     { path: '/work', label: 'Work', number: '03' },
     { path: '/skills', label: 'Skills', number: '04' },
-    { path: '/timeline', label: 'Timeline', number: '05' },
-    { path: '/contact', label: 'Contact', number: '06' },
+    { path: '/contact', label: 'Contact', number: '05' },
   ];
 
   return (
@@ -259,7 +258,7 @@ export default function Navbar({ isHeroPage }) {
         aria-label="Navigation Menu"
       >
         <div className="mobile-drawer-header font-mono">
-          <span className="mobile-drawer-tag text-gray">// SEQUENCE NAVIGATION</span>
+          <span className="mobile-drawer-tag text-gray">NAVIGATION SEQUENCE</span>
           <button
             type="button"
             className="mobile-drawer-close hoverable"

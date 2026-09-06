@@ -1,4 +1,14 @@
 /* Work Section */
+.work-page-section {
+  padding-top: 7rem;
+  padding-bottom: 6rem;
+  min-height: 120vh;
+}
+
+.work-header {
+  margin-bottom: 3.5rem;
+}
+
 .work-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;

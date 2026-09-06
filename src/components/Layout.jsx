@@ -18,7 +18,7 @@ export default function Layout({ isPreloaderDone }) {
   const location = useLocation();
   const isHeroPage = location.pathname === '/';
   
-  const { hasNext, nextRoute, hasPrev, prevRoute } = usePageTransitions({ isActive: isPreloaderDone });
+  const { hasNext, nextRoute } = usePageTransitions({ isActive: isPreloaderDone });
 
   // Scroll to top on route change
   useEffect(() => {
@@ -86,7 +86,12 @@ export default function Layout({ isPreloaderDone }) {
     }, 100);
 
     return () => {
-      ScrollTrigger.getAll().forEach(t => t.kill());
+      // Clean up only reveal triggers created here; child components manage their own triggers
+      ScrollTrigger.getAll().forEach(t => {
+        if (t.vars && t.vars.trigger && t.vars.trigger !== '.quantum-rail-section' && !String(t.vars.trigger).includes('quantum')) {
+          t.kill();
+        }
+      });
     };
   }, [location.pathname, isPreloaderDone, isHeroPage]);
 
@@ -99,17 +104,6 @@ export default function Layout({ isPreloaderDone }) {
       <Navbar isHeroPage={isHeroPage} />
       
       <main className="page-transition-wrapper" style={{ opacity: isPreloaderDone ? 1 : 0, transition: 'opacity 0.8s ease' }}>
-        {hasPrev && prevRoute && (
-          <button
-            type="button"
-            onClick={() => navigate(prevRoute)}
-            className="scroll-hint scroll-hint-top font-mono text-gray hoverable"
-            style={{ background: 'none', border: 'none', width: '100%', cursor: 'pointer' }}
-          >
-            <span className="scroll-arrow">↑</span> Scroll up or click for previous section ({prevRoute === '/' ? 'home' : prevRoute.slice(1)})
-          </button>
-        )}
-        
         <Suspense fallback={null}>
           <Outlet />
         </Suspense>

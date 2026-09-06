@@ -109,10 +109,6 @@ section {
   animation: pulse 2s infinite;
 }
 
-.scroll-hint-top {
-  margin-top: 2rem;
-}
-
 .scroll-hint-bottom {
   margin-bottom: 2rem;
   padding-bottom: 4rem;
