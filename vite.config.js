@@ -166,6 +166,7 @@ function devEmailApiPlugin() {
 export default defineConfig({
   plugins: [react(), cloudflare(), devEmailApiPlugin()],
   build: {
+    cssMinify: 'esbuild',
     chunkSizeWarningLimit: 600,
     rollupOptions: {
       output: {

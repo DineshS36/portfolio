@@ -7,27 +7,25 @@ nav.dock-mode {
   width: auto;
   min-width: fit-content;
   max-width: 92vw;
-  background: rgba(10, 10, 16, 0.72);
-  backdrop-filter: blur(28px) saturate(180%);
-  -webkit-backdrop-filter: blur(28px) saturate(180%);
-  border: 1px solid rgba(255, 255, 255, 0.16);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.02) 100%), rgba(10, 10, 16, 0.65) !important;
+  backdrop-filter: blur(24px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(24px) saturate(180%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.16) !important;
   border-radius: 100px;
   padding: 0.25rem 0.5rem;
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.75),
-              0 0 30px rgba(255, 255, 255, 0.04),
-              inset 0 1px 0 rgba(255, 255, 255, 0.22);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.7),
+              0 0 24px rgba(255, 255, 255, 0.04),
+              inset 0 1px 0 rgba(255, 255, 255, 0.25) !important;
   z-index: 1000;
   transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1),
-              transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
-              filter 0.4s ease;
-  will-change: opacity, transform, filter;
+              transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
 }
 
 nav.dock-mode.nav-visible,
 .nav-visible {
   opacity: 1;
   transform: translateX(-50%) translateY(0);
-  filter: blur(0);
   pointer-events: auto;
 }
 
@@ -35,7 +33,6 @@ nav.dock-mode.nav-hidden,
 .nav-hidden {
   opacity: 0;
   transform: translateX(-50%) translateY(-28px) scale(0.96);
-  filter: blur(8px);
   pointer-events: none;
 }
 
