@@ -8,7 +8,8 @@
     "build": "vite build",
     "lint": "eslint .",
     "preview": "npm run build && wrangler dev",
-    "deploy": "npm run build && wrangler deploy"
+    "deploy": "npm run build && wrangler deploy",
+    "secret:resend": "wrangler secret put RESEND_API_KEY"
   },
   "dependencies": {
     "gsap": "^3.15.0",
