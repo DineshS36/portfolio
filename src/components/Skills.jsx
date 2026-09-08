@@ -160,7 +160,7 @@ export default function Skills() {
       {/* Header */}
       <div className="container gsap-reveal skills-header">
         <h2 className="section-title uppercase">
-          <span className="text-dark-gray">3.</span> Skills &<br />Expertise
+          <span className="text-dark-gray">3.</span> Skills &<br />Certification
         </h2>
         <div className="divider" />
         <p className="skills-subtitle font-mono text-gray">
