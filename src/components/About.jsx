@@ -1,4 +1,4 @@
-import NeuralNetworkCanvas from './NeuralNetworkCanvas';
+import dineshPhoto from '../assets/MYphoto.jpeg';
 import Timeline from './Timeline';
 
 export default function About() {
@@ -24,7 +24,14 @@ export default function About() {
           </div>
 
           <div className="abstract-box hoverable gsap-reveal">
-            <NeuralNetworkCanvas />
+            <div className="about-photo-wrapper">
+              <img
+                src={dineshPhoto}
+                alt="Dinesh - Full Stack Developer & AI Engineer"
+                className="about-photo-img"
+                loading="eager"
+              />
+            </div>
           </div>
         </div>
       </section>
