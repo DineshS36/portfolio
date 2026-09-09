@@ -187,14 +187,14 @@ export default function Timeline() {
       <div className="timeline-header">
         <div className="gsap-reveal">
           <h2 className="section-title uppercase">
-            <span className="text-dark-gray">—</span> Evolution<br />Roadmap
+            Engineering Journey
           </h2>
           <div className="divider" />
         </div>
         <div className="timeline-header-meta font-mono">
           <div className="timeline-meta-pill">
             <span className="meta-pulse-dot" />
-            <span className="meta-pill-text">2025 – 2026 ROADMAP</span>
+            <span className="meta-pill-text">2025 – 2026 JOURNEY</span>
           </div>
           <div className="timeline-jump-strip">
             {epochs.map((ep, i) => (

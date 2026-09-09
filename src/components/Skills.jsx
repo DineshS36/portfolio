@@ -160,12 +160,9 @@ export default function Skills() {
       {/* Header */}
       <div className="container gsap-reveal skills-header">
         <h2 className="section-title uppercase">
-          <span className="text-dark-gray">3.</span> Skills &<br />Certification
+          <span className="text-dark-gray">3.</span> Core Capabilities
         </h2>
         <div className="divider" />
-        <p className="skills-subtitle font-mono text-gray">
-          360° CYLINDRICAL ARCHITECTURE RING • ACTIVE RUNNING ORBIT
-        </p>
       </div>
 
       {/* 360-Degree Cylindrical Orbital Stage */}

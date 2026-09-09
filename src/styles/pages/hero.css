@@ -12,9 +12,13 @@ header.hero-container {
 }
 
 .hero-subtitle {
-  letter-spacing: 0.35em;
-  margin-bottom: 0.75rem;
+  letter-spacing: 0.22em;
+  margin-bottom: 1.25rem;
   font-size: 0.95rem;
+  font-weight: 700;
+  color: #ffffff;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.9), 0 0 22px rgba(255, 255, 255, 0.55), 0 0 35px rgba(255, 255, 255, 0.3);
+  text-align: center;
 }
 
 .hero-title-1 {
@@ -241,6 +245,14 @@ header.hero-container {
 }
 
 @media (max-width: 768px) {
+  .hero-subtitle {
+    font-size: 0.76rem;
+    letter-spacing: 0.12em;
+    line-height: 1.4;
+    margin-bottom: 1rem;
+    padding: 0 1rem;
+  }
+
   .hero-title-1 {
     font-size: 4rem;
   }

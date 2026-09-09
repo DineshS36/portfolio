@@ -160,7 +160,7 @@ export default function Work() {
     <section id="work" className="container work-page-section">
       <div className="gsap-reveal work-header">
         <h2 className="section-title uppercase">
-          <span className="text-dark-gray">2.</span> My<br />Works
+          <span className="text-dark-gray">2.</span> Featured Work
         </h2>
         <div className="divider" />
       </div>

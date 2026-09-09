@@ -54,6 +54,10 @@
   margin: 0 auto 1.75rem auto;
 }
 
+.divider.centered::before {
+  display: none;
+}
+
 .contact-lead.centered {
   max-width: 580px;
   font-size: 1.12rem;

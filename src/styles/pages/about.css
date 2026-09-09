@@ -12,19 +12,32 @@
 }
 
 .section-title {
-  font-size: 4rem;
+  font-size: clamp(2.3rem, 4.4vw, 3.8rem);
   font-weight: 900;
-  line-height: 1.1;
+  line-height: 1.05;
   margin-bottom: 1.5rem;
-  letter-spacing: -1px;
+  letter-spacing: -0.02em;
 }
 
 .divider {
-  width: 4rem;
-  height: 4px;
-  background: #fff;
-  box-shadow: 0 0 10px #fff;
+  position: relative;
+  width: clamp(140px, 18vw, 220px);
+  height: 2px;
+  background: linear-gradient(90deg, #ffffff 0%, rgba(255, 255, 255, 0.5) 45%, rgba(255, 255, 255, 0) 100%);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.7);
   margin-bottom: 2rem;
+}
+
+.divider::before {
+  content: '';
+  position: absolute;
+  top: -3px;
+  left: 0;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #ffffff;
+  box-shadow: 0 0 8px #ffffff, 0 0 16px rgba(255, 255, 255, 0.9);
 }
 
 .about-text {

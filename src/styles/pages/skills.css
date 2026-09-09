@@ -18,13 +18,6 @@
   z-index: 20;
 }
 
-.skills-subtitle {
-  font-size: 0.72rem;
-  letter-spacing: 0.16em;
-  color: rgba(255, 255, 255, 0.45);
-  margin-top: -0.8rem;
-}
-
 /* 360-Degree Orbital Viewport - Unclipped Full-Width Stage */
 .skills-orbital-viewport {
   position: relative;
