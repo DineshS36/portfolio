@@ -1,6 +1,7 @@
 import dineshPhoto from '../assets/MYphoto.jpeg';
 import EngineeringTelemetry from './EngineeringTelemetry';
 import Timeline from './Timeline';
+import MaskedTitle from './MaskedTitle';
 
 export default function About() {
   return (
@@ -9,9 +10,7 @@ export default function About() {
       <section id="about" className="container about-intro-section">
         <div className="about-grid">
           <div className="gsap-reveal">
-            <h2 className="section-title uppercase">
-              <span className="text-dark-gray">1.</span> About Me
-            </h2>
+            <MaskedTitle number="1." text="About Me" />
             <div className="divider" />
             <p className="text-gray about-text">
               I’m Dinesh, an AI-Native Full Stack Developer and 4th-year AIML student specializing in architecture-driven, AI-augmented engineering. Rather than spending weeks writing boilerplate code by hand, I operate at the architectural level: designing decoupled system flows, data schemas, API contracts, and responsive UI layouts with HTML, CSS, and Tailwind. By directing generative AI as an engineering co-pilot, I synthesize, debug, and deploy production-ready cloud applications to Cloudflare Pages and Vercel at rapid sprint velocities.

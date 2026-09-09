@@ -52,6 +52,8 @@
   background: #ffffff;
   box-shadow: 0 0 16px rgba(255, 255, 255, 0.85);
   margin: 0 auto 1.75rem auto;
+  transform-origin: center center;
+  will-change: transform;
 }
 
 .divider.centered::before {

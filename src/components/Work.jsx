@@ -1,6 +1,7 @@
 
 import { useMemo, useState } from 'react';
 import ProjectModal from './ProjectModal';
+import MaskedTitle from './MaskedTitle';
 
 import chatup1 from '../assets/chatup-1.webp';
 import chatup2 from '../assets/chatup-2.webp';
@@ -159,9 +160,7 @@ export default function Work() {
   return (
     <section id="work" className="container work-page-section">
       <div className="gsap-reveal work-header">
-        <h2 className="section-title uppercase">
-          <span className="text-dark-gray">2.</span> Featured Work
-        </h2>
+        <MaskedTitle number="2." text="Featured Work" />
         <div className="divider" />
       </div>
 

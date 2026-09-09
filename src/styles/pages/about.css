@@ -26,6 +26,8 @@
   background: linear-gradient(90deg, #ffffff 0%, rgba(255, 255, 255, 0.5) 45%, rgba(255, 255, 255, 0) 100%);
   box-shadow: 0 0 10px rgba(255, 255, 255, 0.7);
   margin-bottom: 2rem;
+  transform-origin: left center;
+  will-change: transform;
 }
 
 .divider::before {

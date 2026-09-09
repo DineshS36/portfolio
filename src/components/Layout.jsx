@@ -47,23 +47,87 @@ export default function Layout({ isPreloaderDone }) {
         );
       }
 
-      // Staggered Scroll Reveal sections (About, Work content, etc)
+      // Staggered Scroll Reveal sections (About, Work, Skills, Timeline, Contact)
       const reveals = gsap.utils.toArray('.gsap-reveal');
       reveals.forEach((elem) => {
-        gsap.fromTo(elem,
-          { y: 100, opacity: 0 },
-          {
-            y: 0,
-            opacity: 1,
-            duration: 1.5,
-            ease: 'power3.out',
+        const words = elem.querySelectorAll('.word-inner');
+        const divider = elem.querySelector('.divider');
+
+        if (words.length > 0 || divider) {
+          const tl = gsap.timeline({
             scrollTrigger: {
               trigger: elem,
-              start: 'top 80%',
+              start: 'top 85%',
               toggleActions: 'play none none reverse'
             }
+          });
+
+          // 1. Masked Word Slide-Up with silky 3D perspective roll
+          if (words.length > 0) {
+            tl.fromTo(words,
+              { yPercent: 120, rotateX: 25, opacity: 0 },
+              {
+                yPercent: 0,
+                rotateX: 0,
+                opacity: 1,
+                duration: 1.45,
+                stagger: 0.16,
+                ease: 'power3.out'
+              }
+            );
           }
-        );
+
+          // 2. Laser Underline Wipe
+          if (divider) {
+            const isCentered = divider.classList.contains('centered');
+            tl.fromTo(divider,
+              {
+                scaleX: 0,
+                opacity: 0,
+                transformOrigin: isCentered ? 'center center' : 'left center'
+              },
+              {
+                scaleX: 1,
+                opacity: 1,
+                duration: 1.25,
+                ease: 'power2.out'
+              },
+              words.length > 0 ? '-=0.7' : 0
+            );
+          }
+
+          // 3. Trailing subtitle/lead text inside the header
+          const trailingText = elem.querySelectorAll('.about-text, .skill-list, .contact-lead, .beacon-eyebrow');
+          if (trailingText.length > 0) {
+            tl.fromTo(trailingText,
+              { y: 30, opacity: 0 },
+              {
+                y: 0,
+                opacity: 1,
+                duration: 1.1,
+                stagger: 0.15,
+                ease: 'power3.out'
+              },
+              '-=0.6'
+            );
+          }
+        } else {
+          // General Card Containers (Telemetry Deck, Monolith, Abstract Box, etc.)
+          gsap.fromTo(elem,
+            { y: 40, opacity: 0 },
+            {
+              y: 0,
+              opacity: 1,
+              duration: 1.1,
+              ease: 'power3.out',
+              scrollTrigger: {
+                trigger: elem,
+                start: 'top 85%',
+                toggleActions: 'play none none reverse'
+              }
+            }
+          );
+        }
       });
 
       // Staggered Work Card Reveals specifically for the Work page

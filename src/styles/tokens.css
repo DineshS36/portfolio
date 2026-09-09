@@ -73,3 +73,27 @@ body {
 .text-glow-intense {
   text-shadow: 0 0 8px rgba(255, 255, 255, 0.7), 0 0 16px rgba(255, 255, 255, 0.4);
 }
+
+/* Editorial Masked Headline Architecture */
+.masked-heading {
+  overflow: visible;
+}
+
+.word-mask {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: bottom;
+  padding-bottom: 0.14em;
+  margin-right: 0.28em;
+  perspective: 600px;
+}
+
+.word-mask:last-child {
+  margin-right: 0;
+}
+
+.word-inner {
+  display: inline-block;
+  will-change: transform, opacity;
+  transform-style: preserve-3d;
+}

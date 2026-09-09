@@ -1,6 +1,7 @@
 
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { useAudio } from '../hooks/useAudio';
+import MaskedTitle from './MaskedTitle';
 
 const categories = [
   {
@@ -159,9 +160,7 @@ export default function Skills() {
     <section id="skills" className="skills-page-section">
       {/* Header */}
       <div className="container gsap-reveal skills-header">
-        <h2 className="section-title uppercase">
-          <span className="text-dark-gray">3.</span> Core Capabilities
-        </h2>
+        <MaskedTitle number="3." text="Core Capabilities" />
         <div className="divider" />
       </div>
 

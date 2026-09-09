@@ -7,6 +7,7 @@ import {
   RoastingAITokenStreamCanvas,
   EdgeResumeATSParserCanvas
 } from './TimelineVisualizers';
+import MaskedTitle from './MaskedTitle';
 
 export default function Timeline() {
   const { playHoverSound, playClickSound } = useAudio();
@@ -186,9 +187,7 @@ export default function Timeline() {
       {/* Aligned Section Header matching #about, #work, #skills */}
       <div className="timeline-header">
         <div className="gsap-reveal">
-          <h2 className="section-title uppercase">
-            Engineering Journey
-          </h2>
+          <MaskedTitle text="Engineering Journey" />
           <div className="divider" />
         </div>
         <div className="timeline-header-meta font-mono">

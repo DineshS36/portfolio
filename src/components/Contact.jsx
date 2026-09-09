@@ -1,6 +1,7 @@
 import { useState, useRef, useMemo } from 'react';
 import { useAudio } from '../hooks/useAudio';
 import Footer from './Footer';
+import MaskedTitle from './MaskedTitle';
 
 export default function Contact() {
   const monolithRef = useRef(null);
@@ -136,9 +137,7 @@ export default function Contact() {
               <span>Get in Touch</span>
             </div>
 
-            <h2 className="section-title centered uppercase text-glow">
-              LET'S BUILD TOGETHER
-            </h2>
+            <MaskedTitle text="LET'S BUILD TOGETHER" className="section-title centered uppercase text-glow" />
 
             <div className="divider centered" />
 
