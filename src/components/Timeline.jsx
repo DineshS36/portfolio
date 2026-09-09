@@ -24,16 +24,16 @@ export default function Timeline() {
       stageLabel: 'STAGE 01',
       category: 'THE SPARK',
       dockLabel: 'FOUNDATIONS',
-      title: 'First Exploration & Web Foundations',
-      headline: 'HTML5, CSS3 & JavaScript Discovery',
+      title: 'Web Foundations & Core Logic',
+      headline: 'HTML5, CSS3 & Programming Basics',
       summary:
-        'Started exploring programming logic and web development in December 2025. Learned core web architecture with HTML5, CSS3, and JavaScript, quickly progressing into 2026 from fundamental syntax to building dynamic, interactive user interfaces.',
+        'Started exploring programming logic and web development in December 2025. Mastered core frontend structure with HTML5, CSS3, and modern CSS, while building foundational problem-solving skills in Java, JavaScript, and Python.',
       metrics: [
         { label: 'Timeline', value: 'Dec 2025 – Mar 2026' },
         { label: 'Focus', value: 'Web Foundations' },
-        { label: 'Core Tools', value: 'HTML, CSS & JS' }
+        { label: 'Core Tools', value: 'HTML, CSS & Java' }
       ],
-      techStack: ['HTML5', 'CSS3', 'JavaScript', 'Git', 'GitHub', 'Python'],
+      techStack: ['HTML5', 'CSS3', 'Tailwind CSS', 'JavaScript', 'Java', 'Git'],
       Visualizer: WebArchitectureCanvas
     },
     {
@@ -45,7 +45,7 @@ export default function Timeline() {
       title: 'ChatUp: Real-Time Messaging App',
       headline: 'Architected & Shipped in 5 Days',
       summary:
-        'Architected and delivered ChatUp in an intensive 5-day build sprint in June 2026. Designed the system logic and directed AI code generation: full-duplex WebSocket channels with Socket.io, real-time message delivery with sub-25ms ping, and persistent MongoDB chat storage.',
+        'Architected and delivered ChatUp in an intensive 5-day build sprint in June 2026. Designed the full-duplex WebSocket architecture and MongoDB schemas, directing AI code generation to implement Socket.io channels with sub-25ms response times.',
       metrics: [
         { label: 'Sprint Speed', value: '5 Days (June 2026)' },
         { label: 'Latency', value: '< 25ms Ping' },
@@ -81,13 +81,13 @@ export default function Timeline() {
       title: 'AI Resume Builder & Cloudflare Edge',
       headline: 'Decoupled Next.js SaaS & OAuth 2.0',
       summary:
-        'Architected and shipped an edge-deployed SaaS platform in 2026. Decoupled the Next.js presentation layer on Cloudflare Pages from an Express/PostgreSQL backend API, securing auth via Google OAuth 2.0 PKCE and delivering Gemini AI ATS resume scoring.',
+        'Architected and shipped an edge-deployed SaaS platform in 2026. Decoupled the Next.js presentation layer on Cloudflare Pages from an Express/PostgreSQL backend API, securing auth via Google OAuth 2.0 PKCE and directing Gemini AI for real-time ATS resume scoring.',
       metrics: [
         { label: 'Edge TTFB', value: '< 85ms Latency' },
         { label: 'Security', value: 'Google OAuth 2.0' },
         { label: 'Deployment', value: 'Cloudflare Pages' }
       ],
-      techStack: ['Next.js 14', 'Cloudflare Pages', 'PostgreSQL', 'Prisma', 'Google OAuth 2.0', 'Express.js'],
+      techStack: ['Next.js', 'Cloudflare Pages', 'PostgreSQL', 'Prisma', 'Google OAuth 2.0', 'Express.js'],
       Visualizer: EdgeResumeATSParserCanvas
     }
   ];

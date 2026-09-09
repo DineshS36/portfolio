@@ -258,7 +258,7 @@ export default function Navbar({ isHeroPage }) {
         aria-label="Navigation Menu"
       >
         <div className="mobile-drawer-header font-mono">
-          <span className="mobile-drawer-tag text-gray">NAVIGATION SEQUENCE</span>
+          <span className="mobile-drawer-tag text-gray">NAVIGATION</span>
           <button
             type="button"
             className="mobile-drawer-close hoverable"

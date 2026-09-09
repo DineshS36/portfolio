@@ -357,7 +357,7 @@ export function RoastingAITokenStreamCanvas() {
       ctx.font = '9px "Space Mono", monospace';
       ctx.fillStyle = '#ffffff';
       ctx.textAlign = 'left';
-      ctx.fillText('MODEL: GEMINI 1.5 FLASH', 28, 53);
+      ctx.fillText('MODEL: GOOGLE GEMINI API', 28, 53);
 
       ctx.fillStyle = '#888888';
       ctx.fillText('ARCHETYPE: [SARCASTIC_DEV]', 175, 53);

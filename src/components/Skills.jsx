@@ -5,51 +5,51 @@ import { useAudio } from '../hooks/useAudio';
 const categories = [
   {
     id: '01',
-    tag: 'CLIENT-SIDE ARCHITECTURE',
-    title: 'Frontend & UI Engineering',
-    summary: 'Component hierarchy, state orchestration, and responsive interactive web layouts.',
-    telemetry: '60/120 FPS • Sub-16ms Frame Budget',
-    skills: ['React.js', 'Next.js 14', 'JavaScript (ES6+)', 'HTML5', 'CSS3 Layouts', 'Tailwind CSS', 'GSAP']
+    tag: 'CORE UI ENGINEERING',
+    title: 'Frontend & UI Craft (Hands-On)',
+    summary: 'Responsive layouts, component structure, clean styling, and high-fidelity user experiences.',
+    telemetry: '80% Proficiency • Pixel Precision',
+    skills: ['HTML5', 'CSS3 Layouts', 'Tailwind CSS', 'Responsive UI', 'JavaScript Basics', 'React Basics']
   },
   {
     id: '02',
-    tag: 'EVENT BROKER & SERVICES',
-    title: 'Backend & Real-Time APIs',
-    summary: 'Full-duplex WebSocket channels, RESTful API microservices, and secured authorization.',
-    telemetry: '< 25ms RTT • Full-Duplex Gateway',
-    skills: ['Node.js', 'Express.js', 'Socket.io', 'WebSockets', 'RESTful APIs', 'JWT Auth', 'OAuth 2.0 PKCE']
+    tag: 'AI-AUGMENTED ENGINEERING',
+    title: 'Generative AI & Prompt Design',
+    summary: 'Architecting precision prompt schemas, directing LLMs for code synthesis, and sub-second streaming.',
+    telemetry: 'Gemini API • Prompt Schemas',
+    skills: ['Prompt Engineering', 'AI-Augmented Coding', 'Google Gemini API', 'Token Streaming', 'Code Synthesis', 'Rapid Sprints']
   },
   {
     id: '03',
-    tag: 'PERSISTENCE & SCHEMAS',
-    title: 'Database Engineering',
-    summary: 'Document collections, relational schemas, connection pooling, and ORM pipelines.',
-    telemetry: 'B-Tree Indexing • Connection Pooling',
-    skills: ['MongoDB', 'MongoDB Atlas', 'PostgreSQL', 'Prisma ORM', 'Mongoose', 'Database Indexing']
+    tag: 'SYSTEM ARCHITECTURE',
+    title: 'System Design & Data Flows',
+    summary: 'Decoupled presentation layers, client-server models, RESTful contracts, and WebSocket protocols.',
+    telemetry: 'Decoupled Edge • Sub-85ms TTFB',
+    skills: ['Decoupled Architecture', 'System Design', 'RESTful APIs', 'WebSocket Flows', 'Data Contracts', 'Authentication PKCE']
   },
   {
     id: '04',
-    tag: 'APPLIED INTELLIGENCE',
-    title: 'Generative AI & ML',
-    summary: 'Multi-shot prompt engineering, sub-second token streaming, and model foundations.',
-    telemetry: 'Gemini 1.5 Flash • Token Streaming',
-    skills: ['Google Gemini API', '@google/generative-ai', 'Prompt Engineering', 'Token Streaming', 'Python', 'TensorFlow']
+    tag: 'EDGE & CLOUD RUNTIMES',
+    title: 'Cloud & Edge Deployments',
+    summary: 'Edge-distributed static hosting, continuous deployment, serverless edge workers, and DNS routing.',
+    telemetry: 'Cloudflare Pages • Edge Workers',
+    skills: ['Cloudflare Pages', 'Cloudflare Workers', 'Vercel', 'Git', 'GitHub', 'CI/CD Deployments']
   },
   {
     id: '05',
-    tag: 'EDGE & DISTRIBUTED RUNTIMES',
-    title: 'Cloud & Infrastructure',
-    summary: 'Edge-distributed static hosting, continuous deployment, and serverless compute.',
-    telemetry: 'Cloudflare Pages • Edge Workers CDN',
-    skills: ['Cloudflare Pages', 'Cloudflare Workers', 'Vercel', 'AWS', 'GCP', 'Git', 'GitHub']
+    tag: 'FRAMEWORKS DIRECTED WITH AI',
+    title: 'Full-Stack Frameworks',
+    summary: 'Frameworks architected and synthesized using modern AI-assisted engineering workflows.',
+    telemetry: 'AI-Accelerated • Full Stack',
+    skills: ['Next.js', 'Node.js', 'Express.js', 'Socket.io', 'MongoDB Atlas', 'PostgreSQL • Prisma']
   },
   {
     id: '06',
-    tag: 'SYSTEM ARCHITECTURE',
-    title: 'Architectural Standards',
-    summary: 'Decoupled presentation layers, clean code, low-latency execution, and continuous learning.',
-    telemetry: 'Decoupled Edge • Sub-85ms TTFB',
-    skills: ['Decoupled Architecture', 'Sub-85ms TTFB', 'System Design', 'Rapid Sprints', 'Production Reliability']
+    tag: 'PROBLEM SOLVING CORE',
+    title: 'Programming Foundations',
+    summary: 'Foundational computer science principles, OOP concepts, algorithm basics, and schema comprehension.',
+    telemetry: 'OOP Basics • Schema Design',
+    skills: ['Java (OOP)', 'JavaScript Foundations', 'Python Basics', 'Database Concepts', 'Data Structures Basics']
   }
 ];
 

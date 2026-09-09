@@ -22,16 +22,16 @@ export default function Work() {
       {
         bgClass: 'bg-3',
         shortTitle: 'AI Resume Builder',
-        category: 'SAAS • FULL-STACK AI • DECOUPLED',
+        category: 'SAAS • SYSTEM ARCHITECTURE • AI DIRECTION',
         tagline: 'AI-Powered Resume Builder & ATS Analyzer',
         description:
-          'A production-ready SaaS platform that transforms PDFs into ATS-optimized resumes. Built with a decoupled architecture utilizing a Next.js static edge frontend and an Express/PostgreSQL backend, secured by Google OAuth 2.0 and custom JWTs.',
+          'A production-ready SaaS platform that transforms PDFs into ATS-optimized resumes. Architected with a decoupled model combining a Next.js edge frontend on Cloudflare Pages with an Express/PostgreSQL backend, secured by Google OAuth 2.0 and synthesized with AI pair-programming.',
         problem:
           'Opaque Applicant Tracking Systems (ATS) reject up to 75% of qualified resumes due to parsing mismatches. Job seekers face manual reformatting and lack real-time algorithmic guidance on keyword resonance.',
         solution:
-          'Engineered an edge-deployed SaaS application combining Next.js 14, Cloudflare Pages, and Google Gemini 1.5 Flash. It parses PDF structures, computes semantic ATS matching scores, and provides instant contextual enhancements in real-time.',
+          'Architected an edge-deployed SaaS application combining Next.js, Cloudflare Pages, and Google Gemini API. Structured the PDF parsing pipeline, semantic ATS scoring algorithms, and directed AI co-pilots to build the production codebase.',
         techStack: [
-          'Next.js 14',
+          'Next.js',
           'Express',
           'PostgreSQL',
           'Prisma',
@@ -46,14 +46,14 @@ export default function Work() {
           'Gemini AI resume enhancement'
         ],
         architectureFlow: [
-          { step: '01', title: 'Edge Client', tech: 'Next.js 14 • Cloudflare', desc: 'Static edge routing & sub-85ms asset delivery' },
+          { step: '01', title: 'Edge Client', tech: 'Next.js • Cloudflare', desc: 'Static edge routing & sub-85ms asset delivery' },
           { step: '02', title: 'Auth Gateway', tech: 'Google OAuth 2.0', desc: 'PKCE authentication with encrypted session JWTs' },
           { step: '03', title: 'API Microservice', tech: 'Node.js • Express', desc: 'Secure PDF parsing, rate-limiting & schema validation' },
           { step: '04', title: 'Intelligence & Store', tech: 'Gemini Flash • PostgreSQL', desc: 'Real-time ATS scoring & Prisma connection pooling' },
         ],
         architectureDetails: [
           { title: 'Decoupled Edge Performance', desc: 'Separated the presentation layer on Cloudflare Pages from the compute-intensive PDF parser, ensuring lightning-fast initial page loads and global low latency.' },
-          { title: 'Deterministic AI Prompting', desc: 'Engineered strict JSON schema prompts for Gemini 1.5 Flash to eliminate hallucinations and extract structured resume data consistently.' },
+          { title: 'Deterministic AI Prompting', desc: 'Engineered strict JSON schema prompts for Google Gemini API to eliminate hallucinations and extract structured resume data consistently.' },
           { title: 'Enterprise Data Security', desc: 'Zero persistence of raw resumes; resumes are parsed in memory, scored, and returned with HTTP-only cryptographic session cookies.' },
         ],
         metrics: [
@@ -71,14 +71,14 @@ export default function Work() {
       {
         bgClass: 'bg-1',
         shortTitle: 'ChatUp',
-        category: 'Full Stack • Realtime',
+        category: 'REAL-TIME ARCHITECTURE • FULL STACK',
         tagline: 'Real-Time Web Chat Application',
         description:
-          'A modern real-time chatting platform that enables users to communicate instantly through a responsive web interface. The application focuses on seamless messaging, intuitive user experience, and real-time communication.',
+          'A modern real-time chatting platform built on full-duplex WebSocket channels. Designed the event-driven system architecture and MongoDB schemas, guiding AI code synthesis to deliver instantaneous messaging with sub-25ms response times.',
         problem:
           'Standard HTTP polling solutions generate heavy server traffic and cause delayed message delivery, breaking conversational fluidity and draining mobile device batteries.',
         solution:
-          'Designed a full-duplex WebSocket communication engine with Socket.io and Express.js, featuring optimistic UI rendering, automatic connection heartbeat recovery, and persistent MongoDB chat storage.',
+          'Designed a full-duplex WebSocket communication engine with Socket.io and Express.js, architecting optimistic UI rendering, automatic connection heartbeat recovery, and persistent MongoDB chat storage.',
         techStack: ['React', 'Node.js', 'Express.js', 'Socket.io', 'MongoDB'],
         features: [
           'Real-time messaging',
@@ -87,7 +87,7 @@ export default function Work() {
           'Modern chat experience'
         ],
         architectureFlow: [
-          { step: '01', title: 'Reactive Client', tech: 'React 18 • State Sync', desc: 'Instant optimistic UI updates with zero input lag' },
+          { step: '01', title: 'Reactive Client', tech: 'React • State Sync', desc: 'Instant optimistic UI updates with zero input lag' },
           { step: '02', title: 'WebSocket Gateway', tech: 'Socket.io Cluster', desc: 'Full-duplex bidirectional channels with heartbeats' },
           { step: '03', title: 'Event Broker', tech: 'Node.js • Express API', desc: 'Token-based socket authentication & handshake validation' },
           { step: '04', title: 'Persistent History', tech: 'MongoDB Atlas', desc: 'Indexed conversation threads & compound sorting' },
@@ -112,14 +112,14 @@ export default function Work() {
       {
         bgClass: 'bg-2',
         shortTitle: 'AI Roast Generator',
-        category: 'Artificial Intelligence • Web App',
+        category: 'APPLIED GENAI • PROMPT ARCHITECTURE',
         tagline: 'AI-Powered Roast Generator',
         description:
-          'An AI-based web application that generates humorous and context-aware roasts using large language models. The application demonstrates AI integration, prompt engineering, and interactive user experiences.',
+          'An interactive AI web application demonstrating precision prompt engineering and sub-second token streaming. Architected multi-shot persona prompts and structured client-side stream rendering using Google Gemini API.',
         problem:
           'Standard LLM prompts generate generic, sterile humor. Achieving sharp, dynamic, context-aware satire requires precise multi-shot system prompt framing, input sanitization, and sub-second token streaming.',
         solution:
-          'Built an interactive AI web experience leveraging Gemini API with dynamic few-shot system prompts, personality archetype switching, and low-latency token streaming for high-impact comedic punchlines.',
+          'Architected an interactive AI web experience leveraging Gemini API with dynamic few-shot system prompts, personality archetype switching, and low-latency token streaming for high-impact comedic punchlines.',
         techStack: ['React', 'Node.js', 'Gemini API'],
         features: [
           'AI-generated responses',

@@ -122,7 +122,7 @@ export default function ProjectModal({ open, onClose, project }) {
         <div className="project-modal-header">
           <div>
             <p className="project-modal-tag font-mono uppercase">
-              {project.category || 'Case Study // Production System'}
+              {project.category || 'Case Study • Production System'}
             </p>
             <h3 className="project-modal-title text-glow-intense uppercase">{project.title}</h3>
             {project.tagline ? (
@@ -299,7 +299,7 @@ export default function ProjectModal({ open, onClose, project }) {
             {/* 1. Interactive Visual Pipeline Diagram */}
             <div className="case-study-section">
               <div className="case-study-section-header">
-                <span className="section-badge font-mono uppercase">01 // Pipeline Flow</span>
+                <span className="section-badge font-mono uppercase">01 • Pipeline Flow</span>
                 <h4 className="case-study-heading">Decoupled Distributed Architecture</h4>
                 <p className="case-study-subheading text-gray">
                   Data flow and security boundary isolation from edge network delivery down to asynchronous processing models.
@@ -331,7 +331,7 @@ export default function ProjectModal({ open, onClose, project }) {
             {/* 2. Key Technical Decisions */}
             <div className="case-study-section">
               <div className="case-study-section-header">
-                <span className="section-badge font-mono uppercase">02 // Engineering Strategy</span>
+                <span className="section-badge font-mono uppercase">02 • Engineering Strategy</span>
                 <h4 className="case-study-heading">Architectural Decisions & Trade-Offs</h4>
               </div>
 
@@ -359,7 +359,7 @@ export default function ProjectModal({ open, onClose, project }) {
             {metrics.length > 0 && (
               <div className="case-study-section">
                 <div className="case-study-section-header">
-                  <span className="section-badge font-mono uppercase">03 // Verification</span>
+                  <span className="section-badge font-mono uppercase">03 • Verification</span>
                   <h4 className="case-study-heading">Observed System Benchmarks</h4>
                 </div>
 

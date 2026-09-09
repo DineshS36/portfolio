@@ -91,6 +91,274 @@
   }
 }
 
+/* ==========================================================================
+   Engineering Telemetry & Active Radar Deck
+   ========================================================================== */
+.telemetry-command-deck {
+  margin-top: 4.5rem;
+  background: rgba(8, 8, 12, 0.65);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 16px;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  padding: 1.75rem;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  transition: border-color 0.4s ease;
+}
+
+.telemetry-command-deck:hover {
+  border-color: rgba(255, 255, 255, 0.22);
+}
+
+.telemetry-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  margin-bottom: 1.5rem;
+}
+
+.telemetry-header-left {
+  display: flex;
+  align-items: center;
+}
+
+.telemetry-live-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #38bdf8;
+  box-shadow: 0 0 10px #38bdf8;
+  display: inline-block;
+  margin-right: 0.65rem;
+  animation: telemetryPulse 2s ease-in-out infinite;
+}
+
+.telemetry-hud-tag {
+  font-size: 0.75rem;
+  letter-spacing: 1.5px;
+  color: #eeeeee;
+  font-weight: 700;
+}
+
+.telemetry-hud-status {
+  font-size: 0.68rem;
+  letter-spacing: 1px;
+  color: rgba(255, 255, 255, 0.45);
+}
+
+.telemetry-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+
+.telemetry-card {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.telemetry-card:hover {
+  border-color: rgba(255, 255, 255, 0.28);
+  transform: translateY(-3px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
+}
+
+.telemetry-card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.85rem;
+}
+
+.card-badge {
+  font-size: 0.65rem;
+  letter-spacing: 1.5px;
+  color: #38bdf8;
+  font-weight: 600;
+}
+
+.card-indicator {
+  font-size: 0.65rem;
+  letter-spacing: 1px;
+  color: #4ade80;
+}
+
+.telemetry-card-title {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: #ffffff;
+  margin: 0 0 0.65rem 0;
+  letter-spacing: 0.5px;
+}
+
+.telemetry-card-text {
+  font-size: 0.82rem;
+  line-height: 1.6;
+  color: #94a3b8;
+  margin: 0 0 1.25rem 0;
+}
+
+.telemetry-meta-row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  font-size: 0.72rem;
+  letter-spacing: 0.5px;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  padding-top: 0.85rem;
+  margin-top: auto;
+}
+
+/* LinkedIn Profile Identity Preview */
+.linkedin-profile-preview {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  padding: 0.75rem 0.85rem;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 10px;
+  margin-bottom: 0.85rem;
+}
+
+.linkedin-preview-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1px solid rgba(56, 189, 248, 0.5);
+  flex-shrink: 0;
+}
+
+.linkedin-preview-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  overflow: hidden;
+}
+
+.linkedin-preview-name {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.linkedin-check {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #0ea5e9;
+  color: #fff;
+  font-size: 0.6rem;
+  font-weight: 900;
+}
+
+.linkedin-preview-role {
+  font-size: 0.68rem;
+  color: #94a3b8;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Action Links */
+.telemetry-actions-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  margin-top: auto;
+}
+
+.telemetry-btn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.7rem 0.95rem;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 8px;
+  color: #f1f5f9;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-decoration: none;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.telemetry-btn:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: #ffffff;
+  color: #ffffff;
+  transform: translateX(4px);
+  box-shadow: 0 4px 15px rgba(255, 255, 255, 0.1);
+}
+
+.telemetry-btn-ping {
+  border-color: rgba(34, 197, 94, 0.35);
+  color: #86efac;
+}
+
+.telemetry-btn-ping:hover {
+  background: rgba(34, 197, 94, 0.15);
+  border-color: #22c55e;
+  color: #ffffff;
+  box-shadow: 0 4px 15px rgba(34, 197, 94, 0.2);
+}
+
+.telemetry-arrow {
+  font-size: 0.85rem;
+  transition: transform 0.25s ease;
+}
+
+.telemetry-btn:hover .telemetry-arrow {
+  transform: scale(1.2);
+}
+
+@keyframes telemetryPulse {
+  0%, 100% {
+    opacity: 0.4;
+    transform: scale(0.9);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.25);
+  }
+}
+
+@media (max-width: 900px) {
+  .telemetry-grid {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+
+  .telemetry-command-deck {
+    margin-top: 3.5rem;
+    padding: 1.25rem;
+  }
+
+  .telemetry-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+}
+
+
 
 
 

@@ -137,13 +137,13 @@ export default function Contact() {
             </div>
 
             <h2 className="section-title centered uppercase text-glow">
-              INITIATE SEQUENCE
+              LET'S BUILD TOGETHER
             </h2>
 
             <div className="divider centered" />
 
             <p className="contact-lead centered text-gray">
-              Have a project in mind, an architectural challenge, or an engineering opportunity to discuss? Send a direct message below.
+              Have a project idea, a full-stack challenge, or an engineering opportunity to discuss? Send a direct message below.
             </p>
           </div>
 
