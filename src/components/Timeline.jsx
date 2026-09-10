@@ -280,19 +280,10 @@ export default function Timeline() {
                     </div>
                   </div>
 
-                  {/* Right Pane: Live Animated Simulation */}
+                  {/* Right Pane: 3D Interactive Model */}
                   <div className="timeline-simulation-pane">
-                    <div className="terminal-topbar font-mono">
-                      <div className="terminal-dots">
-                        <span className="t-dot" />
-                        <span className="t-dot" />
-                        <span className="t-dot" />
-                      </div>
-                      <span className="terminal-title uppercase">SIMULATION • STAGE {item.epoch}</span>
-                    </div>
-
                     <div className="terminal-canvas-wrapper">
-                      <Visualizer />
+                      <Visualizer isActive={isActive} />
                     </div>
                   </div>
                 </div>
