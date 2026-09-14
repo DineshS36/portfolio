@@ -59,7 +59,6 @@ export function WebArchitectureCanvas({ isActive = true }) {
 
     const render = () => {
       animId = requestAnimationFrame(render);
-      if (!isActiveRef.current) return;
 
       frame++;
       ctx.clearRect(0, 0, width, height);
@@ -181,7 +180,6 @@ export function ChatUpSocketStreamCanvas({ isActive = true }) {
 
     const render = () => {
       animId = requestAnimationFrame(render);
-      if (!isActiveRef.current) return;
 
       ctx.clearRect(0, 0, width, height);
 
@@ -313,7 +311,6 @@ export function RoastingAITokenStreamCanvas({ isActive = true }) {
 
     const render = () => {
       animId = requestAnimationFrame(render);
-      if (!isActiveRef.current) return;
 
       frame++;
       ctx.clearRect(0, 0, width, height);
@@ -462,7 +459,6 @@ export function EdgeResumeATSParserCanvas({ isActive = true }) {
 
     const render = () => {
       animId = requestAnimationFrame(render);
-      if (!isActiveRef.current) return;
 
       ctx.clearRect(0, 0, width, height);
 

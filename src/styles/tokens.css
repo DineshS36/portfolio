@@ -95,5 +95,4 @@ body {
 .word-inner {
   display: inline-block;
   will-change: transform, opacity;
-  transform-style: preserve-3d;
 }

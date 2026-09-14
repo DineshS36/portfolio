@@ -39,9 +39,10 @@ export default function About() {
         <EngineeringTelemetry />
       </section>
 
-      {/* 2. Interactive Evolution Roadmap */}
+      {/* 2. Interactive Evolution Roadmap (Auto-looping + Move Buttons) */}
       <Timeline />
     </div>
   );
 }
+
 

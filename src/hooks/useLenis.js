@@ -23,6 +23,14 @@ export function startLenis() {
   }
 }
 
+export function resetLenis() {
+  if (globalLenis) {
+    globalLenis.stop();
+    globalLenis.scrollTo(0, { immediate: true, force: true });
+    globalLenis.start();
+  }
+}
+
 export function useLenis() {
   useEffect(() => {
     const lenis = new Lenis({

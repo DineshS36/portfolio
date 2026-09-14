@@ -1,4 +1,4 @@
-import { useEffect, Suspense } from 'react';
+import { useEffect } from 'react';
 import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -7,7 +7,7 @@ gsap.registerPlugin(ScrollTrigger);
 import Navbar from './Navbar';
 import CustomCursor from './CustomCursor';
 import usePageTransitions from '../hooks/usePageTransitions';
-import { useLenis } from '../hooks/useLenis';
+import { useLenis, resetLenis } from '../hooks/useLenis';
 
 import ThreeStarfield from './ThreeStarfield';
 import ThreeBackground from './ThreeBackground';
@@ -18,25 +18,31 @@ export default function Layout({ isPreloaderDone }) {
   const location = useLocation();
   const isHeroPage = location.pathname === '/';
   
-  const { hasNext, nextRoute } = usePageTransitions({ isActive: isPreloaderDone });
+  const { hasNext, nextRoute, transitionTo } = usePageTransitions({ isActive: isPreloaderDone });
 
-  // Scroll to top on route change
+  // Scroll to top and reset Lenis virtual scroll on route change
   useEffect(() => {
+    if (typeof window !== 'undefined' && 'scrollRestoration' in window.history) {
+      window.history.scrollRestoration = 'manual';
+    }
     window.scrollTo(0, 0);
+    if (document.documentElement) document.documentElement.scrollTop = 0;
+    if (document.body) document.body.scrollTop = 0;
+    resetLenis();
   }, [location.pathname]);
 
   // Page entry animation and ScrollTrigger re-initialization when route changes
   useEffect(() => {
     if (!isPreloaderDone) return;
     
-    // Animate page content in
+    // Smooth page content fade-in
     gsap.fromTo('.page-transition-wrapper',
-      { opacity: 0, y: 20 },
-      { opacity: 1, y: 0, duration: 0.6, ease: 'power3.out', clearProps: 'all' }
+      { opacity: 0 },
+      { opacity: 1, duration: 0.45, ease: 'power2.out' }
     );
 
-    // Wait for the next tick so the DOM is fully rendered for the new route
-    setTimeout(() => {
+    // Initialize reveals synchronously on next animation frame before paint
+    const animFrameId = requestAnimationFrame(() => {
       ScrollTrigger.refresh();
 
       // Hero Elements (only run if on Hero page and elements exist)
@@ -57,22 +63,22 @@ export default function Layout({ isPreloaderDone }) {
           const tl = gsap.timeline({
             scrollTrigger: {
               trigger: elem,
-              start: 'top 85%',
-              toggleActions: 'play none none reverse'
+              start: 'top 92%',
+              once: true
             }
           });
 
-          // 1. Masked Word Slide-Up with silky 3D perspective roll
+          // 1. Masked Word Slide-Up with silky responsive ease
           if (words.length > 0) {
             tl.fromTo(words,
-              { yPercent: 120, rotateX: 25, opacity: 0 },
+              { yPercent: 105, opacity: 0 },
               {
                 yPercent: 0,
-                rotateX: 0,
                 opacity: 1,
-                duration: 1.45,
-                stagger: 0.16,
-                ease: 'power3.out'
+                duration: 0.8,
+                stagger: 0.07,
+                ease: 'power3.out',
+                clearProps: 'all'
               }
             );
           }
@@ -89,10 +95,11 @@ export default function Layout({ isPreloaderDone }) {
               {
                 scaleX: 1,
                 opacity: 1,
-                duration: 1.25,
-                ease: 'power2.out'
+                duration: 0.75,
+                ease: 'power2.out',
+                clearProps: 'all'
               },
-              words.length > 0 ? '-=0.7' : 0
+              words.length > 0 ? '-=0.4' : 0
             );
           }
 
@@ -100,30 +107,32 @@ export default function Layout({ isPreloaderDone }) {
           const trailingText = elem.querySelectorAll('.about-text, .skill-list, .contact-lead, .beacon-eyebrow');
           if (trailingText.length > 0) {
             tl.fromTo(trailingText,
-              { y: 30, opacity: 0 },
+              { y: 25, opacity: 0 },
               {
                 y: 0,
                 opacity: 1,
-                duration: 1.1,
-                stagger: 0.15,
-                ease: 'power3.out'
+                duration: 0.75,
+                stagger: 0.07,
+                ease: 'power3.out',
+                clearProps: 'all'
               },
-              '-=0.6'
+              '-=0.35'
             );
           }
         } else {
           // General Card Containers (Telemetry Deck, Monolith, Abstract Box, etc.)
           gsap.fromTo(elem,
-            { y: 40, opacity: 0 },
+            { y: 35, opacity: 0 },
             {
               y: 0,
               opacity: 1,
-              duration: 1.1,
+              duration: 0.9,
               ease: 'power3.out',
+              clearProps: 'all',
               scrollTrigger: {
                 trigger: elem,
-                start: 'top 85%',
-                toggleActions: 'play none none reverse'
+                start: 'top 90%',
+                once: true
               }
             }
           );
@@ -147,12 +156,20 @@ export default function Layout({ isPreloaderDone }) {
           }
         );
       }
-    }, 100);
+    });
 
     return () => {
+      cancelAnimationFrame(animFrameId);
       // Clean up only reveal triggers created here; child components manage their own triggers
       ScrollTrigger.getAll().forEach(t => {
-        if (t.vars && t.vars.trigger && t.vars.trigger !== '.quantum-rail-section' && !String(t.vars.trigger).includes('quantum')) {
+        if (
+          t.vars &&
+          t.vars.trigger &&
+          t.vars.trigger !== '.quantum-rail-section' &&
+          !String(t.vars.trigger).includes('quantum') &&
+          !String(t.vars.trigger).includes('timeline') &&
+          !String(t.vars.trigger).includes('experience')
+        ) {
           t.kill();
         }
       });
@@ -167,15 +184,13 @@ export default function Layout({ isPreloaderDone }) {
 
       <Navbar isHeroPage={isHeroPage} />
       
-      <main className="page-transition-wrapper" style={{ opacity: isPreloaderDone ? 1 : 0, transition: 'opacity 0.8s ease' }}>
-        <Suspense fallback={null}>
-          <Outlet />
-        </Suspense>
+      <main className="page-transition-wrapper">
+        <Outlet />
         
         {hasNext && nextRoute && (
           <button
             type="button"
-            onClick={() => navigate(nextRoute)}
+            onClick={() => (transitionTo ? transitionTo('next') : navigate(nextRoute))}
             className="scroll-hint scroll-hint-bottom font-mono text-gray hoverable"
             style={{ background: 'none', border: 'none', width: '100%', cursor: 'pointer' }}
           >
