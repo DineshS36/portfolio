@@ -67,7 +67,7 @@ export default function ThreeBackground({ isHeroPage = true }) {
     const FIXED_PARAMS = {
       // Keep the shader viable on average laptops and phones. The original
       // 360-step setting was a desktop-demo quality level, not a web baseline.
-      uSteps: isLowPowerDevice ? 120 : 200,
+      uSteps: 200,
       uDin: 2.75,
       uDout: 40.0,
       uDopMax: 1.85,
@@ -268,7 +268,7 @@ export default function ThreeBackground({ isHeroPage = true }) {
       const h = window.innerHeight;
       // This shader runs per pixel. Rendering at native Retina resolution made
       // the page needlessly expensive, especially on integrated GPUs.
-      const qualityDpr = isLowPowerDevice ? 0.7 : 1.0;
+      const qualityDpr = isLowPowerDevice ? 0.6 : 0.75;
       const dpr = Math.min(window.devicePixelRatio || 1, qualityDpr);
 
       renderer.setPixelRatio(dpr);
@@ -340,12 +340,8 @@ export default function ThreeBackground({ isHeroPage = true }) {
       compositePass.uniforms.uTime.value = elapsedTime;
 
       // Render smoothly synced with display VSync
-      const minFrameMs = isInteractiveRef.current ? 16 : (isLowPowerDevice ? 28 : 16);
-      if (now - lastRenderMs >= minFrameMs) {
-        bloomPass.enabled = halfFloatOK && isInteractiveRef.current;
-        composer.render();
-        lastRenderMs = now;
-      }
+      bloomPass.enabled = halfFloatOK && isInteractiveRef.current;
+      composer.render();
       animationFrameId = window.requestAnimationFrame(tick);
     };
 
