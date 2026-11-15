@@ -90,6 +90,9 @@ export default function Timeline() {
 
   // Auto-running loop across 4 stages (pauses on hover so user can read)
   useEffect(() => {
+    // Keep touch users in control of the stage so there is time to read it.
+    if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+
     if (isPaused) return;
     const interval = setInterval(() => {
       setActiveEpochIndex((prev) => (prev + 1) % epochs.length);

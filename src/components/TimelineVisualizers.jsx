@@ -1,5 +1,56 @@
 import { useEffect, useRef } from 'react';
 
+const drawMobileFlow = (ctx, width, height, { title, steps, accent = '#38bdf8' }) => {
+  const inset = 16;
+  const cardWidth = width - inset * 2;
+  const top = 30;
+  const gap = 12;
+  const cardHeight = Math.min(42, Math.max(34, (height - top - 24 - gap * (steps.length - 1)) / steps.length));
+
+  ctx.clearRect(0, 0, width, height);
+  ctx.font = '700 9px "Space Mono", monospace';
+  ctx.fillStyle = accent;
+  ctx.textAlign = 'left';
+  ctx.textBaseline = 'middle';
+  ctx.fillText(title, inset, 14);
+
+  steps.forEach(([label, detail], index) => {
+    const y = top + index * (cardHeight + gap);
+    ctx.fillStyle = 'rgba(12, 15, 22, 0.96)';
+    ctx.strokeStyle = index === steps.length - 1 ? `${accent}99` : 'rgba(255,255,255,0.18)';
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    ctx.roundRect(inset, y, cardWidth, cardHeight, 7);
+    ctx.fill();
+    ctx.stroke();
+
+    ctx.textAlign = 'left';
+    ctx.font = '700 10px "Space Mono", monospace';
+    ctx.fillStyle = '#f4f7fb';
+    ctx.fillText(label, inset + 10, y + cardHeight * 0.38, cardWidth - 20);
+    ctx.font = '8px "Space Mono", monospace';
+    ctx.fillStyle = '#aab5c3';
+    ctx.fillText(detail, inset + 10, y + cardHeight * 0.72, cardWidth - 20);
+
+    if (index < steps.length - 1) {
+      const x = width / 2;
+      const startY = y + cardHeight;
+      const endY = startY + gap - 2;
+      ctx.strokeStyle = `${accent}bb`;
+      ctx.fillStyle = `${accent}bb`;
+      ctx.beginPath();
+      ctx.moveTo(x, startY + 1);
+      ctx.lineTo(x, endY - 3);
+      ctx.stroke();
+      ctx.beginPath();
+      ctx.moveTo(x - 3, endY - 5);
+      ctx.lineTo(x, endY - 1);
+      ctx.lineTo(x + 3, endY - 5);
+      ctx.stroke();
+    }
+  });
+};
+
 // ============================================================================
 // STAGE 01: Dec 2025 – Mar 2026 Web Foundations & Core Logic
 // Clean DOM Tree Hierarchy, CSS Cascade Rule Inspector & Event Dispatcher
@@ -62,6 +113,19 @@ export function WebArchitectureCanvas({ isActive = true }) {
 
       frame++;
       ctx.clearRect(0, 0, width, height);
+
+      if (width <= 480) {
+        drawMobileFlow(ctx, width, height, {
+          title: '01 / WEB FOUNDATIONS',
+          steps: [
+            ['Browser', 'renders the page'],
+            ['HTML', 'defines the structure'],
+            ['CSS', 'styles the layout'],
+            ['JavaScript', 'adds interaction']
+          ]
+        });
+        return;
+      }
 
       // 1. Draw Clean Static DOM Tree Connectors
       ctx.lineWidth = 1;
@@ -182,6 +246,20 @@ export function ChatUpSocketStreamCanvas({ isActive = true }) {
       animId = requestAnimationFrame(render);
 
       ctx.clearRect(0, 0, width, height);
+
+      if (width <= 480) {
+        drawMobileFlow(ctx, width, height, {
+          title: '02 / REAL-TIME CHAT',
+          accent: '#10b981',
+          steps: [
+            ['Sender', 'emits a chat message'],
+            ['Socket.IO', 'routes to the room'],
+            ['Other clients', 'receive the update'],
+            ['MongoDB', 'stores the message']
+          ]
+        });
+        return;
+      }
 
       // 1. Clean Channel Header Bar
       const headerY = 16;
@@ -314,6 +392,20 @@ export function RoastingAITokenStreamCanvas({ isActive = true }) {
 
       frame++;
       ctx.clearRect(0, 0, width, height);
+
+      if (width <= 480) {
+        drawMobileFlow(ctx, width, height, {
+          title: '03 / GENERATIVE AI',
+          accent: '#818cf8',
+          steps: [
+            ['User prompt', 'sets the request'],
+            ['Gemini API', 'generates tokens'],
+            ['Stream', 'sends tokens live'],
+            ['React UI', 'renders the reply']
+          ]
+        });
+        return;
+      }
 
       // 1. Model Header Bar
       const headerY = 16;
@@ -461,6 +553,20 @@ export function EdgeResumeATSParserCanvas({ isActive = true }) {
       animId = requestAnimationFrame(render);
 
       ctx.clearRect(0, 0, width, height);
+
+      if (width <= 480) {
+        drawMobileFlow(ctx, width, height, {
+          title: '04 / RESUME BUILDER',
+          accent: '#10b981',
+          steps: [
+            ['Resume upload', 'starts the analysis'],
+            ['ATS parser', 'extracts key sections'],
+            ['Gemini AI', 'scores and suggests'],
+            ['Cloudflare Edge', 'returns the result']
+          ]
+        });
+        return;
+      }
 
       // 1. Top Architecture Gateway Bar
       const headerY = 16;

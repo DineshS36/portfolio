@@ -26,7 +26,7 @@ function NavLink({ to, children, className, onMouseEnter, onClick }) {
 }
 
 export default function Navbar({ isHeroPage }) {
-  const { isMuted, toggleMute, playHoverSound, playClickSound } = useAudio();
+  const { playHoverSound, playClickSound } = useAudio();
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const location = useLocation();
@@ -200,20 +200,6 @@ export default function Navbar({ isHeroPage }) {
           </div>
 
           <div className="nav-actions">
-            {/* Audio Toggle */}
-            <button
-              onClick={() => { toggleMute(); playClickSound(); }}
-              onMouseEnter={playHoverSound}
-              className="nav-link hoverable font-mono uppercase text-glow sound-btn"
-              aria-label={isMuted ? 'Unmute Audio' : 'Mute Audio'}
-            >
-              {isMuted ? (
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><line x1="23" y1="9" x2="17" y2="15"></line><line x1="17" y1="9" x2="23" y2="15"></line></svg>
-              ) : (
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
-              )}
-            </button>
-
             {/* Desktop Resume link */}
             {!isHeroPage && (
               <a

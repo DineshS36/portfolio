@@ -129,14 +129,15 @@ export default function Skills() {
 
   // Interactive Drag / Swipe controls
   const handlePointerDown = (e) => {
+    e.currentTarget.setPointerCapture?.(e.pointerId);
     isDraggingRef.current = true;
-    startXRef.current = e.clientX || (e.touches && e.touches[0]?.clientX) || 0;
+    startXRef.current = e.clientX;
     startAngleRef.current = angleRef.current;
   };
 
   const handlePointerMove = (e) => {
     if (!isDraggingRef.current) return;
-    const clientX = e.clientX || (e.touches && e.touches[0]?.clientX) || 0;
+    const clientX = e.clientX;
     const deltaX = clientX - startXRef.current;
     angleRef.current = (startAngleRef.current - deltaX * 0.32 + 3600) % 360;
     setRotationAngle(angleRef.current);
@@ -171,6 +172,7 @@ export default function Skills() {
         onPointerDown={handlePointerDown}
         onPointerMove={handlePointerMove}
         onPointerUp={handlePointerUp}
+        onPointerCancel={handlePointerUp}
         onWheel={handleWheel}
         role="region"
         aria-label="360 Degree Skills Carousel"

@@ -10,15 +10,13 @@ const initAudio = () => {
     if (AudioContext) {
       audioCtx = new AudioContext();
       globalGain = audioCtx.createGain();
-      globalGain.gain.value = 0; // default muted until toggled
+      globalGain.gain.value = 0;
       globalGain.connect(audioCtx.destination);
     }
   }
 };
 
 export function useAudio() {
-  const [isMuted, setIsMuted] = useState(true);
-  
   // Track if user has interacted to allow audio context to start
   const initialized = useRef(false);
 
@@ -29,6 +27,9 @@ export function useAudio() {
         initAudio();
         if (audioCtx && audioCtx.state === 'suspended') {
           audioCtx.resume();
+        }
+        if (audioCtx && globalGain) {
+          globalGain.gain.setTargetAtTime(0.3, audioCtx.currentTime, 0.05);
         }
         initialized.current = true;
         window.removeEventListener('click', handleFirstInteraction);
@@ -45,22 +46,8 @@ export function useAudio() {
     };
   }, []);
 
-  const toggleMute = useCallback(() => {
-    if (!audioCtx) initAudio();
-    if (audioCtx.state === 'suspended') audioCtx.resume();
-    
-    setIsMuted(prev => {
-      const next = !prev;
-      if (globalGain) {
-        // Smooth transition to avoid pops
-        globalGain.gain.setTargetAtTime(next ? 0 : 0.3, audioCtx.currentTime, 0.05);
-      }
-      return next;
-    });
-  }, []);
-
   const playHoverSound = useCallback(() => {
-    if (!audioCtx || isMuted || !globalGain) return;
+    if (!audioCtx || !globalGain) return;
     
     const osc = audioCtx.createOscillator();
     const gain = audioCtx.createGain();
@@ -78,10 +65,10 @@ export function useAudio() {
     
     osc.start(audioCtx.currentTime);
     osc.stop(audioCtx.currentTime + 0.1);
-  }, [isMuted]);
+  }, []);
 
   const playClickSound = useCallback(() => {
-    if (!audioCtx || isMuted || !globalGain) return;
+    if (!audioCtx || !globalGain) return;
     
     const osc = audioCtx.createOscillator();
     const gain = audioCtx.createGain();
@@ -99,7 +86,7 @@ export function useAudio() {
     
     osc.start(audioCtx.currentTime);
     osc.stop(audioCtx.currentTime + 0.2);
-  }, [isMuted]);
+  }, []);
 
-  return { isMuted, toggleMute, playHoverSound, playClickSound };
+  return { playHoverSound, playClickSound };
 }
